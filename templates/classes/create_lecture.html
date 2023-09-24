@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Lecture</title>
+</head>
+<body>
+    <h1>Create Lecture</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if lecture.meet_link %}
+            <p>Google Meet Link: <a href="{{ lecture.meet_link }}">{{ lecture.meet_link }}</a></p>
+        {% endif %}
+        <button type="submit">Create Lecture</button>
+    </form>
+</body>
+</html>

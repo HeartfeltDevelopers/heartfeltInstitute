@@ -29,11 +29,13 @@ def generate_library_number():
     year = today.strftime("%Y")
     return f'LBY-{random_number}-{year}'
 
+
 def generate_course_number():
     random_number = random.randint(1000, 9999)
     today = datetime.date.today()
     year = today.strftime("%Y")
     return f'CRS-{random_number}-{year}'
+
 
 def generate_book_id():
     random_number = random.randint(1000, 9999)
@@ -42,3 +44,8 @@ def generate_book_id():
     return f'BOOK-{random_number}-{year}'
 
 
+def generate_meeting_password():
+    random_number = random.randint(1000, 9999)
+    today = datetime.date.today()
+    year = today.strftime("%Y")
+    return f'MEETING{random_number}'
