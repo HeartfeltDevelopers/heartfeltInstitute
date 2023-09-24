@@ -8,5 +8,5 @@ urlpatterns = [
     path('admin/dashboard/', admin_dashboard, name='admin_dashboard'),
     path('students/dashboard/', student_dashboard, name='student_dashboard'),
     path('lecturers/dashboard/', lecturer_dashboard, name='lecturer_dashboard'),
-    # Add other URLs as needed
+    # Add other URLs as needed 
 ]
