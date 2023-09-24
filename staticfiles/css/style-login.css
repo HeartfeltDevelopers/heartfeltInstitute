@@ -75,11 +75,11 @@ p.small {
 	padding-bottom: 30px;
 	border-radius: 5px;
 	box-shadow: 0 5px 50px rgba(0,0,0,0.4);
-	text-align: center;
 }
 
 .login-box .box-header {
-	background-color: #ff0000;
+	padding: 6px; 
+	text-align: center;
 	margin-top: 0;
 	border-radius: 5px 5px 0 0;
 }
