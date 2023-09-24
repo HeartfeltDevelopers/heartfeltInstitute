@@ -12,7 +12,7 @@
 				<h2>Register Here</h2>
 			</div>
 
-              <form method="post">
+              <form method="post" style="padding: 20px;">
                 {% csrf_token %}
                 {{ form |crispy }}
                 <button type="submit">Register</button>

@@ -1,26 +1,22 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-
-
-
-    <div class="container">
-		<div class="top">
-			<h1 id="title" class="hidden"><span id="logo">Daily <span>UI</span></span></h1>
-		</div>
-		<div class="login-box animated fadeInUp">
-			<div class="box-header">
-				<h2>Log In</h2>
-			</div>
-
-            <form method="post">
-    {% csrf_token %}
-    {{ form  | crispy }}
-    <button type="submit">Login</button>
-  </form>
-			<a href="#"><p class="small">Forgot your password?</p></a>
-		</div>
+<div class="container">
+	<div class="top">
+		<h1 id="title" class="hidden"><span id="logo">Daily <span>UI</span></span></h1>
 	</div>
+	<div class="login-box animated fadeInUp">
+		<div class="box-header">
+			<h2>Log In</h2>
+		</div>
+		<form method="post">
+			{% csrf_token %}
+			{{ form  | crispy }}
+			<button type="submit">Login</button>
+		</form>
+		<a href="#"><p class="small">Forgot your password?</p></a>
+	</div>
+</div>
 
 <script>
 	$(document).ready(function () {
