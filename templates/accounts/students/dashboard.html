@@ -5,7 +5,107 @@
 
     <body>
    
-       
+        <!-- Page Area Start Here -->
+        <div class="dashboard-page-one">
+            <!-- Sidebar Area Start Here -->
+            <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
+               <div class="mobile-sidebar-header d-md-none">
+                    <div class="header-logo">
+                        <a href="index.html"><img src="img/logo1.png" alt="logo"></a>
+                    </div>
+               </div>
+                <div class="sidebar-menu-content">
+                    <ul class="nav nav-sidebar-menu sidebar-toggle-view">
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Profile</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="student-details.html" class="nav-link"><i
+                                            class="fas fa-angle-right"></i>Student Details</a>
+                                </li>
+                            </ul>
+                        </li>
+                       
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Library</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="all-book.html" class="nav-link"><i class="fas fa-angle-right"></i>All
+                                        Book</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Accounts</span></a>
+                            <ul class="nav sub-group-menu">
+                                
+                                <li class="nav-item">
+                                    <a href="add-expense.html" class="nav-link"><i class="fas fa-angle-right"></i>Pay</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i
+                                    class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Class</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="all-class.html" class="nav-link"><i class="fas fa-angle-right"></i>All
+                                        Classes</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="all-subject.html" class="nav-link"><i
+                                    class="flaticon-open-book"></i><span>Subject</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="class-routine.html" class="nav-link"><i class="flaticon-calendar"></i><span>Class
+                                    Routine</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="student-attendence.html" class="nav-link"><i
+                                    class="flaticon-checklist"></i><span>Attendence</span></a>
+                        </li>
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Exam</span></a>
+                            <ul class="nav sub-group-menu">
+                                <li class="nav-item">
+                                    <a href="exam-schedule.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam
+                                        Schedule</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="exam-grade.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam
+                                        Grades</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="transport.html" class="nav-link"><i
+                                    class="flaticon-bus-side-view"></i><span>Transport</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="hostel.html" class="nav-link"><i class="flaticon-bed"></i><span>Hostel</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="notice-board.html" class="nav-link"><i
+                                    class="flaticon-script"></i><span>Notice</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="messaging.html" class="nav-link"><i
+                                    class="flaticon-chat"></i><span>Messeage</span></a>
+                        </li>
+            
+                       
+                        <li class="nav-item">
+                            <a href="account-settings.html" class="nav-link"><i
+                                    class="flaticon-settings"></i><span>Account</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
@@ -14,7 +114,7 @@
                         <li>
                             <a href="/">Home</a>
                         </li>
-                        <li>Welcome {Student Name}</li>
+                        <li style="text-transform: capitalize;">Welcome {{user.username}}</li>
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
@@ -47,7 +147,7 @@
                                             <img src="img/figure/student.png" class="media-img-auto" alt="student">
                                         </div>
                                         <div class="media-body">
-                                            <h3 class="item-title">Jessia Rose</h3>
+                                            <h3 class="item-title">{{user.first_name}} {{user.last_name}}</h3>
                                             <p>Aliquam erat volutpat. Curabiene natis massa
                                                 sedde lacustiquen sodale word moun taiery.</p>
                                         </div>
@@ -57,46 +157,36 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Student Number:</td>
-                                                    <td class="font-medium text-dark-medium">10005</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Full Name:</td>
-                                                    <td class="font-medium text-dark-medium">Jessia Rose</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gender:</td>
-                                                    <td class="font-medium text-dark-medium">Female</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Date Of Birth:</td>
-                                                    <td class="font-medium text-dark-medium">07.08.2006</td>
+                                                    <td class="font-medium text-dark-medium">1000{{user.id}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Church:</td>
-                                                    <td class="font-medium text-dark-medium">Islam</td>
+                                                    <td class="font-medium text-dark-medium" style="text-transform: capitalize;">{{user.church_name}}</td>
                                                 </tr>
                                               
                                                 <tr>
                                                     <td>E-Mail:</td>
-                                                    <td class="font-medium text-dark-medium">jessiarose@gmail.com</td>
+                                                    <td class="font-medium text-dark-medium">{{user.email}}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Admission Date:</td>
-                                                    <td class="font-medium text-dark-medium">05.01.2019</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Class:</td>
-                                                    <td class="font-medium text-dark-medium">2</td>
-                                                </tr>
-                                                
                                                 <tr>
                                                     <td>Address:</td>
-                                                    <td class="font-medium text-dark-medium">House #10, Road #6,
-                                                        Zimbabwe</td>
+                                                    <td class="font-medium text-dark-medium">{{user.address}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Phone:</td>
-                                                    <td class="font-medium text-dark-medium">+ 88 9856418</td>
+                                                    <td class="font-medium text-dark-medium">{{user.phone}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>City:</td>
+                                                    <td class="font-medium text-dark-medium" style="text-transform: capitalize;">{{user.city}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Country:</td>
+                                                    <td class="font-medium text-dark-medium">{{user.country}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Admission Date:</td>
+                                                    <td class="font-medium text-dark-medium">{{user.date_joined}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

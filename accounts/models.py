@@ -10,6 +10,7 @@ from django_countries.fields import CountryField
 
 class CustomUser(AbstractUser):
     USER_TYPE_CHOICES = (
+        ('admin', 'Admin'),
         ('lecturer', 'Lecturer'),
         ('student', 'Student'),
         ('alumni', 'Alumni'),
