@@ -93,7 +93,7 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('/')  # Redirect to your home page
+            return redirect('/student-dashboard')  # Redirect to your home page
     else:
         form = LoginForm(request)
     return render(request, 'accounts/login.html', {'form': form})
