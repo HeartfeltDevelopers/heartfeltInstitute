@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'coresms.apps.CoresmsConfig',
+    'lib',
     'accounts',
     'finances',
     'library',

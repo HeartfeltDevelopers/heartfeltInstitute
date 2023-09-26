@@ -3,11 +3,14 @@ from django.contrib.auth import login, authenticate, logout
 from .forms import RegistrationForm, LoginForm
 from django.contrib.auth.views import FormView, LoginView
 from .models import Student, Lecturer, Aluminum, Partner
+from lib.models import t_url
 
 
 def admin_dashboard(request):
     labels = []
     data = []
+
+    url = t_url.objects.all()
 
     queryset = Student.objects.all()  # order_by('-population')[:5]
     for stud in queryset:
@@ -24,6 +27,7 @@ def admin_dashboard(request):
         "partners_count": partners_count,
         'labels': labels,
         'data': data,
+        'url': url
     }
     return render(request, 'accounts/admin/dashboard.html', context)
 
