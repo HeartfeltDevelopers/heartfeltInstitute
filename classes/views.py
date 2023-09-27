@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import StudentClasseCreationForm
-from .models import StudentClasse  # You need to define your Lecture model
+from .forms import StudentClasseCreationForm, OnlineLessonCreationForm
+from .models import StudentClasse, OnlineLesson  # You need to define your Lecture model
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from django.conf import settings
@@ -9,39 +9,42 @@ from datetime import datetime
 from pytz import timezone
 
 
-def convert_time(time):
-    return datetime.strptime(str(time), '%d %B %Y').strftime('%Y-%m-%d')
+def converted_date(date):
+    return datetime.strptime(date, '%Y-%m-%d').date()
+    # return datetime.strptime(str(time), '%d %B %Y').strftime('%Y-%m-%d')
 
 
-def create_lecture(request):
+def create_lesson(request):
     credentials_path = settings.GOOGLE_MEET_CREDENTIALS_PATH
 
     unique_request_id = str(uuid.uuid4())
 
     if request.method == 'POST':
-        form = StudentClasseCreationForm(request.POST)
+        form = OnlineLessonCreationForm(request.POST)
         if form.is_valid():
             # Process the form data and create a new lecture
-            lecture = StudentClasse(
-                class_name=form.cleaned_data['class_name'],
-                class_code=form.cleaned_data['class_code'],
-                class_type=form.cleaned_data['class_type'],
-                class_teacher=form.cleaned_data['class_teacher'],
-                lesson_title=form.cleaned_data['meeting_title'],
-                lesson_description=form.cleaned_data['meeting_description'],
-                lesson_date=form.cleaned_data['meeting_date'],
-                lesson_start_time=form.cleaned_data['meeting_start_time'],
-                lesson_end_time=form.cleaned_data['end_date'],
+            online_lesson = OnlineLesson(
+                online_title=form.cleaned_data['online_title'],
+                lesson_description=form.cleaned_data['lesson_description'],
+                lesson_date=form.cleaned_data['lesson_date'],
+                lesson_start_time=form.cleaned_data['lesson_start_time'],
+                lesson_end_time=form.cleaned_data['lesson_end_time'],
                 course_name=form.cleaned_data['course_name'],
                 material_downloads=form.cleaned_data['material_downloads'],
+                lecturer=form.cleaned_data['lecturer'],
+
             )
 
-            lecture.save()
+            converted_lesson_date = datetime.strptime(str(online_lesson.lesson_date), '%Y-%m-%d').date()
+            converted_lesson_start_time = datetime.strptime(str(online_lesson.lesson_start_time), '%H:%M:%S').time()
+            converted_lesson_end_time = datetime.strptime(str(online_lesson.lesson_end_time), '%H:%M:%S').time()
+
+            start_datetime = f'{converted_lesson_date}T{converted_lesson_start_time}:00.000Z'
+            end_datetime = f'{converted_lesson_date}T{converted_lesson_end_time}:00.000Z'
+
+            online_lesson.save()
 
             meeting_timezone = 'Africa/Harare'
-
-            start_datetime = f'{convert_time(lecture.lesson_date)}T{convert_time(lecture.lesson_start_time)}'
-            end_datetime = f'{convert_time(lecture.lesson_date)}T{convert_time(lecture.lesson_end_time)}'
 
             credentials = service_account.Credentials.from_service_account_file(
                 credentials_path, scopes=['https://www.googleapis.com/auth/calendar']
@@ -49,8 +52,8 @@ def create_lecture(request):
             service = build('calendar', 'v3', credentials=credentials)
 
             event = {
-                'summary': lecture.lesson_title,
-                'description': lecture.lesson_description,
+                'summary': online_lesson.online_title,
+                'description': online_lesson.lesson_description,
                 'start': {
                     'dateTime': start_datetime,
                     'timeZone': meeting_timezone,
@@ -69,8 +72,8 @@ def create_lecture(request):
             event = service.events().insert(calendarId='primary', body=event, conferenceDataVersion=1).execute()
 
             meet_link = event['conferenceData']['entryPoints'][0]['uri']
-            lecture.meet_link = meet_link
-            lecture.save()
+            online_lesson.online_platform_link = meet_link
+            online_lesson.save()
 
             return redirect('lecture_list')  # Redirect to a list of lectures or another page
     else:
