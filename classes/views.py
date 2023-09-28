@@ -2,16 +2,11 @@ from django.shortcuts import render, redirect
 from .forms import StudentClasseCreationForm, OnlineLessonCreationForm
 from .models import StudentClasse, OnlineLesson  # You need to define your Lecture model
 from google.oauth2 import service_account
+from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from django.conf import settings
 import uuid
 from datetime import datetime
-from pytz import timezone
-
-
-def converted_date(date):
-    return datetime.strptime(date, '%Y-%m-%d').date()
-    # return datetime.strptime(str(time), '%d %B %Y').strftime('%Y-%m-%d')
 
 
 def create_lesson(request):
@@ -22,7 +17,7 @@ def create_lesson(request):
     if request.method == 'POST':
         form = OnlineLessonCreationForm(request.POST)
         if form.is_valid():
-            # Process the form data and create a new lecture
+            # Process the form data and create a new lesson
             online_lesson = OnlineLesson(
                 online_title=form.cleaned_data['online_title'],
                 lesson_description=form.cleaned_data['lesson_description'],
@@ -34,6 +29,7 @@ def create_lesson(request):
                 lecturer=form.cleaned_data['lecturer'],
 
             )
+            print(online_lesson.lesson_start_time, online_lesson.lesson_date)
 
             converted_lesson_date = datetime.strptime(str(online_lesson.lesson_date), '%Y-%m-%d').date()
             converted_lesson_start_time = datetime.strptime(str(online_lesson.lesson_start_time), '%H:%M:%S').time()
@@ -41,6 +37,8 @@ def create_lesson(request):
 
             start_datetime = f'{converted_lesson_date}T{converted_lesson_start_time}:00.000Z'
             end_datetime = f'{converted_lesson_date}T{converted_lesson_end_time}:00.000Z'
+
+            print(start_datetime, "---", end_datetime)
 
             online_lesson.save()
 
@@ -68,15 +66,25 @@ def create_lesson(request):
                     },
                 },
             }
-
+            print("this is start time: ", start_datetime)
+            print("this is end time: ", end_datetime)
             event = service.events().insert(calendarId='primary', body=event, conferenceDataVersion=1).execute()
 
-            meet_link = event['conferenceData']['entryPoints'][0]['uri']
-            online_lesson.online_platform_link = meet_link
-            online_lesson.save()
+            print(event)
+
+            if event is not None:
+                meet_link = event['conferenceData']['entryPoints'][0]['uri']
+                online_lesson.online_platform_link = meet_link
+                online_lesson.save()
+            else:
+                print("Error creating event")
+
+            # meet_link = event['conferenceData']['entryPoints'][0]['uri']
+            # online_lesson.online_platform_link = meet_link
+            # online_lesson.save()
 
             return redirect('lecture_list')  # Redirect to a list of lectures or another page
     else:
-        form = StudentClasseCreationForm()
+        form = OnlineLessonCreationForm()
 
     return render(request, 'classes/create_lecture.html', {'form': form})

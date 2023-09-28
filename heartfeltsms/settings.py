@@ -149,7 +149,7 @@ STATICFILES_DIRS = [
 ]
 
 
-GOOGLE_MEET_CREDENTIALS_PATH = os.path.join(BASE_DIR, 'credentials', 'client_secret_916799736506-dhvcf24mo3bs0fpt9ogl85srsja4aaik.apps.googleusercontent.com.json')
+GOOGLE_MEET_CREDENTIALS_PATH = os.path.join(BASE_DIR, 'credentials', 'heartfelt-sms-419d0da5f9a0.json')
 # AUTHENTICATION_BACKENDS = [
 #     'django.contrib.auth.backends.ModelBackend',
 #     'allauth.account.auth_backends.AuthenticationBackend',
