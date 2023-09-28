@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import RegistrationForm, LoginForm
 from django.contrib.auth.views import FormView, LoginView
@@ -33,12 +33,15 @@ def admin_dashboard(request):
 
 
 def student_dashboard(request):
+    # student = get_object_or_404(Student, user_id=request.user.id)
     students = Student.objects.all().count()
 
     context = {
+        # "username": student.email,
         "students": students,
     }
-    return render(request, 'accounts/students/dashboard.html', context)
+    template = 'accounts/students/dashboard.html'
+    return render(request, template, context)
 
 
 def lecturer_dashboard(request):
@@ -122,6 +125,9 @@ def register(request):
     else:
         form = RegistrationForm()
     return render(request, 'accounts/register.html', {'form': form})
+
+
+
 
 def Logout(request):
     logout(request)
