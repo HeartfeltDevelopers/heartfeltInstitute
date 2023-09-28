@@ -1,13 +1,16 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth import login, authenticate, logout
 from .forms import RegistrationForm, LoginForm
 from django.contrib.auth.views import FormView, LoginView
 from .models import Student, Lecturer, Aluminum, Partner
+from lib.models import t_url
 
 
 def admin_dashboard(request):
     labels = []
     data = []
+
+    url = t_url.objects.all()
 
     queryset = Student.objects.all()  # order_by('-population')[:5]
     for stud in queryset:
@@ -24,17 +27,21 @@ def admin_dashboard(request):
         "partners_count": partners_count,
         'labels': labels,
         'data': data,
+        'url': url
     }
     return render(request, 'accounts/admin/dashboard.html', context)
 
 
 def student_dashboard(request):
+    # student = get_object_or_404(Student, user_id=request.user.id)
     students = Student.objects.all().count()
 
     context = {
+        # "username": student.email,
         "students": students,
     }
-    return render(request, 'accounts/students/dashboard.html', context)
+    template = 'accounts/students/dashboard.html'
+    return render(request, template, context)
 
 
 def lecturer_dashboard(request):
@@ -69,22 +76,22 @@ class CustomRegistrationView(FormView):
         return super().form_valid(form)
 
 
-#
-# class CustomLoginView(LoginView):
-#     def get_success_url(self):
-#         user = self.request.user
-#
-#         if user.is_authenticated:
-#             if user.user_type == 'admin':
-#                 return '/admin/dashboard/'  # Customize the URL for the admin dashboard
-#             elif user.user_type == 'lecturer':
-#                 return '/lecturer/dashboard/'  # Customize the URL for the lecturer dashboard
-#             elif user.user_type == 'student':
-#                 return '/student/dashboard/'  # Customize the URL for the student dashboard
-#             elif user.user_type == 'alumni':
-#                 return '/alumni/dashboard/'  # Customize the URL for the alumni dashboard
-#
-#         return '/'
+
+class CustomLoginView(LoginView):
+    def get_success_url(self):
+        user = self.request.user
+
+        if user.is_authenticated:
+            if user.user_type == 'admin':
+                return '/admin/dashboard/'  # Customize the URL for the admin dashboard
+            elif user.user_type == 'lecturer':
+                return '/lecturer/dashboard/'  # Customize the URL for the lecturer dashboard
+            elif user.user_type == 'student':
+                return '/student/dashboard/'  # Customize the URL for the student dashboard
+            elif user.user_type == 'alumni':
+                return '/alumni/dashboard/'  # Customize the URL for the alumni dashboard
+
+        return '/'
 
 
 def user_login(request):
@@ -93,19 +100,35 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('admin/dashboard')  # Redirect to your home page
+            if user.is_authenticated:
+                if user.user_type == 'student':
+                    return redirect('/student-dashboard')
+                elif user.user_type == 'lecturer':
+                    return redirect('/lecturer-dashboard')
+                elif user.user_type == 'admin':
+                    return redirect('/admin-dashboard')
+                elif user.user_type == 'alumni':
+                    return redirect('/alumni-dashboard')
+                     
     else:
         form = LoginForm(request)
     return render(request, 'accounts/login.html', {'form': form})
 
-#
-# def register(request):
-#     if request.method == 'POST':
-#         form = RegistrationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             return redirect('home')  # Redirect to your home page
-#     else:
-#         form = RegistrationForm()
-#     return render(request, 'accounts/register.html', {'form': form})
+
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')  # Redirect to your home page
+    else:
+        form = RegistrationForm()
+    return render(request, 'accounts/register.html', {'form': form})
+
+
+
+
+def Logout(request):
+    logout(request)
+    return redirect("/")
