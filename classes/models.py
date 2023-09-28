@@ -8,34 +8,45 @@ class StudentClasse(models.Model):
         ('online', 'Online'),
         ('physical', 'Physical'),
     ]
-
-    ONLINE_PLATFORM_CHOICES = [
-        ('zoom', 'Zoom'),
-        ('teams', 'Microsoft Teams'),
-        ('google_meet', 'Google Meet'),
-        ('webex', 'Cisco Webex'),
-        ('skype', 'Skype'),
-    ]
-
     class_name = models.CharField(max_length=50)
     class_code = models.CharField(max_length=10, unique=True)
     class_type = models.CharField(max_length=10, choices=CLASS_TYPE_CHOICES)
-    class_teacher = models.ForeignKey(Lecturer, on_delete=models.SET_NULL, null=True, blank=True)
-    online_platform = models.CharField(max_length=50, choices=ONLINE_PLATFORM_CHOICES, null=True, blank=True)
-    online_platform_link = models.URLField(max_length=200, null=True, blank=True)
-    material_downloads = models.FileField(upload_to='class_materials/', null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
-    duration = models.PositiveIntegerField(help_text="Duration in minutes", null=True, blank=True)
-    course_name = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
-    start_time = models.DateTimeField(auto_now_add=True)
-    room_number = models.CharField(max_length=10)
-    start_date = models.DateField()
-    end_date = models.DateField()
     created_date = models.DateField(auto_now_add=True)
     updated_date = models.DateField(auto_now=True)
 
     def __str__(self):
         return self.class_name
+
+
+class OnlineLesson(models.Model):
+
+    online_title = models.CharField(max_length=255, null=True, blank=True)
+    lesson_description = models.TextField(max_length=255, null=True, blank=True)
+    lesson_date = models.DateField(null=True, blank=True)
+    lesson_start_time = models.TimeField(null=True, blank=True)
+    lesson_end_time = models.TimeField(null=True, blank=True)
+    material_downloads = models.FileField(upload_to='class_materials/', null=True, blank=True)
+    online_platform_link = models.URLField(max_length=200, null=True, blank=True)
+    course_name = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
+    lecturer = models.ForeignKey(Lecturer, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return self.online_title
+
+
+class OfflineLesson(models.Model):
+
+    lesson_title = models.CharField(max_length=255, null=True, blank=True)
+    lesson_description = models.TextField(max_length=255, null=True, blank=True)
+    lesson_date = models.DateField(null=True, blank=True)
+    lesson_start_time = models.TimeField(null=True, blank=True)
+    lesson_end_time = models.TimeField(null=True, blank=True)
+    material_downloads = models.FileField(upload_to='class_materials/', null=True, blank=True)
+    course_name = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
+    lecturer = models.ForeignKey(Lecturer, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return self.lesson_title
 
 
 class Test(models.Model):
