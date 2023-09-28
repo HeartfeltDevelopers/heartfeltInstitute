@@ -35,8 +35,8 @@ def create_lesson(request):
             converted_lesson_start_time = datetime.strptime(str(online_lesson.lesson_start_time), '%H:%M:%S').time()
             converted_lesson_end_time = datetime.strptime(str(online_lesson.lesson_end_time), '%H:%M:%S').time()
 
-            start_datetime = f'{converted_lesson_date}T{converted_lesson_start_time}:00.000Z'
-            end_datetime = f'{converted_lesson_date}T{converted_lesson_end_time}:00.000Z'
+            start_datetime = f'{converted_lesson_date}T{converted_lesson_start_time}:00-00:00'
+            end_datetime = f'{converted_lesson_date}T{converted_lesson_end_time}:00-00:00'
 
             print(start_datetime, "---", end_datetime)
 
@@ -53,27 +53,30 @@ def create_lesson(request):
                 'summary': online_lesson.online_title,
                 'description': online_lesson.lesson_description,
                 'start': {
-                    'dateTime': start_datetime,
-                    'timeZone': meeting_timezone,
+                    'dateTime': '2024-05-28T09:00:00-07:00',
+                    'timeZone': 'America/Los_Angeles',
                 },
                 'end': {
-                    'dateTime': end_datetime,
-                    'timeZone': meeting_timezone,
+                    'dateTime': '2024-05-28T12:00:00-07:00',
+                    'timeZone': 'America/Los_Angeles',
                 },
                 'conferenceData': {
                     'createRequest': {
                         'requestId': unique_request_id,
+                        'conferenceSolutionKey': {'type': "hangoutsMeet"},
                     },
                 },
+
             }
             print("this is start time: ", start_datetime)
             print("this is end time: ", end_datetime)
-            event = service.events().insert(calendarId='primary', body=event, conferenceDataVersion=1).execute()
+            event = service.events().insert(calendarId='primary', body=event).execute()
 
             print(event)
 
             if event is not None:
-                meet_link = event['conferenceData']['entryPoints'][0]['uri']
+                meet_link = event.get('htmlLink')
+                print('Event created: %s' % (event.get('htmlLink')))
                 online_lesson.online_platform_link = meet_link
                 online_lesson.save()
             else:
@@ -83,7 +86,7 @@ def create_lesson(request):
             # online_lesson.online_platform_link = meet_link
             # online_lesson.save()
 
-            return redirect('lecture_list')  # Redirect to a list of lectures or another page
+            return redirect('home')  # Redirect to a list of lectures or another page
     else:
         form = OnlineLessonCreationForm()
 
