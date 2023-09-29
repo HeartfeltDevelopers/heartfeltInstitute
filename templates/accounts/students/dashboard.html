@@ -134,7 +134,7 @@
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="#"><i
                                                     class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i
+                                            <a class="dropdown-item" href="#member" data-toggle="modal"><i
                                                     class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
                                             <a class="dropdown-item" href="#"><i
                                                     class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
@@ -674,7 +674,7 @@
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="#"><i
                                                     class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i
+                                            <a class="dropdown-item" href="#member" data-toggle="modal"><i
                                                     class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
                                             <a class="dropdown-item" href="#"><i
                                                     class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
@@ -723,4 +723,18 @@
                     </div>
                 </div>
 
-{% endblock %}l>
+        <!-- Modal -->
+        <div class="modal right fade"  id="member"  tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-light">
+                        <button type="button" onclick="javascript:window.location.reload()" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
+                    </div>
+                    <div class="modal-body">
+                        Hello
+                    </div>
+                </div><!-- modal-content -->
+            </div><!-- modal-dialog -->
+        </div><!-- modal -->
+
+{% endblock %}

@@ -7,3 +7,9 @@ admin.site.register(Exam)
 admin.site.register(ExamQuestion)
 admin.site.register(ExamChoice)
 
+
+
+
+
+
+

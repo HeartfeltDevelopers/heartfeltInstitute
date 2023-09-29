@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance List</title>
+</head>
+<body>
+    <h1>Attendance List</h1>
+    <ul>
+        {% for attendance in attendances %}
+            <li>{{ attendance }}</li>
+        {% empty %}
+            <li>No attendance records available.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_attendance' %}">Add Attendance</a>
+</body>
+</html>

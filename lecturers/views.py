@@ -1,6 +1,14 @@
 # views.py
 from django.shortcuts import render, redirect
 from .forms import AssignmentCreationForm
+from googleapiclient.discovery import build
+from google.oauth2 import service_account
+#
+# credentials = service_account.Credentials.from_service_account_file(
+#     'ttttt.json',
+#     scopes=['https://www.googleapis.com/auth/calendar']
+# )
+# service = build('calendar', 'v3', credentials=credentials)
 
 
 def create_assignment(request):
@@ -15,3 +23,5 @@ def create_assignment(request):
         form = AssignmentCreationForm()
 
     return render(request, 'accounts/lecturers/create_assignment.html', {'form': form})
+
+
