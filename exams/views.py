@@ -2,6 +2,7 @@
 # views.py
 from django.shortcuts import render, redirect
 from .forms import ExamForm
+from .models import Exam, ExamQuestion, ExamChoice
 from django.contrib import messages  # Import messages
 
 def add_exam(request):
@@ -16,5 +17,14 @@ def add_exam(request):
         form = ExamForm()
     
     return render(request, 'exams/add_exam.html', {'form': form,})
+
+
+
+def exam_view(request, exam_id):
+    exam = Exam.objects.get(pk=exam_id)
+    questions = ExamQuestion.objects.filter(exam=exam)
+    choices = ExamChoice.objects.filter(question__in=questions)
+    return render(request, 'exam_template.html', {'exam': exam, 'questions': questions, 'choices': choices})
+
 
 
