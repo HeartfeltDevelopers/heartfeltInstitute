@@ -1,0 +1,25 @@
+<!-- add_exam.html -->
+<!DOCTYPE html>
+<html>
+<body>
+    {% block content %}
+    <h2>Add Exam</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save Exam</button>
+    </form>
+    <div class="messages">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+  {% endblock %}
+</body>
+</html>
+
