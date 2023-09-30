@@ -1,0 +1,14 @@
+
+<!-- create_student_classe.html -->
+
+
+{% block content %}
+<h2>Create Student Class</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock %}

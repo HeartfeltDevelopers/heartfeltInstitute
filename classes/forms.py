@@ -18,29 +18,16 @@ class OnlineLessonCreationForm(forms.ModelForm):
         fields = ['online_title', 'lesson_description', 'lesson_date', 'lesson_start_time', 'lesson_end_time',
                   'material_downloads', 'course_name', 'lecturer']
 
-        # widgets = {
-
-        # 'lesson_date': forms.DateInput(attrs={'type': 'date'}),
-        # 'lesson_start_time': forms.TimeInput(attrs={'type': 'time'}),
-        # 'lesson_end_time': forms.TimeInput(attrs={'type': 'time'}),
-
-        #
-        # }
-
 
 class OfflineLessonCreationForm(forms.ModelForm):
+    widgets = {
+        'lesson_date': forms.DateInput(attrs={'type': 'date'}),
+        'lesson_start_time': forms.TimeInput(attrs={'type': 'time'}),
+        'lesson_end_time': forms.TimeInput(attrs={'type': 'time'}),
+    }
+
     class Meta:
         model = OfflineLesson
         fields = ['lesson_title', 'lesson_description', 'lesson_date', 'lesson_start_time', 'lesson_end_time',
                   'material_downloads', 'course_name', 'lecturer']
 
-        widgets = {
-            'lesson_date': forms.DateInput(attrs={'type': 'date'}),
-            'lesson_start_time': forms.TimeInput(attrs={'type': 'time'}),
-            'lesson_end_time': forms.TimeInput(attrs={'type': 'time'}),
-        }
-
-# class StudentClasseCreationForm(forms.ModelForm):
-#     class Meta:
-#         model = StudentClasse
-#         fields = ['class_name', 'class_code', 'class_type']

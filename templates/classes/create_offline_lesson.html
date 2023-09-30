@@ -1,0 +1,14 @@
+
+
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <br>
+  <h2>Create Offline Lesson</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form | crispy}}
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}

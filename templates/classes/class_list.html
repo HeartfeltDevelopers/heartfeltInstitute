@@ -1,0 +1,35 @@
+{% extends 'accounts/students/students_base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+  <h2>Available Classes</h2>
+  <ul>
+    {% for class in classes %}
+      <li>{{ class.class_name }} - {{ class.class_code }}</li>
+    {% endfor %}
+  </ul>
+
+     <h2>Available Offline Classes</h2>
+  <ul>
+    {% for offline_class in offline_lessons %}
+      <li>{{ offline_class.class_name }} - {{ offline_class.class_code }}</li>
+    {% endfor %}
+  </ul>
+
+     <h2>Available Online Lessons</h2>
+  <ul>
+    {% for online_lesson in online_lessons %}
+      <li>{{ online_lesson.online_title }} - {{ online_lesson.lesson_date }} - Link -
+          {{ online_lesson.online_platform_link }}</li>
+    {% endfor %}
+  </ul>
+    <br>
+    <br>
+    <p></p><br>
+    <br>
+    <p></p><br>
+    <br>
+    <p></p>
+{% endblock %}
