@@ -27,7 +27,7 @@ DEBUG = False
 if DEBUG:
     ALLOWED_HOSTS = ["127.0.0.1", "157.230.178.154"]
 else:
-    ALLOWED_HOSTS = ["157.230.178.154"]
+    ALLOWED_HOSTS = ["157.230.178.154", "localhost"]
 
 # Application definition
 
