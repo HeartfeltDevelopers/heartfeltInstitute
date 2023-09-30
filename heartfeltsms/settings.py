@@ -161,9 +161,9 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # settings.py
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]
 
 
 GOOGLE_MEET_CREDENTIALS_PATH = os.path.join(
