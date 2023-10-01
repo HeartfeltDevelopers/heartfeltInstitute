@@ -148,7 +148,13 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 STATIC_URL = "static/"
 # settings.py
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static", "static_dirs"),)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "static", "static_dirs", "img")
+
+MEDIA_URL = "/img/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -160,10 +166,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "accounts.CustomUser"
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # settings.py
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static/"),
-]
 
 
 GOOGLE_MEET_CREDENTIALS_PATH = os.path.join(
