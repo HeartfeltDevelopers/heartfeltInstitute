@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-59z(rfb2!4z&gk9oj61*(m#g3-0kxskf#$k(6jemp1lv6mhm)%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 if DEBUG:
-    ALLOWED_HOSTS = ["127.0.0.1", "157.230.178.154"]
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "157.230.178.154"]
 else:
     ALLOWED_HOSTS = ["157.230.178.154", "localhost"]
 
@@ -148,7 +148,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 STATIC_URL = "static/"
 # settings.py
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -162,7 +162,7 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 # settings.py
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "static/"),
 ]
 
 

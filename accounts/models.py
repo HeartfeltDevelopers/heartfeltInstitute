@@ -3,22 +3,35 @@ from django.contrib.auth.models import AbstractUser, User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
+
 # from courses.models import Course
-from .utilities import generate_student_id, generate_employee_number, generate_partner_number
+from .utilities import (
+    generate_student_id,
+    generate_employee_number,
+    generate_partner_number,
+)
 from django_countries.fields import CountryField
 
 
 class CustomUser(AbstractUser):
     USER_TYPE_CHOICES = (
-        ('admin', 'Admin'),
-        ('lecturer', 'Lecturer'),
-        ('student', 'Student'),
-        ('alumni', 'Alumni'),
-        ('partner', 'Partner')
+        ("lecturer", "Lecturer"),
+        ("student", "Student"),
+        ("alumni", "Alumni"),
+        ("partner", "Partner"),
     )
-    user_type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES, default='student')
-    photo = models.ImageField(upload_to='user_photos/', null=True, blank=True)
-    date_of_birth = models.DateField(null=True, blank=True, default=datetime.datetime.now)
+    USER_GENDER = (
+        ("Female", "Female"),
+        ("Male", "Male"),
+    )
+    user_type = models.CharField(
+        max_length=20, choices=USER_TYPE_CHOICES, default="student"
+    )
+    photo = models.ImageField(upload_to="user_photos/", null=True, blank=True)
+    date_of_birth = models.DateField(
+        null=True, blank=True, default=datetime.datetime.now
+    )
+    gender = models.CharField(max_length=50, choices=USER_GENDER, blank=True)
     phone = models.CharField(max_length=15)
     address = models.TextField()
     church_name = models.CharField(max_length=256)
@@ -32,8 +45,13 @@ class CustomUser(AbstractUser):
 
 class Lecturer(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    employee_number = models.CharField(max_length=20, unique=True, default=generate_employee_number())
-    gender = models.CharField(max_length=10, choices=[('male', 'Male'), ('female', 'Female'), ('other', 'Other')])
+    employee_number = models.CharField(
+        max_length=20, unique=True, default=generate_employee_number()
+    )
+    gender = models.CharField(
+        max_length=10,
+        choices=[("male", "Male"), ("female", "Female"), ("other", "Other")],
+    )
     id_number = models.CharField(max_length=20, null=True, blank=True)
     qualification = models.CharField(max_length=50)
     specialization = models.CharField(max_length=100)
@@ -67,24 +85,28 @@ class Lecturer(models.Model):
 
 class Student(models.Model):
     CURRENT_CLASS = [
-        ('year one', 'Year One'),
-        ('year two', 'Year Two'),
-        ('year three', 'Year Three'),
-        ('year four', 'Year Four'),
-        ('diploma one', 'Diploma One'),
-        ('diploma two', 'Diploma Two'),
-        ('certificate', 'Certificate'),
+        ("year one", "Year One"),
+        ("year two", "Year Two"),
+        ("year three", "Year Three"),
+        ("year four", "Year Four"),
+        ("diploma one", "Diploma One"),
+        ("diploma two", "Diploma Two"),
+        ("certificate", "Certificate"),
     ]
     generate_id = generate_student_id()
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True, db_column='username')
+    user = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, primary_key=True, db_column="username"
+    )
     student_id = models.CharField(max_length=25, default=generate_id)
     id_number = models.CharField(max_length=20, null=True, blank=True)
     phone_number = models.CharField(max_length=15)
     address = models.TextField()
     # enrolled_courses = models.ManyToManyField('Course', related_name='enrolled_students')
-    enrolled_date = models.DateField()
+    # enrolled_date = models.DateField()
     graduation_date = models.DateField(null=True, blank=True)
-    current_year = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(6)])
+    current_year = models.PositiveIntegerField(
+        default=1, validators=[MinValueValidator(1), MaxValueValidator(6)]
+    )
     major = models.CharField(max_length=50)
     # attendance_records = models.ManyToManyField('AttendanceRecord')
     allergies = models.TextField(null=True, blank=True)
@@ -117,25 +139,33 @@ class Aluminum(models.Model):
 class Partner(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     partner_type_choices = [
-        ('money', 'Money'),
-        ('food', 'Food'),
-        ('items', 'Physical Items'),
+        ("money", "Money"),
+        ("food", "Food"),
+        ("items", "Physical Items"),
     ]
     PARTNERSHIP_BADGE = [
-        ('starter', 'Starter'),
-        ('silver', 'Silver'),
-        ('gold', 'Gold'),
-        ('diamond', 'Diamond'),
+        ("starter", "Starter"),
+        ("silver", "Silver"),
+        ("gold", "Gold"),
+        ("diamond", "Diamond"),
     ]
 
     partnership_type = models.CharField(max_length=10, choices=partner_type_choices)
     partner_id = models.CharField(max_length=25, default=generate_partner_number)
     partnership_badge = models.CharField(max_length=20, choices=PARTNERSHIP_BADGE)
     partner_joined_date = models.DateField()
-    total_partnership_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    total_partnership_amount = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True
+    )
     is_partnership_recurring = models.BooleanField(default=False)
-    payment_method = models.CharField(max_length=20, choices=[('Credit Card', 'Credit Card'),
-                                                              ('Bank Transfer', 'Bank Transfer'), ('Cash', 'Cash')])
+    payment_method = models.CharField(
+        max_length=20,
+        choices=[
+            ("Credit Card", "Credit Card"),
+            ("Bank Transfer", "Bank Transfer"),
+            ("Cash", "Cash"),
+        ],
+    )
     transaction_id = models.CharField(max_length=50, blank=True, null=True)
     receipt_number = models.CharField(max_length=50, blank=True, null=True)
 
@@ -143,7 +173,7 @@ class Partner(models.Model):
         return f"{self.user.first_name} {self.user.last_name}"
 
     class Meta:
-        verbose_name_plural = 'Partners'
+        verbose_name_plural = "Partners"
 
 
 class AttendanceRecord(models.Model):
@@ -155,4 +185,4 @@ class AttendanceRecord(models.Model):
         return f"{self.student} - {self.date}"
 
     class Meta:
-        unique_together = ('student', 'date')
+        unique_together = ("student", "date")
