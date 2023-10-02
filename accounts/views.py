@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
 from django.db.models import Q
 from accounts.models import CustomUser
-from .forms import RegistrationForm, LoginForm
+from .forms import LoginForm, UserTypeForm, AdditionalInfoForm, RegistrationForm
 from django.contrib.auth.views import FormView, LoginView
 from .models import Student, Lecturer, Aluminum, Partner
 from lib.models import t_url
@@ -75,29 +75,29 @@ def lecturer_dashboard(request):
     return render(request, "accounts/lecturers/dashboard.html", context)
 
 
-class CustomRegistrationView(FormView):
-    form_class = RegistrationForm
-    template_name = (
-        "accounts/register.html"  # Assuming this is your registration template
-    )
-    success_url = "/accounts/login/"  # Customize this URL
+# class CustomRegistrationView(FormView):
+#     form_class = RegistrationForm
+#     template_name = (
+#         "accounts/register.html"  # Assuming this is your registration template
+#     )
+#     success_url = "/accounts/login/"  # Customize this URL
 
-    def form_valid(self, form):
-        # Create the user account
-        user = form.save()
+#     def form_valid(self, form):
+#         # Create the user account
+#         user = form.save()
 
-        # Determine user type and create corresponding profile
-        user_type = form.cleaned_data["user_type"]
-        if user_type == "student":
-            Student.objects.create(user=user)
-        elif user_type == "lecturer":
-            Lecturer.objects.create(user=user)
-        elif user_type == "alumni":
-            Aluminum.objects.create(user=user)
-        elif user_type == "donor":
-            Partner.objects.create(user=user)
+#         # Determine user type and create corresponding profile
+#         user_type = form.cleaned_data["user_type"]
+#         if user_type == "student":
+#             Student.objects.create(user=user)
+#         elif user_type == "lecturer":
+#             Lecturer.objects.create(user=user)
+#         elif user_type == "alumni":
+#             Aluminum.objects.create(user=user)
+#         elif user_type == "donor":
+#             Partner.objects.create(user=user)
 
-        return super().form_valid(form)
+#         return super().form_valid(form)
 
 
 class CustomLoginView(LoginView):
@@ -143,7 +143,7 @@ def user_login(request):
     return render(request, "accounts/login.html", {"form": form})
 
 
-def register(request):
+def registration(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -152,9 +152,39 @@ def register(request):
             return redirect("/")  # Redirect to your home page
     else:
         form = RegistrationForm()
-    return render(request, "accounts/register.html", {"form": form})
+    return render(request, "accounts/registration.html", {"form": form})
 
 
 def Logout(request):
     logout(request)
     return redirect("/")
+
+
+# def registration(request):
+#     user_type_form = UserTypeForm(request.POST or None, prefix="user_type")
+#     additional_info_form = AdditionalInfoForm(
+#         request.POST or None, prefix="additional_info"
+#     )
+
+#     if request.method == "POST":
+#         if user_type_form.is_valid() and additional_info_form.is_valid():
+#             # Save the user_type_form first
+#             user = user_type_form.save(commit=False)
+#             user.save()
+
+#             # Now save the additional_info_form with the user instance
+#             additional_info = additional_info_form.save(commit=False)
+#             additional_info.user = user
+#             additional_info.save()
+
+#             login(request, user)
+#             return render(request, "accounts/registration_completed.html")
+
+#     return render(
+#         request,
+#         "accounts/registration.html",
+#         {
+#             "user_type_form": user_type_form,
+#             "additional_info_form": additional_info_form,
+#         },
+#     )

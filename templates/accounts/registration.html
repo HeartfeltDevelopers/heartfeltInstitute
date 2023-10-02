@@ -1,0 +1,73 @@
+<!-- registration.html -->
+{% extends 'base_blank.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+  /* CSS styles for the container */
+  .container {
+      background-color: #fff; /* White background color */
+      max-width: 800px; /* Maximum width of 700px */
+      margin: 0 auto; /* Center the container horizontally */
+      padding: 20px; /* Add some padding for spacing */
+      margin-top: 50px; /* Add margin for vertical centering */
+  }
+  .custom-padding {
+    padding-bottom: 10px
+}
+</style>
+
+<div class="container">
+  <form method="post" id="registration-form">
+    {% csrf_token %}
+    <div class="step" id="step1">
+      <h4>Personal Information</h4>
+      <div class="custom-padding">
+         {{form.user_type}}
+      </div>
+      <div class="custom-padding">{{form.username }}
+      </div>
+      <div class="custom-padding">
+        {{form.first_name }}</div>
+      <div class="custom-padding">{{form.last_name }}</div>
+      <div class="custom-padding">{{form.email }}</div>
+      <div class="custom-padding">{{form.password1}}</div>
+      <div class="custom-padding">{{form.password2}}</div>
+      <button type="button" class="btn btn-primary btn-lg next-step">Next</button>
+    </div>
+    <div class="step" id="step2" style="display: none;">
+      <h4>Additional Information</h4>
+      <div class="custom-padding">{{form.date_of_birth }}</div>
+      <div class="custom-padding">{{form.phone }}</div>
+      <div class="custom-padding">{{form.church_name}}</div>
+      <div class="custom-padding">{{form.address}}</div>
+      <div class="custom-padding">{{form.city}}</div>
+      <div class="custom-padding">{{form.country}}</div>
+      
+      <button type="button" class="btn btn-secondary btn-lg prev-step">Back</button> <!-- Add a back button -->
+      <button type="submit" class="btn btn-success btn-lg">Submit</button>
+    </div>
+
+			<a href="{% url 'login' %}"><p class="small">Login</p></a>
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const registrationForm = document.getElementById('registration-form');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const nextButton = document.querySelector('.next-step');
+    const prevButton = document.querySelector('.prev-step'); // Select the back button
+
+    nextButton.addEventListener('click', function() {
+      step1.style.display = 'none';
+      step2.style.display = 'block';
+    });
+
+    prevButton.addEventListener('click', function() { // Add an event listener for the back button
+      step2.style.display = 'none';
+      step1.style.display = 'block';
+    });
+  });
+</script>
+{% endblock %}
