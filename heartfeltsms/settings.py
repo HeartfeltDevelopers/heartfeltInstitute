@@ -27,7 +27,7 @@ DB_PASS = os.getenv("DB_PASS")
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 if DEBUG:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.241.136.85"]
 else:
@@ -99,20 +99,26 @@ if DEBUG:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db5.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
 else:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": "bigboy",
-            "USER": "db_admin",
-            "PASSWORD": DB_PASS,
-            "HOST": "localhost",
-            "PORT": "",
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db5.sqlite3",
         }
     }
+    # DATABASES = {
+    #     "default": {
+    #         "ENGINE": "django.db.backends.postgresql_psycopg2",
+    #         "NAME": "bigboy",
+    #         "USER": "db_admin",
+    #         "PASSWORD": DB_PASS,
+    #         "HOST": "localhost",
+    #         "PORT": "",
+    #     }
+    # }
 
 
 # Password validation
