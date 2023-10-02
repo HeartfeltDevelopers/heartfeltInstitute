@@ -11,10 +11,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 from django.contrib import staticfiles
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv()
+DB_PASS = os.getenv("DB_PASS")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -104,7 +108,7 @@ else:
             "ENGINE": "django.db.backends.postgresql_psycopg2",
             "NAME": "bigboy",
             "USER": "db_admin",
-            "PASSWORD": "focus@1",
+            "PASSWORD": DB_PASS,
             "HOST": "localhost",
             "PORT": "",
         }
