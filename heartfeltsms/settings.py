@@ -27,7 +27,7 @@ DB_PASS = os.getenv("DB_PASS")
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 if DEBUG:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.241.136.85"]
 else:
