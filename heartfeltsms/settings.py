@@ -108,7 +108,7 @@ else:
             "ENGINE": "django.db.backends.postgresql_psycopg2",
             "NAME": "bigboy",
             "USER": "db_admin",
-            "PASSWORD": DB_PASS,
+            "PASSWORD": os.getenv("DB_PASS"),
             "HOST": "localhost",
             "PORT": "",
         }
