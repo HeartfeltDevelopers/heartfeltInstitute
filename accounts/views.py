@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
+from django.db import connection
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
@@ -9,6 +10,12 @@ from .forms import LoginForm, RegistrationForm, UserAttributesForm
 from django.contrib.auth.views import FormView, LoginView
 from .models import Student, Lecturer, Aluminum, Partner
 from lib.models import t_url
+
+
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [dict(zip(columns, row)) for row in cursor.fetchall()]
 
 
 def admin_dashboard(request):
@@ -82,10 +89,38 @@ def student_dashboard(request, id):
 
 
 def lecturer_dashboard(request):
-    students = Student.objects.all().count()
+    students = connection.cursor()
+    students.cursor.execute(
+        """SELECT a.root, s.student_id, a.photo, u.first_name, u.last_name, s.current_year, s.major, a.gender, a.address, a.date_of_birth, a.phone, u.email
+            FROM accounts_CustomUser u
+            INNER JOIN accounts_UserAttributes a ON CAST(a.root AS INT) = u.id
+            INNER JOIN accounts_Student s ON s.root = u.id
+            WHERE u.user_type = 'student';
+        """
+    )
+
+    students = dictfetchall(students)
+
+    c = connection.cursor()
+    c.cursor.execute(
+        """Select a.gender, count(a.id) as total
+                            FROM accounts_UserAttributes a
+                            INNER JOIN accounts_Student s ON s.root = a.root
+                            GROUP BY a.gender
+                            """
+    )
+
+    c = dictfetchall(c)
+
+    totalFemale = c[0]["total"] if c else 0
+    totalMen = c[1]["total"] if c else 0
+    total_students = totalFemale + totalMen
 
     context = {
         "students": students,
+        "total_students": total_students,
+        "totalFemale": totalFemale,
+        "totalMen": totalMen,
     }
     return render(request, "accounts/lecturers/dashboard.html", context)
 

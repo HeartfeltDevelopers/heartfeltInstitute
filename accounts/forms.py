@@ -194,6 +194,7 @@ class UserAttributesForm(forms.ModelForm):
         model = UserAttributes
         fields = [
             "rootID",
+            "root",
             "date_of_birth",
             "gender",
             "phone",

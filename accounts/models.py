@@ -35,6 +35,7 @@ class UserAttributes(models.Model):
         ("Female", "Female"),
         ("Male", "Male"),
     )
+    root = models.IntegerField()
     rootID = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to="user_photos/", null=True, blank=True)
     date_of_birth = models.DateField(
@@ -103,6 +104,7 @@ class Student(models.Model):
         ("certificate", "Certificate"),
     ]
     generate_id = generate_student_id()
+    root = models.IntegerField()
     user = models.OneToOneField(
         CustomUser, on_delete=models.CASCADE, primary_key=True, db_column="username"
     )
