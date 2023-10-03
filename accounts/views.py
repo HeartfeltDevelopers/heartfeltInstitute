@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.db.models import Q
-from accounts.models import CustomUser
-from .forms import LoginForm, UserTypeForm, AdditionalInfoForm, RegistrationForm
+from accounts.models import CustomUser, UserAttributes
+from .forms import LoginForm, RegistrationForm, UserAttributesForm
 from django.contrib.auth.views import FormView, LoginView
 from .models import Student, Lecturer, Aluminum, Partner
 from lib.models import t_url
@@ -44,10 +46,28 @@ def admin_dashboard(request):
 
 
 def user_details(request, id):
-    user = get_object_or_404(CustomUser, id=id)
+    user = get_object_or_404(UserAttributes, rootID=id)
+
+    if request.method == "POST":
+        form = UserAttributesForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            # Redirect to the user's dashboard after successful form submission
+            return HttpResponseRedirect(
+                reverse("user-details", kwargs={"id": user.rootID})
+            )
+
+    else:
+        form = UserAttributesForm(instance=user)
 
     context = {
-        "username": user.username,
+        "photo": user.photo,
+        "church_name": user.church_name,
+        "phone": user.phone,
+        "address": user.address,
+        "city": user.city,
+        "country": user.country,
+        "form": form,
     }
     template = "accounts/users/dashboard.html"
     return render(request, template, context)
@@ -158,33 +178,3 @@ def registration(request):
 def Logout(request):
     logout(request)
     return redirect("/")
-
-
-# def registration(request):
-#     user_type_form = UserTypeForm(request.POST or None, prefix="user_type")
-#     additional_info_form = AdditionalInfoForm(
-#         request.POST or None, prefix="additional_info"
-#     )
-
-#     if request.method == "POST":
-#         if user_type_form.is_valid() and additional_info_form.is_valid():
-#             # Save the user_type_form first
-#             user = user_type_form.save(commit=False)
-#             user.save()
-
-#             # Now save the additional_info_form with the user instance
-#             additional_info = additional_info_form.save(commit=False)
-#             additional_info.user = user
-#             additional_info.save()
-
-#             login(request, user)
-#             return render(request, "accounts/registration_completed.html")
-
-#     return render(
-#         request,
-#         "accounts/registration.html",
-#         {
-#             "user_type_form": user_type_form,
-#             "additional_info_form": additional_info_form,
-#         },
-#     )

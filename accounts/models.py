@@ -40,7 +40,29 @@ class CustomUser(AbstractUser):
     country = CountryField()
 
     def __str__(self):
-        return f"{self.username}, {self.user_type}"
+        return f"{self.id}"
+
+
+class UserAttributes(models.Model):
+    USER_GENDER = (
+        ("Female", "Female"),
+        ("Male", "Male"),
+    )
+    rootID = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to="user_photos/", null=True, blank=True)
+    date_of_birth = models.DateField(
+        null=True, blank=True, default=datetime.datetime.now
+    )
+    gender = models.CharField(max_length=50, choices=USER_GENDER, blank=True)
+    phone = models.CharField(max_length=15)
+    address = models.TextField()
+    church_name = models.CharField(max_length=256)
+    nationality = models.CharField(max_length=50)
+    city = models.CharField(max_length=100)
+    country = CountryField()
+
+    def __unicode__(self):
+        return "UserAttributes {}".format(self.id)
 
 
 class Lecturer(models.Model):

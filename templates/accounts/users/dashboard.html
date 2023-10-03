@@ -114,7 +114,7 @@
                         <li>
                             <a href="/">Home</a>
                         </li>
-                        <li style="text-transform: capitalize;">Welcome {{user.username}}</li>
+                        <li style="text-transform: capitalize;">Welcome </li>
                     </ul>
                 </div>
                 <!-- Breadcubs Area End Here -->
@@ -144,24 +144,20 @@
                                 <div class="student-info">
                                     <div class="media media-none--xs">
                                         <div class="item-img">
-                                            <img src="img/figure/student.png" class="media-img-auto" alt="student">
+                                            <img src="{% static '/img/' %}{{photo}}" class="media-img-auto" alt="student">
+                                            
                                         </div>
                                         <div class="media-body">
                                             <h3 class="item-title">{{user.first_name}} {{user.last_name}}</h3>
-                                            <p>Aliquam erat volutpat. Curabiene natis massa
-                                                sedde lacustiquen sodale word moun taiery.</p>
+                                            <p>Student Number: 1000{{user.id}}</p>
                                         </div>
                                     </div>
                                     <div class="table-responsive info-table">
                                         <table class="table text-nowrap">
                                             <tbody>
                                                 <tr>
-                                                    <td>Student Number:</td>
-                                                    <td class="font-medium text-dark-medium">1000{{user.id}}</td>
-                                                </tr>
-                                                <tr>
                                                     <td>Church:</td>
-                                                    <td class="font-medium text-dark-medium" style="text-transform: capitalize;">{{user.church_name}}</td>
+                                                    <td class="font-medium text-dark-medium" style="text-transform: capitalize;">{{church_name}}</td>
                                                 </tr>
                                               
                                                 <tr>
@@ -170,19 +166,19 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Address:</td>
-                                                    <td class="font-medium text-dark-medium">{{user.address}}</td>
+                                                    <td class="font-medium text-dark-medium">{{address}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Phone:</td>
-                                                    <td class="font-medium text-dark-medium">{{user.phone}}</td>
+                                                    <td class="font-medium text-dark-medium">{{phone}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>City:</td>
-                                                    <td class="font-medium text-dark-medium" style="text-transform: capitalize;">{{user.city}}</td>
+                                                    <td class="font-medium text-dark-medium" style="text-transform: capitalize;">{{city}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Country:</td>
-                                                    <td class="font-medium text-dark-medium">{{user.country}}</td>
+                                                    <td class="font-medium text-dark-medium">{{country}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Admission Date:</td>
@@ -731,7 +727,10 @@
                         <button type="button" onclick="javascript:window.location.reload()" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
                     </div>
                     <div class="modal-body">
-                        Hello
+                        <form  method="post" name="form"  action="" enctype="multipart/form-data">{% csrf_token %}
+                        {{form}}
+                        <button type="submit" class="btn btn-info btn-lg">Save</button>
+                        </form>
                     </div>
                 </div><!-- modal-content -->
             </div><!-- modal-dialog -->

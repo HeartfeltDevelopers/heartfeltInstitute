@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import CustomUser
+from .models import CustomUser, UserAttributes
 from django_countries.fields import CountryField
 
 
@@ -142,25 +142,61 @@ class LoginForm(AuthenticationForm):
         fields = ["username", "password"]  # Fields for login form
 
 
-class UserTypeForm(UserCreationForm):
-    class Meta:
-        model = CustomUser
-        fields = [
-            "user_type",
-            "username",
-            "first_name",
-            "last_name",
-        ]
+class UserAttributesForm(forms.ModelForm):
+    date_of_birth = forms.CharField(
+        max_length=30,
+        required=False,
+        widget=forms.TextInput(
+            attrs={"class": "form-control form-control-lg", "placeholder": "DOB"}
+        ),
+        label="",
+    )
+    phone = forms.CharField(
+        max_length=30,
+        required=False,
+        widget=forms.TextInput(
+            attrs={"class": "form-control form-control-lg", "placeholder": "Phone"}
+        ),
+        label="",
+    )
+    church_name = forms.CharField(
+        max_length=30,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control form-control-lg",
+                "placeholder": "Church Name",
+            }
+        ),
+        label="",
+    )
+    address = forms.CharField(
+        max_length=30,
+        required=False,
+        widget=forms.TextInput(
+            attrs={"class": "form-control form-control-lg", "placeholder": "Address"}
+        ),
+        label="",
+    )
+    city = forms.CharField(
+        max_length=30,
+        required=False,
+        widget=forms.TextInput(
+            attrs={"class": "form-control form-control-lg", "placeholder": "City"}
+        ),
+        label="",
+    )
 
-
-class AdditionalInfoForm(UserCreationForm):
     class Meta:
-        model = CustomUser
+        model = UserAttributes
         fields = [
+            "rootID",
+            "photo",
             "date_of_birth",
-            "email",
+            "gender",
             "phone",
             "church_name",
+            "nationality",
             "address",
             "city",
             "country",
