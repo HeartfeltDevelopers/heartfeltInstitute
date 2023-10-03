@@ -20,23 +20,32 @@
   <form method="post" id="registration-form">
     {% csrf_token %}
     <div class="step" id="step1">
-      <h4>Personal Information</h4>
+      <h4>Additional Information</h4>
       <div class="custom-padding">
-         {{form.user_type}}
-      </div>
-      <div class="custom-padding">{{form.username }}
+        <input value="{{user.id}}" type="hidden" name="rootID">
+        {{form.church_name}}
       </div>
       <div class="custom-padding">
-        {{form.first_name }}</div>
-      <div class="custom-padding">{{form.last_name }}</div>
-      <div class="custom-padding">{{form.email }}</div>
-      <div class="custom-padding">{{form.password1}}</div>
-      <div class="custom-padding">{{form.password2}}</div>
-      <div class="custom-padding">{{form.country}}</div>
+        {{form.date_of_birth}}
+      </div>
+      <div class="custom-padding">
+        {{form.gender}}
+      </div>
+      <div class="custom-padding">
+        {{form.phone}}
+      </div>
+      <div class="custom-padding">
+        {{form.nationality}}
+      </div>
+      <div class="custom-padding">
+        {{form.address}}
+      </div>
+      <div class="custom-padding">
+        {{form.city}}
+      </div>
       <button type="submit" class="btn btn-success btn-lg">Submit</button>
     </div>
 
-			<a href="{% url 'login' %}"><p class="small">Login</p></a>
   </form>
 </div>
 

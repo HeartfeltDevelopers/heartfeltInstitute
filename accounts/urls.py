@@ -7,6 +7,7 @@ from .views import (
     user_login,
     user_details,
     registration,
+    registration2,
 )
 
 urlpatterns = [
@@ -17,5 +18,6 @@ urlpatterns = [
     path("lecturers/dashboard/", lecturer_dashboard, name="lecturer_dashboard"),
     path("user-details/<str:id>/", user_details, name="user-details"),
     path("registration/", registration, name="registration"),
+    path("registration-step-2/", registration2, name="registration-step-2"),
     # Add other URLs as needed
 ]

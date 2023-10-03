@@ -15,28 +15,15 @@ from django_countries.fields import CountryField
 
 class CustomUser(AbstractUser):
     USER_TYPE_CHOICES = (
+        ("admin", "admin"),
         ("lecturer", "Lecturer"),
         ("student", "Student"),
         ("alumni", "Alumni"),
         ("partner", "Partner"),
     )
-    USER_GENDER = (
-        ("Female", "Female"),
-        ("Male", "Male"),
-    )
     user_type = models.CharField(
         max_length=20, choices=USER_TYPE_CHOICES, default="student"
     )
-    photo = models.ImageField(upload_to="user_photos/", null=True, blank=True)
-    date_of_birth = models.DateField(
-        null=True, blank=True, default=datetime.datetime.now
-    )
-    gender = models.CharField(max_length=50, choices=USER_GENDER, blank=True)
-    phone = models.CharField(max_length=15)
-    address = models.TextField()
-    church_name = models.CharField(max_length=256)
-    nationality = models.CharField(max_length=50)
-    city = models.CharField(max_length=100)
     country = CountryField()
 
     def __str__(self):
@@ -59,7 +46,7 @@ class UserAttributes(models.Model):
     church_name = models.CharField(max_length=256)
     nationality = models.CharField(max_length=50)
     city = models.CharField(max_length=100)
-    country = CountryField()
+    # country = CountryField()
 
     def __unicode__(self):
         return "UserAttributes {}".format(self.id)

@@ -31,7 +31,7 @@ DEBUG = True
 if DEBUG:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.241.136.85"]
 else:
-    ALLOWED_HOSTS = ["192.241.136.85", "localhost"]
+    ALLOWED_HOSTS = ["192.241.136.85", "localhost", "127.0.0.1"]
 
 # Application definition
 
@@ -99,14 +99,14 @@ if DEBUG:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+            "NAME": BASE_DIR / "db5.sqlite3",
         }
     }
 else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db5.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
     # DATABASES = {

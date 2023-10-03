@@ -23,12 +23,8 @@ def admin_dashboard(request):
         data.append(queryset.all().count())
 
     students = CustomUser.objects.filter(Q(user_type="student")).count()
-    female_count = CustomUser.objects.filter(
-        Q(gender="Female") & Q(user_type="student")
-    ).count()
-    male_count = CustomUser.objects.filter(
-        Q(gender="Male") & Q(user_type="student")
-    ).count()
+    female_count = UserAttributes.objects.filter(Q(gender="Female")).count()
+    male_count = UserAttributes.objects.filter(Q(gender="Male")).count()
     all_students = Student.objects.all()
     lecturer_count = CustomUser.objects.filter(Q(user_type="lecturer")).count()
 
@@ -66,7 +62,6 @@ def user_details(request, id):
         "phone": user.phone,
         "address": user.address,
         "city": user.city,
-        "country": user.country,
         "form": form,
     }
     template = "accounts/users/dashboard.html"
@@ -167,12 +162,28 @@ def registration(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
+            username = form.cleaned_data.get("username")
+            raw_password = form.cleaned_data.get("password1")
+            user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect("/")  # Redirect to your home page
+            return redirect("registration-step-2")
     else:
         form = RegistrationForm()
     return render(request, "accounts/registration.html", {"form": form})
+
+
+def registration2(request):
+    if request.method == "POST":
+        form = UserAttributesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(
+                reverse("user-details", kwargs={"id": request.user.id})
+            )
+    else:
+        form = UserAttributesForm()
+    return render(request, "accounts/registration2.html", {"form": form})
 
 
 def Logout(request):

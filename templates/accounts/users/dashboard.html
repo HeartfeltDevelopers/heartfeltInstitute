@@ -2,8 +2,15 @@
 {% load static %}
 {% block content %}
 
-
     <body>
+        <style>
+            #id_rootID{
+                display: none;
+            }
+            label {
+                display: none;
+            }
+        </style>
    
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
@@ -26,7 +33,7 @@
                             </ul>
                         </li>
                        
-                        <li class="nav-item sidebar-nav-item">
+                        <!-- <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Library</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
@@ -35,7 +42,7 @@
                                 </li>
                                 
                             </ul>
-                        </li>
+                        </li> -->
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Accounts</span></a>
                             <ul class="nav sub-group-menu">
@@ -56,18 +63,18 @@
                                 
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="all-subject.html" class="nav-link"><i
                                     class="flaticon-open-book"></i><span>Subject</span></a>
-                        </li>
-                        <li class="nav-item">
+                        </li> -->
+                        <!-- <li class="nav-item">
                             <a href="class-routine.html" class="nav-link"><i class="flaticon-calendar"></i><span>Class
                                     Routine</span></a>
-                        </li>
-                        <li class="nav-item">
+                        </li> -->
+                        <!-- <li class="nav-item">
                             <a href="student-attendence.html" class="nav-link"><i
                                     class="flaticon-checklist"></i><span>Attendence</span></a>
-                        </li>
+                        </li> -->
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Exam</span></a>
                             <ul class="nav sub-group-menu">
@@ -80,27 +87,6 @@
                                         Grades</a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="transport.html" class="nav-link"><i
-                                    class="flaticon-bus-side-view"></i><span>Transport</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="hostel.html" class="nav-link"><i class="flaticon-bed"></i><span>Hostel</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="notice-board.html" class="nav-link"><i
-                                    class="flaticon-script"></i><span>Notice</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="messaging.html" class="nav-link"><i
-                                    class="flaticon-chat"></i><span>Messeage</span></a>
-                        </li>
-            
-                       
-                        <li class="nav-item">
-                            <a href="account-settings.html" class="nav-link"><i
-                                    class="flaticon-settings"></i><span>Account</span></a>
                         </li>
                     </ul>
                 </div>
@@ -125,28 +111,27 @@
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">
-                                        <h3>About Me</h3>
                                     </div>
                                     <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                             aria-expanded="false">...</a>
 
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-times text-orange-red"></i>Close</a>
                                             <a class="dropdown-item" href="#member" data-toggle="modal"><i
                                                     class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i
+                                            <a class="dropdown-item" href="#" onclick="javascript:window.location.reload()"><i
                                                     class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="student-info">
                                     <div class="media media-none--xs">
+                                        {% if photo %}
                                         <div class="item-img">
                                             <img src="{% static '/img/' %}{{photo}}" class="media-img-auto" alt="student">
                                             
                                         </div>
+                                        {% endif %}
                                         <div class="media-body">
                                             <h3 class="item-title">{{user.first_name}} {{user.last_name}}</h3>
                                             <p>Student Number: 1000{{user.id}}</p>
@@ -178,7 +163,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Country:</td>
-                                                    <td class="font-medium text-dark-medium">{{country}}</td>
+                                                    <td class="font-medium text-dark-medium">{{user.country}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Admission Date:</td>
@@ -195,7 +180,7 @@
                     <div class="col-8-xxxl col-12">
                         <div class="row">
                             <!-- Summery Area Start Here -->
-                            <div class="col-lg-4">
+                            <!-- <div class="col-lg-4">
                                 <div class="dashboard-summery-one">
                                     <div class="row">
                                         <div class="col-6">
@@ -245,10 +230,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- Summery Area End Here -->
                             <!-- Exam Result Area Start Here -->
-                            <div class="col-lg-12">
+                            <!-- <div class="col-lg-12">
                                 <div class="card dashboard-card-eleven">
                                     <div class="card-body">
                                         <div class="heading-layout1">
@@ -586,7 +571,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- Exam Result Area End Here -->
                         </div>
                     </div>
@@ -656,7 +641,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4-xxxl col-12">
+                    <!-- <div class="col-4-xxxl col-12">
                         <div class="card dashboard-card-six">
                             <div class="card-body">
                                 <div class="heading-layout1 mg-b-17">
@@ -716,7 +701,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
         <!-- Modal -->
@@ -724,16 +709,23 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header bg-light">
+                        <h4>
+                            Update Personal Information
+                        </h4>
                         <button type="button" onclick="javascript:window.location.reload()" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
                     </div>
                     <div class="modal-body">
                         <form  method="post" name="form"  action="" enctype="multipart/form-data">{% csrf_token %}
-                        {{form}}
-                        <button type="submit" class="btn btn-info btn-lg">Save</button>
+                        <div style="margin-bottom: 20px;">
+                            {{form}}
+                        </div>
+                        <button type="submit" class="btn btn-outline-success btn-lg">Save</button>
                         </form>
                     </div>
                 </div><!-- modal-content -->
             </div><!-- modal-dialog -->
         </div><!-- modal -->
+
+       
 
 {% endblock %}

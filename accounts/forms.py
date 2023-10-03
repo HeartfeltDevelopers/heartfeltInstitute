@@ -73,49 +73,6 @@ class RegistrationForm(UserCreationForm):
         ),
         label="",
     )
-    date_of_birth = forms.CharField(
-        max_length=30,
-        required=False,
-        widget=forms.TextInput(
-            attrs={"class": "form-control form-control-lg", "placeholder": "DOB"}
-        ),
-        label="",
-    )
-    phone = forms.CharField(
-        max_length=30,
-        required=False,
-        widget=forms.TextInput(
-            attrs={"class": "form-control form-control-lg", "placeholder": "Phone"}
-        ),
-        label="",
-    )
-    church_name = forms.CharField(
-        max_length=30,
-        required=False,
-        widget=forms.TextInput(
-            attrs={
-                "class": "form-control form-control-lg",
-                "placeholder": "Church Name",
-            }
-        ),
-        label="",
-    )
-    address = forms.CharField(
-        max_length=30,
-        required=False,
-        widget=forms.TextInput(
-            attrs={"class": "form-control form-control-lg", "placeholder": "Address"}
-        ),
-        label="",
-    )
-    city = forms.CharField(
-        max_length=30,
-        required=False,
-        widget=forms.TextInput(
-            attrs={"class": "form-control form-control-lg", "placeholder": "City"}
-        ),
-        label="",
-    )
 
     class Meta:
         model = CustomUser
@@ -127,11 +84,6 @@ class RegistrationForm(UserCreationForm):
             "email",
             "password1",
             "password2",
-            "date_of_birth",
-            "phone",
-            "church_name",
-            "address",
-            "city",
             "country",
         ]
 
@@ -143,11 +95,37 @@ class LoginForm(AuthenticationForm):
 
 
 class UserAttributesForm(forms.ModelForm):
-    date_of_birth = forms.CharField(
-        max_length=30,
+    GENDER_CHOICES = (
+        ("Female", "Female"),
+        ("Male", "Male"),
+    )
+    gender = forms.ChoiceField(
+        choices=GENDER_CHOICES,
+        required=True,  # Set this to True if user_type is required
+        widget=forms.Select(
+            attrs={
+                "class": "form-control custom-padding form-control-lg",
+                "style": "margin-bottom: 10px;",
+            }
+        ),
+        label="",
+    )
+    # rootID = forms.CharField(
+    #     max_length=30,
+    #     required=False,
+    #     widget=forms.TextInput(
+    #         attrs={"class": "form-control form-control-lg", "type": "text"}
+    #     ),
+    #     label="",
+    # )
+    date_of_birth = forms.DateField(
         required=False,
-        widget=forms.TextInput(
-            attrs={"class": "form-control form-control-lg", "placeholder": "DOB"}
+        widget=forms.DateInput(
+            attrs={
+                "class": "form-control form-control-lg",
+                "placeholder": "DOB",
+                "style": "margin-bottom: 10px;",
+            }
         ),
         label="",
     )
@@ -155,7 +133,11 @@ class UserAttributesForm(forms.ModelForm):
         max_length=30,
         required=False,
         widget=forms.TextInput(
-            attrs={"class": "form-control form-control-lg", "placeholder": "Phone"}
+            attrs={
+                "class": "form-control form-control-lg",
+                "placeholder": "Phone",
+                "style": "margin-bottom: 10px;",
+            }
         ),
         label="",
     )
@@ -166,6 +148,19 @@ class UserAttributesForm(forms.ModelForm):
             attrs={
                 "class": "form-control form-control-lg",
                 "placeholder": "Church Name",
+                "style": "margin-bottom: 10px;",
+            }
+        ),
+        label="",
+    )
+    nationality = forms.CharField(
+        max_length=30,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control form-control-lg",
+                "placeholder": "Nationality",
+                "style": "margin-bottom: 10px;",
             }
         ),
         label="",
@@ -174,7 +169,11 @@ class UserAttributesForm(forms.ModelForm):
         max_length=30,
         required=False,
         widget=forms.TextInput(
-            attrs={"class": "form-control form-control-lg", "placeholder": "Address"}
+            attrs={
+                "class": "form-control form-control-lg",
+                "placeholder": "Address",
+                "style": "margin-bottom: 10px;",
+            }
         ),
         label="",
     )
@@ -182,7 +181,11 @@ class UserAttributesForm(forms.ModelForm):
         max_length=30,
         required=False,
         widget=forms.TextInput(
-            attrs={"class": "form-control form-control-lg", "placeholder": "City"}
+            attrs={
+                "class": "form-control form-control-lg",
+                "placeholder": "City",
+                "style": "margin-bottom: 10px;",
+            }
         ),
         label="",
     )
@@ -191,7 +194,6 @@ class UserAttributesForm(forms.ModelForm):
         model = UserAttributes
         fields = [
             "rootID",
-            "photo",
             "date_of_birth",
             "gender",
             "phone",
@@ -199,5 +201,5 @@ class UserAttributesForm(forms.ModelForm):
             "nationality",
             "address",
             "city",
-            "country",
+            "photo",
         ]
