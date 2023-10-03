@@ -7,6 +7,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.db.models import Q
 from accounts.models import CustomUser, UserAttributes
 from .forms import LoginForm, RegistrationForm, UserAttributesForm
+from lecturers.forms import AssignmentNotificationForm
+from lecturers.models import AssignmentNotification
 from django.contrib.auth.views import FormView, LoginView
 from .models import Student, Lecturer, Aluminum, Partner
 from lib.models import t_url
@@ -89,6 +91,7 @@ def student_dashboard(request, id):
 
 
 def lecturer_dashboard(request):
+    notifications = AssignmentNotification.objects.all()
     students = connection.cursor()
     students.cursor.execute(
         """SELECT a.root, s.student_id, a.photo, u.first_name, u.last_name, s.current_year, s.major, a.gender, a.address, a.date_of_birth, a.phone, u.email
@@ -116,11 +119,23 @@ def lecturer_dashboard(request):
     totalMen = c[1]["total"] if c else 0
     total_students = totalFemale + totalMen
 
+    if request.method == "POST":
+        form = AssignmentNotificationForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # Redirect to the user's dashboard after successful form submission
+            return HttpResponseRedirect(reverse("lecturer-dashboard"))
+
+    else:
+        form = AssignmentNotificationForm()
+
     context = {
         "students": students,
         "total_students": total_students,
         "totalFemale": totalFemale,
         "totalMen": totalMen,
+        "form": form,
+        "notifications": notifications,
     }
     return render(request, "accounts/lecturers/dashboard.html", context)
 

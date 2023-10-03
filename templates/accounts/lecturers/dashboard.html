@@ -221,44 +221,20 @@
 
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                            <a class="dropdown-item" href="#notifications" data-toggle="modal"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
                                             <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="notice-box-wrap">
+                                    {% for rw in notifications %}
                                     <div class="notice-list">
-                                        <div class="post-date bg-skyblue">16 June, 2019</div>
+                                        <div class="post-date {{rw.notification_rating}}">16 June, 2019</div>
                                         <h6 class="notice-title"><a href="#">Great School manag mene esom tus eleifend lectus
                                             sed maximus mi faucibusnting.</a></h6>
                                         <div class="entry-meta">  Jennyfar Lopez / <span>5 min ago</span></div>
                                     </div>
-                                    <div class="notice-list">
-                                        <div class="post-date bg-yellow">16 June, 2019</div>
-                                        <h6 class="notice-title"><a href="#">Great School manag printing.</a></h6>
-                                        <div class="entry-meta">  Jennyfar Lopez / <span>5 min ago</span></div>
-                                    </div>
-                                    <div class="notice-list">
-                                        <div class="post-date bg-pink">16 June, 2019</div>
-                                        <h6 class="notice-title"><a href="#">Great School manag Nulla rhoncus eleifensed mim
-                                            us mi faucibus id. Mauris vestibulum non purus lobortismenearea</a></h6>
-                                        <div class="entry-meta">  Jennyfar Lopez / <span>5 min ago</span></div>
-                                    </div>
-                                    <div class="notice-list">
-                                        <div class="post-date bg-skyblue">16 June, 2019</div>
-                                        <h6 class="notice-title"><a href="#">Great School manag mene esom  text of the printing.</a></h6>
-                                        <div class="entry-meta">  Jennyfar Lopez / <span>5 min ago</span></div>
-                                    </div>
-                                    <div class="notice-list">
-                                        <div class="post-date bg-yellow">16 June, 2019</div>
-                                        <h6 class="notice-title"><a href="#">Great School manag printing.</a></h6>
-                                        <div class="entry-meta">  Jennyfar Lopez / <span>5 min ago</span></div>
-                                    </div>
-                                    <div class="notice-list">
-                                        <div class="post-date bg-pink">16 June, 2019</div>
-                                        <h6 class="notice-title"><a href="#">Great School manag meneesom.</a></h6>
-                                        <div class="entry-meta">  Jennyfar Lopez / <span>5 min ago</span></div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -374,6 +350,29 @@
                         </div>
                     </div>
                 </div>
+
+                 <!-- Modal -->
+        <div class="modal right fade"  id="notifications"  tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-light">
+                        <h4>
+                            Add Notifications
+                        </h4>
+                        <button type="button" onclick="javascript:window.location.reload()" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
+                    </div>
+                    <div class="modal-body">
+                        <form  method="post" name="form"  action="" enctype="multipart/form-data">{% csrf_token %}
+                        <div style="margin-bottom: 20px;">
+                            {{form}}
+                        </div>
+                        <button type="submit" class="btn btn-outline-success btn-lg">Save</button>
+                        </form>
+                    </div>
+                </div><!-- modal-content -->
+            </div><!-- modal-dialog -->
+        </div><!-- modal -->
+
 
 
  {% endblock %}l>
