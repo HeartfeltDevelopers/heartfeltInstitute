@@ -1,0 +1,61 @@
+{% extends 'lecturerBase.html' %}
+{% load static %}
+{% block content %}
+    <div class="col-lg-12">
+        <div class="card dashboard-card-eleven">
+            <div class="card-body">
+                <div class="heading-layout1">
+                    <div class="item-title">
+                        <h3>Online Lessons</h3>
+                    </div>
+                </div>
+                <div class="table-box-wrap">
+                    <form class="search-form-box">
+                        <div class="row gutters-8">
+                            <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                <input type="text" placeholder="Search by Roll ..." class="form-control">
+                            </div>
+                            <div class="col-4-xxxl col-xl-4 col-lg-4 col-12 form-group">
+                                <input type="text" placeholder="Search by Name ..." class="form-control">
+                            </div>
+                            <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                <input type="text" placeholder="Search by Class ..." class="form-control">
+                            </div>
+                            <div class="col-1-xxxl col-xl-2 col-lg-2 col-12 form-group">
+                                <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive student-table-box">
+                        <table class="table display data-table text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Lesson Date</th>
+                                    <th>Lesson Start Date</th>
+                                    <th>Lesson End Start</th>
+                                    <th>Lecturer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for rw in online_lessons %}
+                                <tr>
+                                    
+                                    <td>{{rw.online_title}}</td>
+                                    <td>{{rw.lesson_date}}</td>
+                                    <td>{{rw.lesson_start_time}}</td>
+                                    <td>{{rw.lesson_end_time}}</td>
+                                    <td>{{rw.lecturer}}</td>
+                                    
+                                </tr>
+                                {% endfor %}
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -100,3 +100,15 @@ def create_lesson(request):
         form = OnlineLessonCreationForm()
 
     return render(request, "classes/create_lecture.html", {"form": form})
+
+
+def AllOnlineClasses(request):
+    online_lessons = OnlineLesson.objects.all().order_by("-id")
+
+    context = {
+        "online_lessons": online_lessons,
+    }
+
+    template = "classes/allOnlineLessons.html"
+
+    return render(request, template, context)

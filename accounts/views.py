@@ -90,8 +90,8 @@ def user_details(request, id):
     return render(request, template, context)
 
 
-def student_dashboard(request, id):
-    user = get_object_or_404(CustomUser, id=id)
+def student_dashboard(request):
+    user = get_object_or_404(CustomUser, id=request.user.id)
     # student = get_object_or_404(Student, user_id=request.user.id)
     students = Student.objects.all().count()
 

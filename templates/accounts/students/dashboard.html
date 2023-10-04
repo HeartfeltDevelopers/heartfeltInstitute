@@ -1,123 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'studentBase.html' %}
 {% load static %}
 {% block content %}
-
-
-    <body>
-   
-        <!-- Page Area Start Here -->
-        <div class="dashboard-page-one">
-            <!-- Sidebar Area Start Here -->
-            <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
-               <div class="mobile-sidebar-header d-md-none">
-                    <div class="header-logo">
-                        <a href="index.html"><img src="img/logo1.png" alt="logo"></a>
-                    </div>
-               </div>
-                <div class="sidebar-menu-content">
-                    <ul class="nav nav-sidebar-menu sidebar-toggle-view">
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Profile</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="student-details.html" class="nav-link"><i
-                                            class="fas fa-angle-right"></i>Student Details</a>
-                                </li>
-                            </ul>
-                        </li>
-                       
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Library</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="all-book.html" class="nav-link"><i class="fas fa-angle-right"></i>All
-                                        Book</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Accounts</span></a>
-                            <ul class="nav sub-group-menu">
-                                
-                                <li class="nav-item">
-                                    <a href="add-expense.html" class="nav-link"><i class="fas fa-angle-right"></i>Pay</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i
-                                    class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Class</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="all-class.html" class="nav-link"><i class="fas fa-angle-right"></i>All
-                                        Classes</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="all-subject.html" class="nav-link"><i
-                                    class="flaticon-open-book"></i><span>Subject</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="class-routine.html" class="nav-link"><i class="flaticon-calendar"></i><span>Class
-                                    Routine</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="student-attendence.html" class="nav-link"><i
-                                    class="flaticon-checklist"></i><span>Attendence</span></a>
-                        </li>
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Exam</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="exam-schedule.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam
-                                        Schedule</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="exam-grade.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam
-                                        Grades</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="transport.html" class="nav-link"><i
-                                    class="flaticon-bus-side-view"></i><span>Transport</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="hostel.html" class="nav-link"><i class="flaticon-bed"></i><span>Hostel</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="notice-board.html" class="nav-link"><i
-                                    class="flaticon-script"></i><span>Notice</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="messaging.html" class="nav-link"><i
-                                    class="flaticon-chat"></i><span>Messeage</span></a>
-                        </li>
-            
-                       
-                        <li class="nav-item">
-                            <a href="account-settings.html" class="nav-link"><i
-                                    class="flaticon-settings"></i><span>Account</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
-                <!-- Breadcubs Area Start Here -->
-                <div class="breadcrumbs-area">
-                    <h3>Student Dashboard</h3>
-                    <ul>
-                        <li>
-                            <a href="/">Home</a>
-                        </li>
-                        <li style="text-transform: capitalize;">Welcome {{user.username}}</li>
-                    </ul>
-                </div>
-                <!-- Breadcubs Area End Here -->
                 <div class="row">
                     <!-- Student Info Area Start Here -->
                     <div class="col-4-xxxl col-12">
@@ -721,7 +605,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
         <!-- Modal -->
         <div class="modal right fade"  id="member"  tabindex="-1" role="dialog">

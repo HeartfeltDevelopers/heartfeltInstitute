@@ -53,6 +53,8 @@
         {% include 'header.html' %}
         <!-- Page Area Start Here -->
         <div class="dashboard-page-one">
+            
+            <!-- Sidebar Area Start Here -->
             <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
                 <div class="mobile-sidebar-header d-md-none">
                      <div class="header-logo">
@@ -62,81 +64,47 @@
                  <div class="sidebar-menu-content">
                      <ul class="nav nav-sidebar-menu sidebar-toggle-view">
                          <li class="nav-item sidebar-nav-item">
-                             <a href="#" class="nav-link"><i class="flaticon-dashboard"></i><span>Dashboard</span></a>
-                             <ul class="nav sub-group-menu sub-group-active">
-                                 <li class="nav-item">
-                                     <a href="{% url 'lecturer_dashboard' %}" class="nav-link menu-active"><i class="fas fa-angle-right"></i>Lecturers</a>
-                                 </li>
-                             </ul>
-                         </li>
-                         <li class="nav-item sidebar-nav-item">
-                             <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>
+                             <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Profile</span></a>
                              <ul class="nav sub-group-menu">
                                  <li class="nav-item">
-                                     <a href="{% url 'all-students' %}" class="nav-link"><i class="fas fa-angle-right"></i>All Students</a>
+                                     <a href="{% url 'user-details' user.id %}" class="nav-link"><i
+                                             class="fas fa-angle-right"></i>Student Details</a>
                                  </li>
-                                 <!-- <li class="nav-item">
-                                     <a href="admit-form.html" class="nav-link"><i class="fas fa-angle-right"></i>Add Student</a>
-                                 </li> -->
                              </ul>
                          </li>
-                         
                         
-                         <!-- <li class="nav-item sidebar-nav-item">
-                             <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Library</span></a>
-                             <ul class="nav sub-group-menu">
-                                 <li class="nav-item">
-                                     <a href="all-book.html" class="nav-link"><i class="fas fa-angle-right"></i>All Book</a>
-                                 </li>
-                             </ul>
-                         </li> -->
-                         <!-- <li class="nav-item sidebar-nav-item">
-                             <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Account</span></a>
-                             <ul class="nav sub-group-menu">
-                                 <li class="nav-item">
-                                     <a href="all-fees.html" class="nav-link"><i class="fas fa-angle-right"></i>Paid Up Students</a>
-                                 </li>
-                                 <li class="nav-item">
-                                     <a href="all-expense.html" class="nav-link"><i class="fas fa-angle-right"></i>Owing Students</a>
-                                 </li>
-                               
-                             </ul>
-                         </li> -->
                          <li class="nav-item sidebar-nav-item">
-                             <a href="#" class="nav-link"><i class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Class</span></a>
+                             <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Accounts</span></a>
                              <ul class="nav sub-group-menu">
+                                 
                                  <li class="nav-item">
-                                     <a href="{%url 'online-lessons' %}" class="nav-link"><i class="fas fa-angle-right"></i>All Classes</a>
-                                 </li>
-                                 <li class="nav-item">
-                                     <a href="#addClass" data-toggle="modal" class="nav-link"><i class="fas fa-angle-right"></i>Add New Class</a>
+                                     <a href="add-expense.html" class="nav-link"><i class="fas fa-angle-right"></i>Pay</a>
                                  </li>
                              </ul>
                          </li>
-                         <!-- <li class="nav-item">
-                             <a href="student-attendence.html" class="nav-link"><i class="flaticon-checklist"></i><span>Attendence</span></a>
-                         </li> -->
+                         <li class="nav-item sidebar-nav-item">
+                             <a href="#" class="nav-link"><i
+                                     class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Class</span></a>
+                             <ul class="nav sub-group-menu">
+                                 <li class="nav-item">
+                                     <a href="all-class.html" class="nav-link"><i class="fas fa-angle-right"></i>All
+                                         Classes</a>
+                                 </li>
+                                 
+                             </ul>
+                         </li>
                          <!-- <li class="nav-item sidebar-nav-item">
                              <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Exam</span></a>
                              <ul class="nav sub-group-menu">
                                  <li class="nav-item">
-                                     <a href="exam-schedule.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam Schedule</a>
+                                     <a href="exam-schedule.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam
+                                         Schedule</a>
                                  </li>
                                  <li class="nav-item">
-                                     <a href="exam-grade.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam Grades</a>
+                                     <a href="exam-grade.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam
+                                         Grades</a>
                                  </li>
                              </ul>
-                         </li> -->
-                        
-                         <!-- <li class="nav-item">
-                             <a href="notice-board.html" class="nav-link"><i class="flaticon-script"></i><span>Notice</span></a>
-                         </li> -->
-                         <!-- <li class="nav-item">
-                             <a href="messaging.html" class="nav-link"><i class="flaticon-chat"></i><span>Messeage</span></a>
-                         </li>
-                         
-                         <li class="nav-item">
-                             <a href="account-settings.html" class="nav-link"><i class="flaticon-settings"></i><span>Account</span></a>
                          </li> -->
                      </ul>
                  </div>
@@ -146,7 +114,7 @@
              <div class="dashboard-content-one">
                  <!-- Breadcubs Area Start Here -->
                  <div class="breadcrumbs-area">
-                     <h3>Lecturer Dashboard</h3>
+                     <h3>Students Dashboard</h3>
                      <ul>
                          <li>
                              <a href="/">Home</a>
@@ -184,23 +152,7 @@
                      </div>
                  <!-- modal -->
  
-                 <!-- Modal -->
-                 <div class="modal right fade" id="addClass" tabindex="-1" role="dialog">
-                     <div class="modal-dialog modal-lg" role="document">
-                         <div class="modal-content">
-                             <div class="modal-header bg-light">
-                                 <h4>Add Class</h4>
-                                 <button type="button" onclick="javascript:window.location.reload()" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
-                             </div>
-                             <div class="modal-body">
-                                 <!-- Iframe to display the lecture creation form -->
-                                 <iframe src="{% url 'create_lesson' %}" width="100%" height="600" frameborder="0"></iframe>
-                             </div>
-                         </div><!-- modal-content -->
-                     </div><!-- modal-dialog -->
-                 </div>
-                 
-             <!-- modal -->
+                
              
     </main>
 
