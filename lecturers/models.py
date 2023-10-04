@@ -26,6 +26,7 @@ class AssignmentNotification(models.Model):
         ("bg-yellow", "Yellow"),
         ("bg-pink", "Pink"),
     ]
+    date = models.DateField()
     notification_title = models.CharField(max_length=100)
     notification_rating = models.CharField(max_length=20, choices=rating_choices)
     notify_class = models.ForeignKey(

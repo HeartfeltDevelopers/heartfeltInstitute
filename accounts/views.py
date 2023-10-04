@@ -5,6 +5,19 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.db.models import Q
+
+from classes.forms import StudentClasseCreationForm, OnlineLessonCreationForm
+from classes.models import (
+    StudentClasse,
+    OnlineLesson,
+)  # You need to define your Lecture model
+from google.oauth2 import service_account
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from django.conf import settings
+import uuid
+from datetime import datetime
+
 from accounts.models import CustomUser, UserAttributes
 from .forms import LoginForm, RegistrationForm, UserAttributesForm
 from lecturers.forms import AssignmentNotificationForm
@@ -90,8 +103,7 @@ def student_dashboard(request, id):
     return render(request, template, context)
 
 
-def lecturer_dashboard(request):
-    notifications = AssignmentNotification.objects.all()
+def fetch_students():
     students = connection.cursor()
     students.cursor.execute(
         """SELECT a.root, s.student_id, a.photo, u.first_name, u.last_name, s.current_year, s.major, a.gender, a.address, a.date_of_birth, a.phone, u.email
@@ -101,8 +113,12 @@ def lecturer_dashboard(request):
             WHERE u.user_type = 'student';
         """
     )
+    return dictfetchall(students)
 
-    students = dictfetchall(students)
+
+def lecturer_dashboard(request):
+    notifications = AssignmentNotification.objects.all().order_by("-id")[:5]
+    students = fetch_students()
 
     c = connection.cursor()
     c.cursor.execute(
@@ -120,24 +136,118 @@ def lecturer_dashboard(request):
     total_students = totalFemale + totalMen
 
     if request.method == "POST":
-        form = AssignmentNotificationForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+        assignment_form = AssignmentNotificationForm(request.POST, request.FILES)
+        if assignment_form.is_valid():
+            assignment_form.save()
             # Redirect to the user's dashboard after successful form submission
             return HttpResponseRedirect(reverse("lecturer-dashboard"))
 
     else:
-        form = AssignmentNotificationForm()
+        assignment_form = AssignmentNotificationForm()
 
     context = {
         "students": students,
         "total_students": total_students,
         "totalFemale": totalFemale,
         "totalMen": totalMen,
-        "form": form,
+        "assignment_form": assignment_form,
         "notifications": notifications,
     }
     return render(request, "accounts/lecturers/dashboard.html", context)
+
+
+def create_lesson(request):
+    credentials_path = settings.GOOGLE_MEET_CREDENTIALS_PATH
+
+    unique_request_id = str(uuid.uuid4())
+
+    if request.method == "POST":
+        form = OnlineLessonCreationForm(request.POST)
+        if form.is_valid():
+            # Process the form data and create a new lesson
+            online_lesson = OnlineLesson(
+                online_title=form.cleaned_data["online_title"],
+                lesson_description=form.cleaned_data["lesson_description"],
+                lesson_date=form.cleaned_data["lesson_date"],
+                lesson_start_time=form.cleaned_data["lesson_start_time"],
+                lesson_end_time=form.cleaned_data["lesson_end_time"],
+                course_name=form.cleaned_data["course_name"],
+                material_downloads=form.cleaned_data["material_downloads"],
+                lecturer=form.cleaned_data["lecturer"],
+            )
+            print(online_lesson.lesson_start_time, online_lesson.lesson_date)
+
+            converted_lesson_date = datetime.strptime(
+                str(online_lesson.lesson_date), "%Y-%m-%d"
+            ).date()
+            converted_lesson_start_time = datetime.strptime(
+                str(online_lesson.lesson_start_time), "%H:%M:%S"
+            ).time()
+            converted_lesson_end_time = datetime.strptime(
+                str(online_lesson.lesson_end_time), "%H:%M:%S"
+            ).time()
+
+            start_datetime = (
+                f"{converted_lesson_date}T{converted_lesson_start_time}:00-00:00"
+            )
+            end_datetime = (
+                f"{converted_lesson_date}T{converted_lesson_end_time}:00-00:00"
+            )
+
+            print(start_datetime, "---", end_datetime)
+
+            online_lesson.save()
+
+            meeting_timezone = "Africa/Harare"
+
+            credentials = service_account.Credentials.from_service_account_file(
+                credentials_path, scopes=["https://www.googleapis.com/auth/calendar"]
+            )
+            service = build("calendar", "v3", credentials=credentials)
+
+            event = {
+                "summary": online_lesson.online_title,
+                "description": online_lesson.lesson_description,
+                "start": {
+                    "dateTime": "2024-05-28T09:00:00-07:00",
+                    "timeZone": "America/Los_Angeles",
+                },
+                "end": {
+                    "dateTime": "2024-05-28T12:00:00-07:00",
+                    "timeZone": "America/Los_Angeles",
+                },
+                "conferenceData": {
+                    "createRequest": {
+                        "requestId": unique_request_id,
+                        "conferenceSolutionKey": {"type": "hangoutsMeet"},
+                    },
+                },
+            }
+            print("this is start time: ", start_datetime)
+            print("this is end time: ", end_datetime)
+            event = service.events().insert(calendarId="primary", body=event).execute()
+
+            print(event)
+
+            if event is not None:
+                meet_link = event.get("htmlLink")
+                print("Event created: %s" % (event.get("htmlLink")))
+                online_lesson.online_platform_link = meet_link
+                online_lesson.save()
+            else:
+                print("Error creating event")
+
+            # meet_link = event['conferenceData']['entryPoints'][0]['uri']
+            # online_lesson.online_platform_link = meet_link
+            # online_lesson.save()
+
+            return redirect(
+                "lecturer-dashboard"
+            )  # Redirect to a list of lectures or another page
+    else:
+        form = OnlineLessonCreationForm()
+
+    return render(request, "classes/create_lecture.html", {"form": form})
 
 
 # class CustomRegistrationView(FormView):

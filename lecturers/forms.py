@@ -12,4 +12,11 @@ class AssignmentCreationForm(forms.ModelForm):
 class AssignmentNotificationForm(forms.ModelForm):
     class Meta:
         model = AssignmentNotification
-        fields = ["notification_title", "notify_class", "message", "assignment"]
+        fields = [
+            "date",
+            "notification_rating",
+            "notification_title",
+            "notify_class",
+            "message",
+            "assignment",
+        ]

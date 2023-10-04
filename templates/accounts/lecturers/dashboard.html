@@ -1,130 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'lecturerBase.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
-
-<body>
    
-        <!-- Page Area Start Here -->
-        <div class="dashboard-page-one">
-            <!-- Sidebar Area Start Here -->
-           <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
-               <div class="mobile-sidebar-header d-md-none">
-                    <div class="header-logo">
-                        <a href="index.html"><img src="img/logo1.png" alt="logo"></a>
-                    </div>
-               </div>
-                <div class="sidebar-menu-content">
-                    <ul class="nav nav-sidebar-menu sidebar-toggle-view">
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-dashboard"></i><span>Dashboard</span></a>
-                            <ul class="nav sub-group-menu sub-group-active">
-                                <li class="nav-item">
-                                    <a href="index5.html" class="nav-link menu-active"><i class="fas fa-angle-right"></i>Lecturers</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="all-student.html" class="nav-link"><i class="fas fa-angle-right"></i>All Students</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="student-details.html" class="nav-link"><i class="fas fa-angle-right"></i>Student Details</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="admit-form.html" class="nav-link"><i class="fas fa-angle-right"></i>Add Student</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="student-promotion.html" class="nav-link"><i class="fas fa-angle-right"></i>Student Promotion</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                       
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Library</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="all-book.html" class="nav-link"><i class="fas fa-angle-right"></i>All Book</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Account</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="all-fees.html" class="nav-link"><i class="fas fa-angle-right"></i>Paid Up Students</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="all-expense.html" class="nav-link"><i class="fas fa-angle-right"></i>Owing Students</a>
-                                </li>
-                              
-                            </ul>
-                        </li>
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Class</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="all-class.html" class="nav-link"><i class="fas fa-angle-right"></i>All Classes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="add-class.html" class="nav-link"><i class="fas fa-angle-right"></i>Add New Class</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="all-subject.html" class="nav-link"><i class="flaticon-open-book"></i><span>Subject</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="class-routine.html" class="nav-link"><i class="flaticon-calendar"></i><span>Class Routine</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="student-attendence.html" class="nav-link"><i class="flaticon-checklist"></i><span>Attendence</span></a>
-                        </li>
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Exam</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="exam-schedule.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam Schedule</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="exam-grade.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam Grades</a>
-                                </li>
-                            </ul>
-                        </li>
-                       
-                        <li class="nav-item">
-                            <a href="notice-board.html" class="nav-link"><i class="flaticon-script"></i><span>Notice</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="messaging.html" class="nav-link"><i class="flaticon-chat"></i><span>Messeage</span></a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a href="account-settings.html" class="nav-link"><i class="flaticon-settings"></i><span>Account</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Sidebar Area End Here -->
             <div class="dashboard-content-one">
-                <!-- Breadcubs Area Start Here -->
-                <div class="breadcrumbs-area">
-                    <h3>Lecturer Dashboard</h3>
-                    <ul>
-                        <li>
-                            <a href="/">Home</a>
-                        </li>
-                        <li style="text-transform: capitalize !important;">Welcome {{user.username}}</li>
-                    </ul>
-                </div>
-                <!-- Breadcubs Area End Here -->
+                
                 <div class="row">
                     <!-- Dashboard summery Start Here -->
                     <div class="col-12 col-4-xxxl">
                         <div class="row">
-                            <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
+                            <div class="col-6-xxxl col-lg-4 col-sm-6 col-12">
                                 <div class="dashboard-summery-two">
                                     <div class="item-icon bg-light-magenta">
                                         <i class="flaticon-classmates text-magenta"></i>
@@ -135,7 +20,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
+                            <div class="col-6-xxxl col-lg-4 col-sm-6 col-12">
                                 <div class="dashboard-summery-two">
                                     <div class="item-icon bg-light-blue">
                                         <i class="flaticon-shopping-list text-blue"></i>
@@ -146,25 +31,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
+                            <div class="col-6-xxxl col-lg-4 col-sm-6 col-12">
                                 <div class="dashboard-summery-two">
                                     <div class="item-icon bg-light-yellow">
                                         <i class="flaticon-mortarboard text-orange"></i>
                                     </div>
                                     <div class="item-content">
                                         <div class="item-number"><span class="counter" data-num="23890">23,890</span></div>
-                                        <div class="item-title">Graduate Studes</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
-                                <div class="dashboard-summery-two">
-                                    <div class="item-icon bg-light-red">
-                                        <i class="flaticon-money text-red"></i>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="item-number"><span>$</span><span class="counter" data-num="2102050">21,02,050</span></div>
-                                        <div class="item-title">Total Income</div>
+                                        <div class="item-title">Graduate Students</div>
                                     </div>
                                 </div>
                             </div>
@@ -178,16 +52,6 @@
                                 <div class="heading-layout1">
                                     <div class="item-title">
                                         <h3>Students</h3>
-                                    </div>
-                                   <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button"
-                                        data-toggle="dropdown" aria-expanded="false">...</a>
-
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="doughnut-chart-wrap">
@@ -220,19 +84,16 @@
                                         data-toggle="dropdown" aria-expanded="false">...</a>
 
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#notifications" data-toggle="modal"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                            <a class="dropdown-item" href="#notifications" data-toggle="modal"><i class="fas fa-cogs text-dark-pastel-green"></i>Add</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="notice-box-wrap">
                                     {% for rw in notifications %}
                                     <div class="notice-list">
-                                        <div class="post-date {{rw.notification_rating}}">16 June, 2019</div>
-                                        <h6 class="notice-title"><a href="#">Great School manag mene esom tus eleifend lectus
-                                            sed maximus mi faucibusnting.</a></h6>
-                                        <div class="entry-meta">  Jennyfar Lopez / <span>5 min ago</span></div>
+                                        <div class="post-date {{rw.notification_rating}}">{{rw.date}}</div>
+                                        <h6 class="notice-title"><a href="#">{{rw.notification_title}}</a></h6>
+                                        <div class="entry-meta">  {{rw.notify_class}} </div>
                                     </div>
                                     {% endfor %}
                                 </div>
@@ -249,16 +110,6 @@
                                 <div class="heading-layout1">
                                     <div class="item-title">
                                         <h3>My Students</h3>
-                                    </div>
-                                   <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button"
-                                        data-toggle="dropdown" aria-expanded="false">...</a>
-
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="table-box-wrap">
@@ -293,8 +144,6 @@
                                                     <th>Gender</th>
                                                     <th>Year</th>
                                                     <th>Major</th>
-                                                    <th>Address</th>
-                                                    <th>Date Of Birth</th>
                                                     <th>Phone</th>
                                                     <th>E-mail</th>
                                                     <th></th>
@@ -318,8 +167,6 @@
                                                     <td>{{rw.gender}}</td>
                                                     <td>{{rw.current_year}}</td>
                                                     <td>{{rw.major}}</td>
-                                                    <td>{{rw.address}}</td>
-                                                    <td>{{rw.date_of_birth}}</td>
                                                     <td>{{rw.phone}}</td>
                                                     <td>{{rw.email}}</td>
                                                     <td>
@@ -350,29 +197,6 @@
                         </div>
                     </div>
                 </div>
+              
 
-                 <!-- Modal -->
-        <div class="modal right fade"  id="notifications"  tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-light">
-                        <h4>
-                            Add Notifications
-                        </h4>
-                        <button type="button" onclick="javascript:window.location.reload()" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
-                    </div>
-                    <div class="modal-body">
-                        <form  method="post" name="form"  action="" enctype="multipart/form-data">{% csrf_token %}
-                        <div style="margin-bottom: 20px;">
-                            {{form}}
-                        </div>
-                        <button type="submit" class="btn btn-outline-success btn-lg">Save</button>
-                        </form>
-                    </div>
-                </div><!-- modal-content -->
-            </div><!-- modal-dialog -->
-        </div><!-- modal -->
-
-
-
- {% endblock %}l>
+ {% endblock %}

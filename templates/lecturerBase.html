@@ -1,0 +1,239 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Heartfelt SMS</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+    <!-- Normalize CSS -->
+
+    <!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="{% static 'css/animate-login.css' %}">
+	<!-- Custom Stylesheet -->
+	<!-- <link rel="stylesheet" href="{% static 'css/style-login.css' %}"> -->
+
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <!-- Flaticon CSS -->
+    <link rel="stylesheet" href="{% static 'fonts/flaticon.ttf' %}">
+    <!-- Full Calender CSS -->
+    <link rel="stylesheet" href="{% static 'css/fullcalendar.min.css' %}">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Modernize js -->
+    <script src="{% static 'js/modernizr-3.6.0.min.js' %}"></script>
+
+</head>
+
+
+<body>
+    <main>
+         <!-- Preloader Start Here -->
+    <div id="preloader"></div>
+    <!-- Preloader End Here -->
+    <div id="wrapper" class="wrapper bg-ash">
+        {% include 'header.html' %}
+        <!-- Page Area Start Here -->
+        <div class="dashboard-page-one">
+            <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
+                <div class="mobile-sidebar-header d-md-none">
+                     <div class="header-logo">
+                         <a href="index.html"><img src="img/logo1.png" alt="logo"></a>
+                     </div>
+                </div>
+                 <div class="sidebar-menu-content">
+                     <ul class="nav nav-sidebar-menu sidebar-toggle-view">
+                         <li class="nav-item sidebar-nav-item">
+                             <a href="#" class="nav-link"><i class="flaticon-dashboard"></i><span>Dashboard</span></a>
+                             <ul class="nav sub-group-menu sub-group-active">
+                                 <li class="nav-item">
+                                     <a href="{% url 'lecturer_dashboard' %}" class="nav-link menu-active"><i class="fas fa-angle-right"></i>Lecturers</a>
+                                 </li>
+                             </ul>
+                         </li>
+                         <li class="nav-item sidebar-nav-item">
+                             <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>
+                             <ul class="nav sub-group-menu">
+                                 <li class="nav-item">
+                                     <a href="{% url 'all-students' %}" class="nav-link"><i class="fas fa-angle-right"></i>All Students</a>
+                                 </li>
+                                 <!-- <li class="nav-item">
+                                     <a href="admit-form.html" class="nav-link"><i class="fas fa-angle-right"></i>Add Student</a>
+                                 </li> -->
+                             </ul>
+                         </li>
+                         
+                        
+                         <!-- <li class="nav-item sidebar-nav-item">
+                             <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Library</span></a>
+                             <ul class="nav sub-group-menu">
+                                 <li class="nav-item">
+                                     <a href="all-book.html" class="nav-link"><i class="fas fa-angle-right"></i>All Book</a>
+                                 </li>
+                             </ul>
+                         </li> -->
+                         <!-- <li class="nav-item sidebar-nav-item">
+                             <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Account</span></a>
+                             <ul class="nav sub-group-menu">
+                                 <li class="nav-item">
+                                     <a href="all-fees.html" class="nav-link"><i class="fas fa-angle-right"></i>Paid Up Students</a>
+                                 </li>
+                                 <li class="nav-item">
+                                     <a href="all-expense.html" class="nav-link"><i class="fas fa-angle-right"></i>Owing Students</a>
+                                 </li>
+                               
+                             </ul>
+                         </li> -->
+                         <li class="nav-item sidebar-nav-item">
+                             <a href="#" class="nav-link"><i class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Class</span></a>
+                             <ul class="nav sub-group-menu">
+                                 <li class="nav-item">
+                                     <a href="all-class.html" class="nav-link"><i class="fas fa-angle-right"></i>All Classes</a>
+                                 </li>
+                                 <li class="nav-item">
+                                     <a href="#addClass" data-toggle="modal" class="nav-link"><i class="fas fa-angle-right"></i>Add New Class</a>
+                                 </li>
+                             </ul>
+                         </li>
+                         <!-- <li class="nav-item">
+                             <a href="student-attendence.html" class="nav-link"><i class="flaticon-checklist"></i><span>Attendence</span></a>
+                         </li> -->
+                         <li class="nav-item sidebar-nav-item">
+                             <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Exam</span></a>
+                             <ul class="nav sub-group-menu">
+                                 <li class="nav-item">
+                                     <a href="exam-schedule.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam Schedule</a>
+                                 </li>
+                                 <li class="nav-item">
+                                     <a href="exam-grade.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam Grades</a>
+                                 </li>
+                             </ul>
+                         </li>
+                        
+                         <!-- <li class="nav-item">
+                             <a href="notice-board.html" class="nav-link"><i class="flaticon-script"></i><span>Notice</span></a>
+                         </li> -->
+                         <!-- <li class="nav-item">
+                             <a href="messaging.html" class="nav-link"><i class="flaticon-chat"></i><span>Messeage</span></a>
+                         </li>
+                         
+                         <li class="nav-item">
+                             <a href="account-settings.html" class="nav-link"><i class="flaticon-settings"></i><span>Account</span></a>
+                         </li> -->
+                     </ul>
+                 </div>
+             </div>
+             <!-- Sidebar Area End Here -->
+
+             <div class="dashboard-content-one">
+                 <!-- Breadcubs Area Start Here -->
+                 <div class="breadcrumbs-area">
+                     <h3>Lecturer Dashboard</h3>
+                     <ul>
+                         <li>
+                             <a href="/">Home</a>
+                         </li>
+                         <li style="text-transform: capitalize !important;">Welcome {{user.username}}</li>
+                     </ul>
+                 </div>
+                 <!-- Breadcubs Area End Here -->
+                 <div class="row">
+                     <!-- Main area Start Here -->
+                     {% block content %}{% endblock %}
+                     <!-- Main area End Here -->
+                 </div>
+                 
+ 
+                 <!-- Modal -->
+                     <div class="modal right fade"  id="notifications"  tabindex="-1" role="dialog">
+                         <div class="modal-dialog modal-lg" role="document">
+                             <div class="modal-content">
+                                 <div class="modal-header bg-light">
+                                     <h4>
+                                         Add Notifications
+                                     </h4>
+                                 </div>
+                                 <div class="modal-body">
+                                     <form  method="post" name="assignment_form"  action="" enctype="multipart/form-data">{% csrf_token %}
+                                     <div style="margin-bottom: 20px;">
+                                         {{assignment_form}}
+                                     </div>
+                                     <button type="submit" name="assignment_submit" class="btn btn-outline-success btn-lg">Save</button>
+                                     </form>
+                                 </div>
+                             </div><!-- modal-content -->
+                         </div><!-- modal-dialog -->
+                     </div>
+                 <!-- modal -->
+ 
+                 <!-- Modal -->
+                 <div class="modal right fade" id="addClass" tabindex="-1" role="dialog">
+                     <div class="modal-dialog modal-lg" role="document">
+                         <div class="modal-content">
+                             <div class="modal-header bg-light">
+                                 <h4>Add Class</h4>
+                                 <button type="button" onclick="javascript:window.location.reload()" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
+                             </div>
+                             <div class="modal-body">
+                                 <!-- Iframe to display the lecture creation form -->
+                                 <iframe src="{% url 'create_lesson' %}" width="100%" height="600" frameborder="0"></iframe>
+                             </div>
+                         </div><!-- modal-content -->
+                     </div><!-- modal-dialog -->
+                 </div>
+                 
+             <!-- modal -->
+             
+    </main>
+
+            </div>
+        </div>
+        <!-- Page Area End Here -->
+    </div>
+
+    <!-- jquery-->
+    
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <!-- Plugins js -->
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Counterup Js -->
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <!-- Moment Js -->
+    <script src="{% static 'js/moment.min.js' %}"></script>
+    <!-- Waypoints Js -->
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <!-- Scroll Up Js -->
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <!-- Full Calender Js -->
+    <script src="{% static 'js/fullcalendar.min.js' %}"></script>
+    <!-- Chart Js -->
+    <script src="{% static 'js/Chart.min.js' %}"></script>
+    <!-- Custom Js -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+
+    </footer>
+</body>
+</html>
