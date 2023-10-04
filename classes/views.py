@@ -103,7 +103,7 @@ def create_lesson(request):
 
 
 def AllOnlineClasses(request):
-    online_lessons = OnlineLesson.objects.all().order_by("-id")
+    online_lessons = OnlineLesson.objects.all().order_by("-id")[:20]
 
     context = {
         "online_lessons": online_lessons,

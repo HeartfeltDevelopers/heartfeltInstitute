@@ -1,6 +1,13 @@
 {% extends 'lecturerBase.html' %}
 {% load static %}
 {% block content %}
+<style>
+    .wrap-text-span {
+    white-space: normal;
+    word-wrap: break-word;  /* Allows long URLs or words to break and wrap onto the next line */
+}
+
+</style>
     <div class="col-lg-12">
         <div class="card dashboard-card-eleven">
             <div class="card-body">
@@ -13,13 +20,13 @@
                     <form class="search-form-box">
                         <div class="row gutters-8">
                             <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                <input type="text" placeholder="Search by Roll ..." class="form-control">
+                                <input type="text" placeholder="Search by Title ..." class="form-control">
                             </div>
                             <div class="col-4-xxxl col-xl-4 col-lg-4 col-12 form-group">
-                                <input type="text" placeholder="Search by Name ..." class="form-control">
+                                <input type="text" placeholder="Search by Date ..." class="form-control">
                             </div>
                             <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                <input type="text" placeholder="Search by Class ..." class="form-control">
+                                <input type="text" placeholder="Search by Lecturer ..." class="form-control">
                             </div>
                             <div class="col-1-xxxl col-xl-2 col-lg-2 col-12 form-group">
                                 <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
@@ -41,7 +48,7 @@
                                 {% for rw in online_lessons %}
                                 <tr>
                                     
-                                    <td>{{rw.online_title}}</td>
+                                    <td><a href="#lessons{{rw.id}}" data-toggle="modal">{{rw.online_title}}</a></td>
                                     <td>{{rw.lesson_date}}</td>
                                     <td>{{rw.lesson_start_time}}</td>
                                     <td>{{rw.lesson_end_time}}</td>
@@ -58,4 +65,26 @@
         </div>
     </div>
 </div>
+
+ <!-- Modal -->
+ {% for rw in online_lessons %}
+ <div class="modal right fade"  id="lessons{{rw.id}}"  tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h4>
+                    Zoom Link
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span class="wrap-text-span">
+                    {{rw.online_platform_link}}
+                </span>
+            </div>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>
+{% endfor %}
+<!-- modal -->
+
 {% endblock %}
