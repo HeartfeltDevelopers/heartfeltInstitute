@@ -42,17 +42,31 @@
                                     <th>Lesson Start Date</th>
                                     <th>Lesson End Start</th>
                                     <th>Lecturer</th>
+                                    <th>Class Link</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for rw in online_lessons %}
                                 <tr>
                                     
-                                    <td><a href="#lessons{{rw.id}}" data-toggle="modal">{{rw.online_title}}</a></td>
+                                    <td>{{rw.online_title}}</td>
                                     <td>{{rw.lesson_date}}</td>
                                     <td>{{rw.lesson_start_time}}</td>
                                     <td>{{rw.lesson_end_time}}</td>
                                     <td>{{rw.lecturer}}</td>
+                                    <td>
+                                        <div class="dropdown text-center">
+                                            <a href="#" class="dropdown-toggle"
+                                                data-toggle="dropdown" aria-expanded="false">
+                                                <span
+                                                    class="flaticon-more-button-of-three-dots"></span>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" style="padding:10px; font-size: sm;">
+                                                <a href="{{rw.online_platform_link}}" style="text-decoration: none; text-decoration-color: black;" target="_blank">{{rw.online_platform_link}}</a>
+                                                
+                                            </div>
+                                        </div>
+                                    </td>
                                     
                                 </tr>
                                 {% endfor %}
@@ -66,25 +80,5 @@
     </div>
 </div>
 
- <!-- Modal -->
- {% for rw in online_lessons %}
- <div class="modal right fade"  id="lessons{{rw.id}}"  tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-light">
-                <h4>
-                    Zoom Link
-                </h4>
-            </div>
-            <div class="modal-body">
-                <span class="wrap-text-span">
-                    {{rw.online_platform_link}}
-                </span>
-            </div>
-        </div><!-- modal-content -->
-    </div><!-- modal-dialog -->
-</div>
-{% endfor %}
-<!-- modal -->
 
 {% endblock %}
