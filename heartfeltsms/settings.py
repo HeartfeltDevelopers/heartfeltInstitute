@@ -27,11 +27,11 @@ DB_PASS = os.getenv("DB_PASS")
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 if DEBUG:
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.241.136.85"]
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "198.199.87.51"]
 else:
-    ALLOWED_HOSTS = ["192.241.136.85", "localhost", "127.0.0.1"]
+    ALLOWED_HOSTS = ["198.199.87.51", "localhost", "127.0.0.1"]
 
 # Application definition
 
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "lib",
     "accounts",
     "finances",
-    "library",
+    # "library",
     "attendance",
     "classes",
     "students",
@@ -103,22 +103,22 @@ if DEBUG:
         }
     }
 else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
     # DATABASES = {
     #     "default": {
-    #         "ENGINE": "django.db.backends.postgresql_psycopg2",
-    #         "NAME": "bigboy",
-    #         "USER": "db_admin",
-    #         "PASSWORD": DB_PASS,
-    #         "HOST": "localhost",
-    #         "PORT": "",
+    #         "ENGINE": "django.db.backends.sqlite3",
+    #         "NAME": BASE_DIR / "db.sqlite3",
     #     }
     # }
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": "bigboy",
+            "USER": "admin",
+            "PASSWORD": "focus@1",
+            "HOST": "localhost",
+            "PORT": "",
+        }
+    }
 
 
 # Password validation
