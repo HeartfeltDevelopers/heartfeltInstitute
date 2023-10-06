@@ -27,7 +27,7 @@ DB_PASS = os.getenv("DB_PASS")
 SECRET_KEY = "django-insecure-59z(rfb2!4z&gk9oj61*(m#g3-0kxskf#$k(6jemp1lv6mhm)%"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 if DEBUG:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1", "198.199.87.51"]
 else:
@@ -103,18 +103,12 @@ if DEBUG:
         }
     }
 else:
-    # DATABASES = {
-    #     "default": {
-    #         "ENGINE": "django.db.backends.sqlite3",
-    #         "NAME": BASE_DIR / "db.sqlite3",
-    #     }
-    # }
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql_psycopg2",
             "NAME": "bigboy",
-            "USER": os.getenv("USER"),
-            "PASSWORD": os.getenv("DB_PASS"),
+            "USER": "admin",
+            "PASSWORD": "focus@1",
             "HOST": "localhost",
             "PORT": "",
         }
