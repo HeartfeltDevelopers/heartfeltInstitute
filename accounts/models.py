@@ -44,7 +44,7 @@ class UserAttributes(models.Model):
     gender = models.CharField(max_length=50, choices=USER_GENDER, blank=True)
     phone = models.CharField(max_length=15)
     address = models.CharField(max_length=500)
-    church_name = models.CharField(max_length=256)
+    church_name = models.CharField(max_length=500)
     nationality = models.CharField(max_length=50)
     city = models.CharField(max_length=100)
     # country = CountryField()
