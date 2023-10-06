@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="customuser",
             name="address",
-            field=models.TextField(default=django.utils.timezone.now),
+            field=models.TextField(default=django.utils.timezone.now, null=True),
             preserve_default=False,
         ),
         migrations.AddField(
