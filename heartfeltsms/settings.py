@@ -27,7 +27,7 @@ DB_PASS = os.getenv("DB_PASS")
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 if DEBUG:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1", "198.199.87.51"]
 else:
@@ -113,8 +113,8 @@ else:
         "default": {
             "ENGINE": "django.db.backends.postgresql_psycopg2",
             "NAME": "bigboy",
-            "USER": "admin",
-            "PASSWORD": "focus@1",
+            "USER": os.getenv("USER"),
+            "PASSWORD": os.getenv("DB_PASS"),
             "HOST": "localhost",
             "PORT": "",
         }
