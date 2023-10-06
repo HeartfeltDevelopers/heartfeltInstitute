@@ -7,7 +7,6 @@ import django_countries.fields
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("accounts", "0046_remove_customuser_address_and_more"),
     ]
@@ -22,7 +21,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="customuser",
             name="church_name",
-            field=models.CharField(default=django.utils.timezone.now, max_length=256),
+            field=models.CharField(default=django.utils.timezone.now, max_length=500),
             preserve_default=False,
         ),
         migrations.AddField(
