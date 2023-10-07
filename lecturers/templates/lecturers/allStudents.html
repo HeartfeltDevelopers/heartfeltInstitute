@@ -30,7 +30,7 @@
                         </div>
                     </form>
                     <div class="table-responsive student-table-box">
-                        <table class="table display data-table text-nowrap">
+                        <table class="table display data-table text-nowrap" style="font-size: small;">
                             <thead>
                                 <tr>
                                     <th>
@@ -47,6 +47,7 @@
                                     <th>Phone</th>
                                     <th>E-mail</th>
                                     <th></th>
+                                    <th>Account Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,18 +56,24 @@
                                     <td>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input">
-                                            <label class="form-check-label"><a href="{%url 'user-details' rw.root %}">#{{rw.student_id}}</a></label>
+                                            <label class="form-check-label">
+                                                {% if rw.student_id %}
+                                                <a href="{%url 'user-details' rw.root %}" style="font-size: small;">#{{rw.student_id}}</a>
+                                                {% else %}
+                                                <div style="font-size: small; color: green;">Application Pending ...</div>
+                                                {% endif %}
+                                            </label>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         {% if rw.photo %}
-                                        <img src="{% static '/img/' %}{{rw.photo}}" alt="student" class="rounded">
+                                        <img src="{% static '/img/' %}{{rw.photo}}" alt="student" width="100" class="rounded">
                                         {% endif %}
                                     </td>
                                     <td>{{rw.first_name}} {{rw.last_name}}</td>
                                     <td>{{rw.gender}}</td>
-                                    <td>{{rw.current_year}}</td>
-                                    <td>{{rw.major}}</td>
+                                    <td>{%if rw.current_year %}{{rw.current_year}}{% endif %}</td>
+                                    <td>{% if rw.major %}{{rw.major}} {% endif %}</td>
                                     <td>{{rw.phone}}</td>
                                     <td>{{rw.email}}</td>
                                     <td>
@@ -78,14 +85,11 @@
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <a class="dropdown-item" href="#"><i
-                                                                class="fas fa-times text-orange-red"></i>Close</a>
-                                                        <a class="dropdown-item" href="#"><i
                                                                 class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                                        <a class="dropdown-item" href="#"><i
-                                                                class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                                     </div>
                                                 </div>
                                             </td>
+                                    <td>{{rw.status}}</td>
                                 </tr>
                                 {% endfor %}
                                 

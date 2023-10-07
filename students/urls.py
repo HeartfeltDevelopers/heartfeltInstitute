@@ -1,8 +1,7 @@
 from django.urls import path
-from . import views
+from .views import submit_assignment, new_student_account
 
 urlpatterns = [
-
-    path('submit_assignment/', views.submit_assignment, name='submit_assignment'),
-    # path('assignment_success/', views.assignment_success, name='assignment_success'),
+    path("submit_assignment/", submit_assignment, name="submit_assignment"),
+    path("new-student/", new_student_account, name="new-student"),
 ]

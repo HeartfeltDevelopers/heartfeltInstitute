@@ -12,8 +12,16 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import environ
 
 from django.contrib import staticfiles
+
+root = environ.Path(__file__) - 3  # Three folders back, adjust if needed.
+env = environ.Env(
+    DEBUG=(bool, False),
+    # Default values for other environment variables can be set as well.
+)
+environ.Env.read_env(root(".env"))  # Reads the .env file.
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,10 +32,10 @@ DB_PASS = os.getenv("DB_PASS")
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-59z(rfb2!4z&gk9oj61*(m#g3-0kxskf#$k(6jemp1lv6mhm)%"
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 if DEBUG:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1", "198.199.87.51"]
 else:

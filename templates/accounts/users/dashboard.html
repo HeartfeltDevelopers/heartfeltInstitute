@@ -89,7 +89,7 @@
                                 <div class="heading-layout1">
                                     <div class="item-title">
                                         <h3 class="item-title">{{user.first_name}} {{user.last_name}}</h3>
-                                        <p>Student Number: 1000{{user.id}}</p>
+                                        <p>Student Temp Number: 1000{{user.id}}</p>
                                     </div>
                                     <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -103,54 +103,45 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="student-info">
-                                    <!-- <div class="media media-none--xs">
-                                        {% if photo %}
-                                        <div class="item-img">
-                                            <img src="{% static '/img/' %}{{photo}}" class="media-img-auto" alt="student">
-                                            
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="table-responsive info-table col-8-xxxl col-12">
+                                            <table class="table text-nowrap">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Church:</td>
+                                                        <td class="font-medium text-dark-medium" style="text-transform: capitalize;">{{church_name}}</td>
+                                                    </tr>
+                                                
+                                                    <tr>
+                                                        <td>E-Mail:</td>
+                                                        <td class="font-medium text-dark-medium">{{user.email}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Address:</td>
+                                                        <td class="font-medium text-dark-medium">{{address}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Phone:</td>
+                                                        <td class="font-medium text-dark-medium">{{phone}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>City:</td>
+                                                        <td class="font-medium text-dark-medium" style="text-transform: capitalize;">{{city}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Country:</td>
+                                                        <td class="font-medium text-dark-medium">{{user.country}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Admission Date:</td>
+                                                        <td class="font-medium text-dark-medium">{{user.date_joined}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                        {% endif %}
-                                        <div class="media-body">
-                                            <h3 class="item-title">{{user.first_name}} {{user.last_name}}</h3>
-                                            <p>Student Number: 1000{{user.id}}</p>
-                                        </div>
-                                    </div> -->
-                                    <div class="table-responsive info-table">
-                                        <table class="table text-nowrap">
-                                            <tbody>
-                                                <tr>
-                                                    <td>Church:</td>
-                                                    <td class="font-medium text-dark-medium" style="text-transform: capitalize;">{{church_name}}</td>
-                                                </tr>
-                                              
-                                                <tr>
-                                                    <td>E-Mail:</td>
-                                                    <td class="font-medium text-dark-medium">{{user.email}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Address:</td>
-                                                    <td class="font-medium text-dark-medium">{{address}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Phone:</td>
-                                                    <td class="font-medium text-dark-medium">{{phone}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>City:</td>
-                                                    <td class="font-medium text-dark-medium" style="text-transform: capitalize;">{{city}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Country:</td>
-                                                    <td class="font-medium text-dark-medium">{{user.country}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Admission Date:</td>
-                                                    <td class="font-medium text-dark-medium">{{user.date_joined}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

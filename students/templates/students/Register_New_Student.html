@@ -1,0 +1,31 @@
+<!-- registration.html -->
+{% extends 'base_blank.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+  /* CSS styles for the container */
+  .container {
+      background-color: #ffffffeb; /* White background color */
+      max-width: 800px; /* Maximum width of 700px */
+      margin: 0 auto; /* Center the container horizontally */
+      padding: 20px; /* Add some padding for spacing */
+      margin-top: 50px; /* Add margin for vertical centering */
+  }
+  .custom-padding {
+    padding-bottom: 10px
+}
+</style>
+
+<div class="container">
+    <form method="post" id="registration-form">
+      {% csrf_token %}
+      <input type="hidden" name="root" value="{{user.id}}">
+      <input type="hidden" name="user" value="{{user.id}}">
+      <input type="hidden" name="status" value="Pending">
+      {{form.student_id}}
+      <button type="submit" class="btn btn-success btn-lg">Next</button>
+    </form>
+</div>
+
+
+{% endblock %}

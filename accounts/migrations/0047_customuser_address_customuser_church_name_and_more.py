@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
             model_name="customuser",
             name="country",
             field=django_countries.fields.CountryField(
-                default=django.utils.timezone.now, max_length=2
+                default=django.utils.timezone.now, max_length=20
             ),
             preserve_default=False,
         ),

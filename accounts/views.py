@@ -106,11 +106,12 @@ def student_dashboard(request):
 def fetch_students():
     students = connection.cursor()
     students.cursor.execute(
-        """SELECT a.root, s.student_id, a.photo, u.first_name, u.last_name, s.current_year, s.major, a.gender, a.address, a.date_of_birth, a.phone, u.email
+        """SELECT a.root, s.student_id, a.photo, u.first_name, u.last_name, s.current_year, s.major, a.gender, a.address, a.date_of_birth, a.phone, u.email, s.status
             FROM accounts_CustomUser u
             INNER JOIN accounts_UserAttributes a ON CAST(a.root AS INT) = u.id
-            INNER JOIN accounts_Student s ON s.root = u.id
-            WHERE u.user_type = 'student';
+            LEFT JOIN accounts_Student s ON s.root = u.id
+            WHERE u.user_type = 'student'
+            Order By u.id Desc
         """
     )
     return dictfetchall(students)
@@ -338,9 +339,14 @@ def registration2(request):
         form = UserAttributesForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(
-                reverse("user-details", kwargs={"id": request.user.id})
-            )
+            if request.user.user_type == "student":
+                return redirect("/students/new-student")
+            elif request.user_type == "lecturer":
+                return redirect("/lecturer-dashboard")
+            elif request.user_type == "admin":
+                return redirect("/admin-dashboard")
+            elif request.user_type == "alumni":
+                return redirect("/alumni-dashboard")
     else:
         form = UserAttributesForm()
     return render(request, "accounts/registration2.html", {"form": form})

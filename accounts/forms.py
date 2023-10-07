@@ -110,14 +110,6 @@ class UserAttributesForm(forms.ModelForm):
         ),
         label="",
     )
-    # rootID = forms.CharField(
-    #     max_length=30,
-    #     required=False,
-    #     widget=forms.TextInput(
-    #         attrs={"class": "form-control form-control-lg", "type": "text"}
-    #     ),
-    #     label="",
-    # )
     date_of_birth = forms.DateField(
         required=False,
         widget=forms.DateInput(

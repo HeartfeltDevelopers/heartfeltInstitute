@@ -24,7 +24,7 @@ class CustomUser(AbstractUser):
     user_type = models.CharField(
         max_length=20, choices=USER_TYPE_CHOICES, default="student"
     )
-    country = CountryField()
+    country = CountryField(max_length=20)
 
     def __str__(self):
         return f"{self.id}"
@@ -110,8 +110,8 @@ class Student(models.Model):
     )
     student_id = models.CharField(max_length=25, default=generate_id)
     id_number = models.CharField(max_length=20, null=True, blank=True)
-    phone_number = models.CharField(max_length=15)
-    address = models.CharField(max_length=500)
+    # phone_number = models.CharField(max_length=15)
+    # address = models.CharField(max_length=500)
     # enrolled_courses = models.ManyToManyField('Course', related_name='enrolled_students')
     # enrolled_date = models.DateField()
     graduation_date = models.DateField(null=True, blank=True)
@@ -131,6 +131,7 @@ class Student(models.Model):
     languages_spoken = models.TextField(null=True, blank=True)
     hobbies = models.TextField(null=True, blank=True)
     interests = models.TextField(null=True, blank=True)
+    status = models.CharField(max_length=15, default="Pending", null=True, blank=True)
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name} - {self.student_id}"
