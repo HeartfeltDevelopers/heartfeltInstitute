@@ -112,6 +112,7 @@ class LessonAllocation(models.Model):
     student_root = models.IntegerField()
     course = models.CharField(max_length=200, null=True, blank=True)
     lecturer = models.CharField(max_length=200, null=True, blank=True)
+    status = models.CharField(max_length=20, default="Inactive")
 
     def __str__(self):
         return f"{self.course} - {self.lecturer}"
