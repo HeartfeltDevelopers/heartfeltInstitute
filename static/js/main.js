@@ -394,12 +394,13 @@
           Doughnut Chart 
       -------------------------------------*/
     if ($("#student-doughnut-chart").length) {
+      let totalMen = "5"
 
       var doughnutChartData = {
         labels: ["Female Students", "Male Students"],
         datasets: [{
           backgroundColor: ["#304ffe", "#ffa601"],
-          data: [45000, 105000],
+          data: ["1", "5"],
           label: "Total Students"
         }, ]
       };

@@ -3,200 +3,200 @@
 {% load crispy_forms_tags %}
 {% block content %}
    
-            <div class="dashboard-content-one">
-                
-                <div class="row">
-                    <!-- Dashboard summery Start Here -->
-                    <div class="col-12 col-4-xxxl">
-                        <div class="row">
-                            <div class="col-6-xxxl col-lg-4 col-sm-6 col-12">
-                                <div class="dashboard-summery-two">
-                                    <div class="item-icon bg-light-magenta">
-                                        <i class="flaticon-classmates text-magenta"></i>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="item-number"><span class="counter" data-num="{{total_students}}"></span></div>
-                                        <div class="item-title">Total Students</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6-xxxl col-lg-4 col-sm-6 col-12">
-                                <div class="dashboard-summery-two">
-                                    <div class="item-icon bg-light-blue">
-                                        <i class="flaticon-shopping-list text-blue"></i>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="item-number"><span class="counter" data-num="19050">19,050</span></div>
-                                        <div class="item-title">Total Exams</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6-xxxl col-lg-4 col-sm-6 col-12">
-                                <div class="dashboard-summery-two">
-                                    <div class="item-icon bg-light-yellow">
-                                        <i class="flaticon-mortarboard text-orange"></i>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="item-number"><span class="counter" data-num="23890">23,890</span></div>
-                                        <div class="item-title">Graduate Students</div>
-                                    </div>
-                                </div>
-                            </div>
+<div class="dashboard-content-one">
+    <div class="row">
+        <!-- Dashboard summery Start Here -->
+        <div class="col-12 col-4-xxxl">
+            <div class="row">
+                <div class="col-6-xxxl col-lg-4 col-sm-6 col-12">
+                    <div class="dashboard-summery-two">
+                        <div class="item-icon bg-light-magenta">
+                            <i class="flaticon-classmates text-magenta"></i>
+                        </div>
+                        <div class="item-content">
+                            <div class="item-number"><span class="counter" data-num="{{total_students}}"></span></div>
+                            <div class="item-title">Total Students</div>
                         </div>
                     </div>
-                    <!-- Dashboard summery End Here -->
-                    <!-- Students Chart End Here -->
-                    <div class="col-lg-6 col-4-xxxl col-xl-6">
-                        <div class="card dashboard-card-three">
-                            <div class="card-body">
-                                <div class="heading-layout1">
-                                    <div class="item-title">
-                                        <h3>Students</h3>
-                                    </div>
-                                </div>
-                                <div class="doughnut-chart-wrap">
-                                    <canvas id="student-doughnut-chart" width="100" height="270"></canvas>
-                                </div>
-                                <div class="student-report">
-                                    <div class="student-count pseudo-bg-blue">
-                                        <h4 class="item-title">Female Students</h4>
-                                        <div class="item-number">{{totalFemale}}</div>
-                                    </div>
-                                    <div class="student-count pseudo-bg-yellow">
-                                        <h4 class="item-title">Male Students</h4>
-                                        <div class="item-number">{{totalMen}}</div>
-                                    </div>
-                                </div>
-                            </div>
+                </div>
+                <div class="col-6-xxxl col-lg-4 col-sm-6 col-12">
+                    <div class="dashboard-summery-two">
+                        <div class="item-icon bg-light-blue">
+                            <i class="flaticon-shopping-list text-blue"></i>
+                        </div>
+                        <div class="item-content">
+                            <div class="item-number"><span class="counter" data-num="19050">19,050</span></div>
+                            <div class="item-title">Total Exams</div>
                         </div>
                     </div>
-                    <!-- Students Chart End Here -->
-                    <!-- Notice Board Start Here -->
-                    <div class="col-lg-6 col-4-xxxl col-xl-6">
-                        <div class="card dashboard-card-six">
-                            <div class="card-body">
-                                <div class="heading-layout1 mg-b-17">
-                                    <div class="item-title">
-                                        <h3>Notifications</h3>
-                                    </div>
-                                   <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button"
-                                        data-toggle="dropdown" aria-expanded="false">...</a>
+                </div>
+                <div class="col-6-xxxl col-lg-4 col-sm-6 col-12">
+                    <div class="dashboard-summery-two">
+                        <div class="item-icon bg-light-yellow">
+                            <i class="flaticon-mortarboard text-orange"></i>
+                        </div>
+                        <div class="item-content">
+                            <div class="item-number"><span class="counter" data-num="23890">23,890</span></div>
+                            <div class="item-title">Graduate Students</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Dashboard summery End Here -->
+        <!-- Students Chart End Here -->
+        <div class="col-lg-6 col-4-xxxl col-xl-6">
+            <div class="card dashboard-card-three">
+                <div class="card-body">
+                    <div class="heading-layout1">
+                        <div class="item-title">
+                            <h3>Students</h3>
+                        </div>
+                    </div>
+                    <div class="doughnut-chart-wrap">
+                        <canvas id="student-doughnut-chart" width="100" height="270"></canvas>
+                    </div>
+                    <div class="student-report">
+                        <div class="student-count pseudo-bg-blue">
+                            <h4 class="item-title">Female Students</h4>
+                            <div class="item-number">{{totalFemale}}</div>
+                        </div>
+                        <div class="student-count pseudo-bg-yellow">
+                            <h4 class="item-title">Male Students</h4>
+                            <div class="item-number">{{totalMen}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Students Chart End Here -->
+        <!-- Notice Board Start Here -->
+        <div class="col-lg-6 col-4-xxxl col-xl-6">
+            <div class="card dashboard-card-six">
+                <div class="card-body">
+                    <div class="heading-layout1 mg-b-17">
+                        <div class="item-title">
+                            <h3>Notifications</h3>
+                        </div>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="#" role="button"
+                            data-toggle="dropdown" aria-expanded="false">...</a>
 
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#notifications" data-toggle="modal"><i class="fas fa-cogs text-dark-pastel-green"></i>Add</a>
-                                        </div>
-                                    </div>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#notifications" data-toggle="modal"><i class="fas fa-cogs text-dark-pastel-green"></i>Add</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notice-box-wrap">
+                        {% for rw in notifications %}
+                        <div class="notice-list">
+                            <div class="post-date {{rw.notification_rating}}">{{rw.date}}</div>
+                            <h6 class="notice-title"><a href="#">{{rw.notification_title}}</a></h6>
+                            <div class="entry-meta">  {{rw.notify_class}} </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Notice Board End Here -->
+    </div>
+    <!-- Student Table Area Start Here -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card dashboard-card-eleven">
+                <div class="card-body">
+                    <div class="heading-layout1">
+                        <div class="item-title">
+                            <h3>My Students</h3>
+                        </div>
+                    </div>
+                    <div class="table-box-wrap">
+                        <form class="search-form-box">
+                            <div class="row gutters-8">
+                                <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                    <input type="text" placeholder="Search by Roll ..." class="form-control">
                                 </div>
-                                <div class="notice-box-wrap">
-                                    {% for rw in notifications %}
-                                    <div class="notice-list">
-                                        <div class="post-date {{rw.notification_rating}}">{{rw.date}}</div>
-                                        <h6 class="notice-title"><a href="#">{{rw.notification_title}}</a></h6>
-                                        <div class="entry-meta">  {{rw.notify_class}} </div>
-                                    </div>
+                                <div class="col-4-xxxl col-xl-4 col-lg-4 col-12 form-group">
+                                    <input type="text" placeholder="Search by Name ..." class="form-control">
+                                </div>
+                                <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
+                                    <input type="text" placeholder="Search by Class ..." class="form-control">
+                                </div>
+                                <div class="col-1-xxxl col-xl-2 col-lg-2 col-12 form-group">
+                                    <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="table-responsive student-table-box">
+                            <table class="table display data-table text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input checkAll">
+                                                <label class="form-check-label">Roll</label>
+                                            </div>
+                                        </th>
+                                        <th>Photo</th>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Year</th>
+                                        <th>Major</th>
+                                        <th>Phone</th>
+                                        <th>E-mail</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for rw in students %}
+                                    <tr>
+                                        <td>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input">
+                                                <label class="form-check-label"><a href="{%url 'user-details' rw.root %}">#{{rw.student_id}}</a></label>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            {% if rw.photo %}
+                                            <img src="{% static '/img/' %}{{rw.photo}}" alt="student" class="rounded">
+                                            {% endif %}
+                                        </td>
+                                        <td>{{rw.first_name}} {{rw.last_name}}</td>
+                                        <td>{{rw.gender}}</td>
+                                        <td>{{rw.current_year}}</td>
+                                        <td>{{rw.major}}</td>
+                                        <td>{{rw.phone}}</td>
+                                        <td>{{rw.email}}</td>
+                                        <td>
+                                                    <div class="dropdown">
+                                                        <a href="#" class="dropdown-toggle"
+                                                            data-toggle="dropdown" aria-expanded="false">
+                                                            <span
+                                                                class="flaticon-more-button-of-three-dots"></span>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#"><i
+                                                                    class="fas fa-times text-orange-red"></i>Close</a>
+                                                            <a class="dropdown-item" href="#"><i
+                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                                            <a class="dropdown-item" href="#"><i
+                                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                    </tr>
                                     {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Notice Board End Here -->
-                </div>
-                <!-- Student Table Area Start Here -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card dashboard-card-eleven">
-                            <div class="card-body">
-                                <div class="heading-layout1">
-                                    <div class="item-title">
-                                        <h3>My Students</h3>
-                                    </div>
-                                </div>
-                                <div class="table-box-wrap">
-                                    <form class="search-form-box">
-                                        <div class="row gutters-8">
-                                            <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                                <input type="text" placeholder="Search by Roll ..." class="form-control">
-                                            </div>
-                                            <div class="col-4-xxxl col-xl-4 col-lg-4 col-12 form-group">
-                                                <input type="text" placeholder="Search by Name ..." class="form-control">
-                                            </div>
-                                            <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                                <input type="text" placeholder="Search by Class ..." class="form-control">
-                                            </div>
-                                            <div class="col-1-xxxl col-xl-2 col-lg-2 col-12 form-group">
-                                                <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <div class="table-responsive student-table-box">
-                                        <table class="table display data-table text-nowrap">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        <div class="form-check">
-                                                            <input type="checkbox" class="form-check-input checkAll">
-                                                            <label class="form-check-label">Roll</label>
-                                                        </div>
-                                                    </th>
-                                                    <th>Photo</th>
-                                                    <th>Name</th>
-                                                    <th>Gender</th>
-                                                    <th>Year</th>
-                                                    <th>Major</th>
-                                                    <th>Phone</th>
-                                                    <th>E-mail</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for rw in students %}
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input type="checkbox" class="form-check-input">
-                                                            <label class="form-check-label"><a href="{%url 'user-details' rw.root %}">#{{rw.student_id}}</a></label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        {% if rw.photo %}
-                                                        <img src="{% static '/img/' %}{{rw.photo}}" alt="student" class="rounded">
-                                                        {% endif %}
-                                                    </td>
-                                                    <td>{{rw.first_name}} {{rw.last_name}}</td>
-                                                    <td>{{rw.gender}}</td>
-                                                    <td>{{rw.current_year}}</td>
-                                                    <td>{{rw.major}}</td>
-                                                    <td>{{rw.phone}}</td>
-                                                    <td>{{rw.email}}</td>
-                                                    <td>
-                                                                <div class="dropdown">
-                                                                    <a href="#" class="dropdown-toggle"
-                                                                        data-toggle="dropdown" aria-expanded="false">
-                                                                        <span
-                                                                            class="flaticon-more-button-of-three-dots"></span>
-                                                                    </a>
-                                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                                        <a class="dropdown-item" href="#"><i
-                                                                                class="fas fa-times text-orange-red"></i>Close</a>
-                                                                        <a class="dropdown-item" href="#"><i
-                                                                                class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                                                        <a class="dropdown-item" href="#"><i
-                                                                                class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                </tr>
-                                                {% endfor %}
-                                                
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                                    
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-              
+            </div>
+        </div>
+    </div>
+
+               
 
  {% endblock %}

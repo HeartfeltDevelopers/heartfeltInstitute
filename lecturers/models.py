@@ -29,10 +29,8 @@ class AssignmentNotification(models.Model):
     date = models.DateField()
     notification_title = models.CharField(max_length=100)
     notification_rating = models.CharField(max_length=20, choices=rating_choices)
-    notify_class = models.ForeignKey(
-        StudentClasse, on_delete=models.CASCADE, related_name="notifications"
-    )
-    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+    notify_class = models.IntegerField()
+    assignment = models.IntegerField()
     message = models.TextField(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 

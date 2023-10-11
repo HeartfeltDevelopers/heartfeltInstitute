@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.db.models import Q
-
+import json
 from classes.forms import StudentClasseCreationForm, OnlineLessonCreationForm
 from classes.models import (
     StudentClasse,
@@ -25,6 +25,7 @@ from lecturers.models import AssignmentNotification
 from django.contrib.auth.views import FormView, LoginView
 from .models import Student, Lecturer, Aluminum, Partner
 from lib.models import t_url
+from lib.utils import *
 
 
 def dictfetchall(cursor):
@@ -78,6 +79,9 @@ def user_details(request, id):
     else:
         form = UserAttributesForm(instance=user)
 
+    user_notifications, total_notifications = fetch_notifications(request.user.id)
+    lesson_allocation, total_lesson_allocations = fetch_lessons(request.user.id)
+
     context = {
         "photo": user.photo,
         "church_name": user.church_name,
@@ -85,6 +89,10 @@ def user_details(request, id):
         "address": user.address,
         "city": user.city,
         "form": form,
+        "notification": user_notifications,
+        "total_notifications": total_notifications,
+        "lesson_allocation": lesson_allocation,
+        "total_lesson_allocations": total_lesson_allocations,
     }
     template = "accounts/users/dashboard.html"
     return render(request, template, context)
@@ -103,20 +111,6 @@ def student_dashboard(request):
     return render(request, template, context)
 
 
-def fetch_students():
-    students = connection.cursor()
-    students.cursor.execute(
-        """SELECT a.root, s.student_id, a.photo, u.first_name, u.last_name, s.current_year, s.major, a.gender, a.address, a.date_of_birth, a.phone, u.email, s.status
-            FROM accounts_CustomUser u
-            INNER JOIN accounts_UserAttributes a ON CAST(a.root AS INT) = u.id
-            LEFT JOIN accounts_Student s ON s.root = u.id
-            WHERE u.user_type = 'student'
-            Order By u.id Desc
-        """
-    )
-    return dictfetchall(students)
-
-
 def lecturer_dashboard(request):
     notifications = AssignmentNotification.objects.all().order_by("-id")[:5]
     students = fetch_students()
@@ -129,7 +123,6 @@ def lecturer_dashboard(request):
                             GROUP BY a.gender
                             """
     )
-
     c = dictfetchall(c)
 
     totalFemale = c[0]["total"] if c else 0

@@ -5,8 +5,8 @@ from courses.models import Course
 
 class StudentClasse(models.Model):
     CLASS_TYPE_CHOICES = [
-        ('online', 'Online'),
-        ('physical', 'Physical'),
+        ("online", "Online"),
+        ("physical", "Physical"),
     ]
     class_name = models.CharField(max_length=50)
     class_code = models.CharField(max_length=10, unique=True)
@@ -19,31 +19,35 @@ class StudentClasse(models.Model):
 
 
 class OnlineLesson(models.Model):
-
     online_title = models.CharField(max_length=255, null=True, blank=True)
     lesson_description = models.TextField(max_length=255, null=True, blank=True)
     lesson_date = models.DateField(null=True, blank=True)
     lesson_start_time = models.TimeField(null=True, blank=True)
     lesson_end_time = models.TimeField(null=True, blank=True)
-    material_downloads = models.FileField(upload_to='class_materials/', null=True, blank=True)
+    material_downloads = models.FileField(
+        upload_to="class_materials/", null=True, blank=True
+    )
     online_platform_link = models.URLField(max_length=200, null=True, blank=True)
-    course_name = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
-    lecturer = models.ForeignKey(Lecturer, on_delete=models.SET_NULL, null=True, blank=True)
+    course_name = models.CharField(max_length=200, null=True, blank=True)
+    lecturer = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return self.online_title
 
 
 class OfflineLesson(models.Model):
-
     lesson_title = models.CharField(max_length=255, null=True, blank=True)
     lesson_description = models.TextField(max_length=255, null=True, blank=True)
     lesson_date = models.DateField(null=True, blank=True)
     lesson_start_time = models.TimeField(null=True, blank=True)
     lesson_end_time = models.TimeField(null=True, blank=True)
-    material_downloads = models.FileField(upload_to='class_materials/', null=True, blank=True)
+    material_downloads = models.FileField(
+        upload_to="class_materials/", null=True, blank=True
+    )
     course_name = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
-    lecturer = models.ForeignKey(Lecturer, on_delete=models.SET_NULL, null=True, blank=True)
+    lecturer = models.ForeignKey(
+        Lecturer, on_delete=models.SET_NULL, null=True, blank=True
+    )
 
     def __str__(self):
         return self.lesson_title
@@ -51,7 +55,9 @@ class OfflineLesson(models.Model):
 
 class Test(models.Model):
     title = models.CharField(max_length=100)
-    course_name = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
+    course_name = models.ForeignKey(
+        Course, on_delete=models.SET_NULL, null=True, blank=True
+    )
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     total_marks = models.IntegerField()
@@ -79,7 +85,7 @@ class StudentTestSubmission(models.Model):
     total_score = models.PositiveBigIntegerField(default=0)
 
     def __str__(self):
-        return f'{self.student} - {self.test} - {self.total_score}'
+        return f"{self.student} - {self.test} - {self.total_score}"
 
 
 class StudentResponse(models.Model):
@@ -90,7 +96,7 @@ class StudentResponse(models.Model):
     marks_obtained = models.PositiveBigIntegerField(default=0)
 
     def __str__(self):
-        return f'{self.submission} - {self.question} - {self.selected_choice}'
+        return f"{self.submission} - {self.question} - {self.selected_choice}"
 
 
 class TestFeedBack(models.Model):
@@ -99,4 +105,12 @@ class TestFeedBack(models.Model):
     feedback_text = models.TextField(blank=True)
 
     def __str__(self):
-        return f'{self.student} - {self.test}'
+        return f"{self.student} - {self.test}"
+
+
+class LessonAllocation(models.Model):
+    student_root = models.IntegerField()
+    course = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.student.student_root
