@@ -16,6 +16,11 @@
             .custom-rounded {
                 border-radius: 15px; /* Adjust this value as needed */
             }
+            .extra-large-option {
+                font-size: 1.5rem;  /* Adjust this value as per your requirement */
+                padding: 10px 15px; /* Adjust padding if needed */
+            }
+
         </style>
    
         <!-- Page Area Start Here -->
@@ -99,7 +104,7 @@
                                             aria-expanded="false">...</a>
 
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#"><i
+                                            <a class="dropdown-item" href="#lesson_allocation" data-toggle="modal"><i
                                                 class="fas fa-plus text-dark-pastel-green"></i>Add Class</a>
                                             <a class="dropdown-item" href="#member" data-toggle="modal"><i
                                                     class="fas fa-cogs text-orange-red"></i>Edit Profile</a>
@@ -357,6 +362,38 @@
                         <form  method="post" name="form"  action="" enctype="multipart/form-data">{% csrf_token %}
                         <div style="margin-bottom: 20px;">
                             {{form}}
+                        </div>
+                        <button type="submit" class="btn btn-outline-success btn-lg">Save</button>
+                        </form>
+                    </div>
+                </div><!-- modal-content -->
+            </div><!-- modal-dialog -->
+        </div><!-- modal -->
+
+        <!-- Modal -->
+        <div class="modal right fade"  id="lesson_allocation"  tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-light">
+                        <h4>
+                            Add Course
+                        </h4>
+                        <button type="button" onclick="javascript:window.location.reload()" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
+                    </div>
+                    <div class="modal-body">
+                        <form  method="post" name="lesson_allocation_creation_form"  action="" enctype="multipart/form-data">{% csrf_token %}
+                        <div style="margin-bottom: 20px;">
+                            <input type="hidden" value="{{request.user.id}}" name="student_root">
+                            <select name="course" class="form-control">
+                                {% for rw in courses %}
+                                    <option value="{{rw.course_code}}">{{rw.course_title}}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="lecturer" class="form-control">
+                                {% for rw in lecturer %}
+                                    <option value="{{rw.first_name}} {{rw.last_name}}">{{rw.first_name}} {{rw.last_name}}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-outline-success btn-lg">Save</button>
                         </form>

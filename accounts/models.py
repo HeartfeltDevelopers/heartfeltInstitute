@@ -60,7 +60,7 @@ class Lecturer(models.Model):
     )
     gender = models.CharField(
         max_length=10,
-        choices=[("male", "Male"), ("female", "Female"), ("other", "Other")],
+        choices=[("male", "Male"), ("female", "Female")],
     )
     id_number = models.CharField(max_length=20, null=True, blank=True)
     qualification = models.CharField(max_length=50)

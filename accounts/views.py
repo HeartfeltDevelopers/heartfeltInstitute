@@ -20,12 +20,15 @@ from datetime import datetime
 
 from accounts.models import CustomUser, UserAttributes
 from .forms import LoginForm, RegistrationForm, UserAttributesForm
+from classes.forms import LessonAllocationCreationForm
 from lecturers.forms import AssignmentNotificationForm
 from lecturers.models import AssignmentNotification
 from django.contrib.auth.views import FormView, LoginView
 from .models import Student, Lecturer, Aluminum, Partner
 from lib.models import t_url
 from lib.utils import *
+from courses.models import Course
+from accounts.models import Lecturer
 
 
 def dictfetchall(cursor):
@@ -66,6 +69,8 @@ def admin_dashboard(request):
 
 def user_details(request, id):
     user = get_object_or_404(UserAttributes, rootID=id)
+    courses = Course.objects.all()
+    lecturer = CustomUser.objects.filter(user_type="lecturer")
 
     if request.method == "POST":
         form = UserAttributesForm(request.POST, request.FILES, instance=user)
@@ -79,6 +84,20 @@ def user_details(request, id):
     else:
         form = UserAttributesForm(instance=user)
 
+    if request.method == "POST":
+        lesson_allocation_creation_form = LessonAllocationCreationForm(
+            request.POST, request.FILES
+        )
+        if lesson_allocation_creation_form.is_valid():
+            lesson_allocation_creation_form.save()
+            # Redirect to the user's dashboard after successful form submission
+            return HttpResponseRedirect(
+                reverse("user-details", kwargs={"id": user.rootID})
+            )
+
+    else:
+        lesson_allocation_creation_form = LessonAllocationCreationForm(instance=user)
+
     user_notifications, total_notifications = fetch_notifications(request.user.id)
     lesson_allocation, total_lesson_allocations = fetch_lessons(request.user.id)
 
@@ -89,8 +108,11 @@ def user_details(request, id):
         "address": user.address,
         "city": user.city,
         "form": form,
+        "lesson_allocation_creation_form": lesson_allocation_creation_form,
         "notification": user_notifications,
         "total_notifications": total_notifications,
+        "lecturer": lecturer,
+        "courses": courses,
         "lesson_allocation": lesson_allocation,
         "total_lesson_allocations": total_lesson_allocations,
     }

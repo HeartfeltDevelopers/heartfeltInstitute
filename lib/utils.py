@@ -43,7 +43,7 @@ def fetch_notifications(user_id):
 def fetch_lessons(user_id):
     lesson_allocation = connection.cursor()
     lesson_allocation.cursor.execute(
-        """SELECT la.student_root, la.course, ol.online_title, ol.lesson_date, ol.lesson_start_time, ol.lesson_end_time, ol.lecturer, ol.online_platform_link
+        """SELECT la.student_root, la.course, ol.online_title, ol.lesson_date, ol.lesson_start_time, ol.lesson_end_time, la.lecturer, ol.online_platform_link
             FROM classes_LessonAllocation la
             INNER JOIN classes_OnlineLesson ol ON ol.course_name = la.course
             WHERE la.student_root = %s
