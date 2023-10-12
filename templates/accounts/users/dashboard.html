@@ -55,7 +55,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item sidebar-nav-item">
+                        <!-- <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i
                                     class="fi fi-rr-presentation"></i><span>Class</span></a>
                             <ul class="nav sub-group-menu">
@@ -65,8 +65,8 @@
                                 </li>
                                 
                             </ul>
-                        </li>
-                        <li class="nav-item sidebar-nav-item">
+                        </li> -->
+                        <!-- <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="fi fi-rr-test"></i><span>Exam</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
@@ -78,7 +78,7 @@
                                         Grades</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                 <!-- Breadcubs Area End Here -->
                 <div class="row">
                     <!-- Student Info Area Start Here -->
-                    <div class="col-6-xxxl col-12">
+                    <div class="col-md-6 col-12">
                         <div class="card dashboard-card-ten">
                             <div class="card-body">
                                 <div class="heading-layout1">
@@ -115,8 +115,8 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="row">
-                                        <div class="table-responsive info-table col-8-xxxl col-12">
-                                            <table class="table text-nowrap">
+                                        <div class="table-responsive info-table{% if photo %} col-md-8{% else %} col-md-12{% endif %} col-12">
+                                            <table class="table text-nowrap" >
                                                 <tbody>
                                                     <tr>
                                                         <td>Church:</td>
@@ -150,9 +150,11 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class=" col-4-xxxl text-center item-icon">
-                                            <img src="{% static 'img/' %}{{photo}}"  width="150" alt="" class="custom-rounded">
+                                        {% if photo %}
+                                        <div class=" col-md-4 text-center item-icon">
+                                            <img src="{% static 'img/' %}{{photo}}"  width="100" alt="" class="custom-rounded">
                                         </div>
+                                        {% endif %}
                                     </div>
 
                                 </div>
@@ -161,7 +163,7 @@
                     </div>
                     <!-- Student Info Area End Here -->
                     <!-- Notification Area Start Here -->
-                    <div class="col-6-xxxl col-12">
+                    <div class="col-md-6 col-12">
                         <div class="card dashboard-card-six">
                             <div class="card-body">
                                 <div class="heading-layout1 mg-b-17">
@@ -175,7 +177,7 @@
                                         <div class="notice-list">
                                             <div class="post-date {{rw.notification_rating}}">{{rw.date}} : {{rw.student_class}}</div>
                                             <h6 class="notice-title"><a href="#">{{rw.notification_title}}</a></h6>
-                                            <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
+                                            <div class="entry-meta"> {{rw.lecturer}} <span></span></div>
                                         </div>
                                     {% endfor %}
 
@@ -310,7 +312,7 @@
                                                             <td>
                                                                 <div class="form-check">
                                                                     <input type="checkbox" class="form-check-input">
-                                                                    <label class="form-check-label">{{rw.course}}</label>
+                                                                    <label class="form-check-label">{{rw.course_name}}</label>
                                                                 </div>
                                                             </td>
                                                             <td>{{rw.online_title}}</td>
@@ -320,19 +322,21 @@
                                                             <td>{{rw.lecturer}}</td>
                                                             <td>
                                                                 <div class="dropdown">
-                                                                    <a href="#" class="dropdown-toggle"
-                                                                        data-toggle="dropdown" aria-expanded="false">
-                                                                        <span
-                                                                            class="flaticon-more-button-of-three-dots"></span>
-                                                                    </a>
-                                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                                        <a class="dropdown-item" href="{{rw.online_platform_link}}" target="_blank">{{rw.online_platform_link}}</a>
-                                                                    </div>
+                                                                    {% if rw.lesson_date|date:"Y-m-d" < current_date|date:"Y-m-d" %}
+                                                                        Expired
+                                                                    {% else %}
+                                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                            <span class="flaticon-more-button-of-three-dots"></span>
+                                                                        </a>
+                                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                                            <a class="dropdown-item" href="{{rw.online_platform_link}}" target="_blank">{{rw.online_platform_link}}</a>
+                                                                        </div>
+                                                                    {% endif %}
                                                                 </div>
+                                                                
                                                             </td>
                                                         </tr>
                                                         {% endfor %}
-                                                        
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -372,7 +376,7 @@
 
         <!-- Modal -->
         <div class="modal right fade"  id="lesson_allocation"  tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header bg-light">
                         <h4>

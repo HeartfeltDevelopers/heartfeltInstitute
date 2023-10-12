@@ -17,7 +17,7 @@ def fetch_students():
         """SELECT a.root, s.student_id, a.photo, u.first_name, u.last_name, s.current_year, s.major, a.gender, a.address, a.date_of_birth, a.phone, u.email, s.status
             FROM accounts_CustomUser u
             INNER JOIN accounts_UserAttributes a ON CAST(a.root AS INT) = u.id
-            LEFT JOIN accounts_Student s ON s.root = u.id
+            INNER JOIN accounts_Student s ON s.root = u.id
             WHERE u.user_type = 'student'
             Order By u.id Desc
         """
@@ -25,15 +25,14 @@ def fetch_students():
     return dictfetchall(students)
 
 
-def fetch_notifications(user_id):
+def fetch_notifications(className):
     notifications = connection.cursor()
     notifications.cursor.execute(
-        """SELECT  an.date, an.notification_title, an.notification_rating, an.notify_class, an.assignment, sc.student_class
-            FROM students_StudentClass sc
-            INNER JOIN lecturers_AssignmentNotification an ON sc.student_class = an.notify_class
-            WHERE sc.root =  %s
+        """SELECT  an.date, an.notification_title, an.notification_rating, an.notify_class, an.assignment
+            FROM lecturers_AssignmentNotification an 
+            WHERE an.notify_class = %s
         """,
-        [user_id],
+        [className],
     )
     notification_list = dictfetchall(notifications)
     total_notifications = len(notification_list)
@@ -43,11 +42,10 @@ def fetch_notifications(user_id):
 def fetch_lessons(user_id):
     lesson_allocation = connection.cursor()
     lesson_allocation.cursor.execute(
-        """SELECT la.student_root, la.course, ol.online_title, ol.lesson_date, ol.lesson_start_time, ol.lesson_end_time, la.lecturer, ol.online_platform_link
-            FROM classes_LessonAllocation la
-            INNER JOIN classes_OnlineLesson ol ON ol.course_name = la.course
-            WHERE la.student_root = %s
-            Order By la.id Desc
+        """SELECT  ol.course_name, ol.online_title, ol.lesson_date, ol.lesson_start_time, ol.lesson_end_time, ol.lecturer, ol.online_platform_link
+            FROM classes_OnlineLesson ol 
+            WHERE ol.course_name = %s
+            Order By ol.id Desc
         """,
         [user_id],
     )

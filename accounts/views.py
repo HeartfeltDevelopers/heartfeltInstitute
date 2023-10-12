@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.db.models import Q
+from datetime import date
 import json
 from classes.forms import StudentClasseCreationForm, OnlineLessonCreationForm
 from classes.models import (
@@ -29,6 +30,7 @@ from lib.models import t_url
 from lib.utils import *
 from courses.models import Course
 from accounts.models import Lecturer
+from classes.models import LessonAllocation
 
 
 def dictfetchall(cursor):
@@ -98,10 +100,11 @@ def user_details(request, id):
     else:
         lesson_allocation_creation_form = LessonAllocationCreationForm(instance=user)
 
-    user_notifications, total_notifications = fetch_notifications(request.user.id)
-    lesson_allocation, total_lesson_allocations = fetch_lessons(request.user.id)
+    user_notifications, total_notifications = fetch_notifications(user.className)
+    lesson_allocation, total_lesson_allocations = fetch_lessons(user.className)
 
     context = {
+        "current_date": date.today(),
         "photo": user.photo,
         "church_name": user.church_name,
         "phone": user.phone,

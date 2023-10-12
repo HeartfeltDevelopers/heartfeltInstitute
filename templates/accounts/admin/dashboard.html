@@ -15,7 +15,7 @@
                 <div class="sidebar-menu-content">
                     <ul class="nav nav-sidebar-menu sidebar-toggle-view">
                         <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-dashboard"></i><span>Dashboard</span></a>
+                            <a href="#" class="nav-link"><i class="fi fi-rr-home"></i><span>Dashboard</span></a>
                             <ul class="nav sub-group-menu">
                                 {% for rw in url %}
                                     {% if rw.category == 'dashboard' and rw.status == 'Active' %}
@@ -28,7 +28,7 @@
                             </ul>
                         </li>
                         <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>
+                            <a href="#" class="nav-link"><i class="fi fi-rr-graduation-cap"></i><span>Students</span></a>
                             <ul class="nav sub-group-menu">
                                 {% for rw in url %}
                                     {% if rw.category == 'students' and rw.status == 'Active' %}
@@ -66,17 +66,17 @@
                                     {% endif %}
                                 {% endfor %}
                             </ul>
-                        </li> -->
+                        </li> --> 
                         <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i
-                                    class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Classes</span></a>
+                                    class="fi fi-rr-presentation"></i><span>Classes</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="all-class.html" class="nav-link"><i class="fas fa-angle-right"></i>All
+                                    <a href="{%url 'online-lessons' %}" class="nav-link"><i class="fas fa-angle-right"></i>All
                                         Classes</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="add-class.html" class="nav-link"><i class="fas fa-angle-right"></i>Add New
+                                    <a href="#addClass" data-toggle="modal" class="nav-link"><i class="fas fa-angle-right"></i>Add New
                                         Class</a>
                                 </li>
                             </ul>
@@ -94,14 +94,14 @@
                                     class="flaticon-checklist"></i><span>Attendence</span></a>
                         </li> -->
                         <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-shopping-list"></i><span>Exams</span></a>
+                            <a href="#" class="nav-link"><i class="fi fi-rr-test"></i><span>Exams</span></a>
                             <ul class="nav sub-group-menu">
                                 <li class="nav-item">
-                                    <a href="exam-schedule.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam
+                                    <a href="" class="nav-link"><i class="fas fa-angle-right"></i>Exam
                                         Schedule</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="exam-grade.html" class="nav-link"><i class="fas fa-angle-right"></i>Exam
+                                    <a href="" class="nav-link"><i class="fas fa-angle-right"></i>Exam
                                         Grades</a>
                                 </li>
                             </ul>
@@ -543,4 +543,22 @@
                     </div>
                 </div> -->
                 <!-- Social Media End Here -->
+
+                 <!-- Modal -->
+                 <div class="modal right fade" id="addClass" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-light">
+                                <h4>Add Class</h4>
+                                <button type="button" onclick="javascript:window.location.reload()" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Iframe to display the lecture creation form -->
+                                <iframe src="{% url 'create_lesson' %}" width="100%" height="600" frameborder="0"></iframe>
+                            </div>
+                        </div><!-- modal-content -->
+                    </div><!-- modal-dialog -->
+                </div>
+                
+            <!-- modal -->
 {% endblock %}l>

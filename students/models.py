@@ -8,7 +8,7 @@ class StudentClass(models.Model):
     root = models.IntegerField()
     student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
     lecturer_name = models.ForeignKey(Lecturer, on_delete=models.CASCADE, null=True)
-    student_class = models.IntegerField()
+    student_class = models.CharField(max_length=50, default="HIM-LEC-01")
     created_date = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now=True)
 

@@ -7,6 +7,7 @@
     word-wrap: break-word;  /* Allows long URLs or words to break and wrap onto the next line */
 }
 
+
 </style>
     <div class="col-lg-12">
         <div class="card dashboard-card-eleven">
@@ -16,11 +17,12 @@
                         <h3>Online Lessons</h3>
                     </div>
                 </div>
+                {% if online_lessons %}
                 <div class="table-box-wrap">
                     <form class="search-form-box">
                         <div class="row gutters-8">
                             <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                                <input type="text" placeholder="Search by Title ..." class="form-control">
+                                <input type="text" name="title" placeholder="Search by Title ..." class="form-control">
                             </div>
                             <div class="col-4-xxxl col-xl-4 col-lg-4 col-12 form-group">
                                 <input type="text" placeholder="Search by Date ..." class="form-control">
@@ -55,16 +57,17 @@
                                     <td>{{rw.lesson_end_time}}</td>
                                     <td>{{rw.lecturer}}</td>
                                     <td>
-                                        <div class="dropdown text-center">
-                                            <a href="#" class="dropdown-toggle"
-                                                data-toggle="dropdown" aria-expanded="false">
-                                                <span
-                                                    class="flaticon-more-button-of-three-dots"></span>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right" style="padding:10px; font-size: sm;">
-                                                <a href="{{rw.online_platform_link}}" style="text-decoration: none; text-decoration-color: black;" target="_blank">{{rw.online_platform_link}}</a>
-                                                
-                                            </div>
+                                        <div class="dropdown">
+                                            {% if rw.lesson_date|date:"Y-m-d" < current_date|date:"Y-m-d" %}
+                                                Expired
+                                            {% else %}
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    <span class="flaticon-more-button-of-three-dots"></span>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="{{rw.online_platform_link}}" target="_blank">{{rw.online_platform_link}}</a>
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     </td>
                                     
@@ -75,6 +78,9 @@
                         </table>
                     </div>
                 </div>
+                {% else %}
+                <div> You dont have upcoming lessons </div>
+                {% endif %}
             </div>
         </div>
     </div>

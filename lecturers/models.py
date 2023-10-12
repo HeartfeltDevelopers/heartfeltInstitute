@@ -29,7 +29,7 @@ class AssignmentNotification(models.Model):
     date = models.DateField()
     notification_title = models.CharField(max_length=100)
     notification_rating = models.CharField(max_length=20, choices=rating_choices)
-    notify_class = models.IntegerField()
+    notify_class = models.CharField(max_length=20, default="HIM-LEC-01")
     assignment = models.IntegerField()
     message = models.TextField(blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)

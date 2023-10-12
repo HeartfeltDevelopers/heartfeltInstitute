@@ -181,10 +181,23 @@ class UserAttributesForm(forms.ModelForm):
         ),
         label="",
     )
+    className = forms.CharField(
+        max_length=30,
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control form-control-lg",
+                "placeholder": "Class Name",
+                "style": "margin-bottom: 10px;",
+            }
+        ),
+        label="Class Name",
+    )
 
     class Meta:
         model = UserAttributes
         fields = [
+            "className",
             "rootID",
             "root",
             "date_of_birth",

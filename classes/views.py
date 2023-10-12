@@ -7,7 +7,8 @@ from googleapiclient.discovery import build
 from django.conf import settings
 from django.contrib import messages
 import uuid
-from datetime import datetime
+from datetime import datetime, date
+from django.db.models import Q
 
 
 def create_lesson(request):
@@ -105,7 +106,14 @@ def create_lesson(request):
 def AllOnlineClasses(request):
     online_lessons = OnlineLesson.objects.all().order_by("-id")[:20]
 
+    # query = request.GET.get("title")
+    # if query:
+    #     queryset_list = online_lessons.filter(
+    #         Q(title__icontains=query) | Q(lname__icontains=query)
+    #     ).distinct()
+
     context = {
+        "current_date": date.today(),
         "online_lessons": online_lessons,
     }
 
