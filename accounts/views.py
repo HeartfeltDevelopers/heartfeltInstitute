@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.db import connection
 from django.urls import reverse
@@ -70,6 +71,7 @@ def admin_dashboard(request):
 
 
 def user_details(request, id):
+    user_loggedin = get_object_or_404(UserAttributes, rootID=request.user.id)
     user = get_object_or_404(UserAttributes, rootID=id)
     courses = Course.objects.all()
     lecturer = CustomUser.objects.filter(user_type="lecturer")
@@ -105,6 +107,7 @@ def user_details(request, id):
 
     context = {
         "current_date": date.today(),
+        "user_img": user_loggedin.photo,
         "photo": user.photo,
         "church_name": user.church_name,
         "phone": user.phone,

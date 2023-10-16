@@ -1,4 +1,4 @@
-
+{% load static %}
         <!-- Header Menu Area Start Here -->
         <div class="navbar navbar-expand-md header-menu-one bg-light">
             <div class="nav-bar-header-one">
@@ -36,11 +36,16 @@
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
                     <li class="navbar-item dropdown header-admin">
-                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            <div class="admin-title">
-                                <h5 class="item-title" style="text-transform: capitalize;">{{user.username}}</h5>
-                                <span>{{user.user_type}}</span>
+                        <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <div class="admin-title d-flex align-items-center">
+                                {% if photo %}
+                                <!-- Display user image -->
+                                <img src="{% static 'img/' %}{{user_img}}" alt="User Image" width="60" height="60" class="rounded-circle"> <!-- Added Bootstrap classes -->
+                                {% endif %}
+                                <div style="margin-left: 20px;">
+                                    <h5 class="item-title" style="text-transform: capitalize;">{{ user.username }}</h5>
+                                    <span>{{ user.user_type }}</span>
+                                </div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">

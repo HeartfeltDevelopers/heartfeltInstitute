@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import environ
+from decouple import config
 
 from django.contrib import staticfiles
 
@@ -198,3 +199,17 @@ GOOGLE_MEET_CREDENTIALS_PATH = os.path.join(
 
 # Sets the ID of your site's URL.
 # SITE_ID = 1
+
+# Email settings
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = True
+EMAIL_HOST = (
+    "smtp.gmail.com"  # For example, 'smtp.gmail.com' if you're using Gmail's SMTP
+)
+EMAIL_PORT = 587  # Common ports include 25, 465, and 587
+EMAIL_USE_TLS = True  # Use this if your SMTP server uses TLS
+# EMAIL_USE_SSL = True               # Use this if your SMTP server uses SSL
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+
+PASSWORD_RESET_TIMEOUT = 14400
