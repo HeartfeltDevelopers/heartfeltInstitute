@@ -72,6 +72,7 @@ def admin_dashboard(request):
 
 def user_details(request, id):
     user_loggedin = get_object_or_404(UserAttributes, rootID=request.user.id)
+    student = get_object_or_404(Student, root=request.user.id)
     user = get_object_or_404(UserAttributes, rootID=id)
     courses = Course.objects.all()
     lecturer = CustomUser.objects.filter(user_type="lecturer")
@@ -107,12 +108,14 @@ def user_details(request, id):
 
     context = {
         "current_date": date.today(),
+        "student_id": student.student_id,
         "user_img": user_loggedin.photo,
         "photo": user.photo,
         "church_name": user.church_name,
         "phone": user.phone,
         "address": user.address,
         "city": user.city,
+        "country": user.country,
         "form": form,
         "lesson_allocation_creation_form": lesson_allocation_creation_form,
         "notification": user_notifications,
@@ -272,31 +275,6 @@ def create_lesson(request):
     return render(request, "classes/create_lecture.html", {"form": form})
 
 
-# class CustomRegistrationView(FormView):
-#     form_class = RegistrationForm
-#     template_name = (
-#         "accounts/register.html"  # Assuming this is your registration template
-#     )
-#     success_url = "/accounts/login/"  # Customize this URL
-
-#     def form_valid(self, form):
-#         # Create the user account
-#         user = form.save()
-
-#         # Determine user type and create corresponding profile
-#         user_type = form.cleaned_data["user_type"]
-#         if user_type == "student":
-#             Student.objects.create(user=user)
-#         elif user_type == "lecturer":
-#             Lecturer.objects.create(user=user)
-#         elif user_type == "alumni":
-#             Aluminum.objects.create(user=user)
-#         elif user_type == "donor":
-#             Partner.objects.create(user=user)
-
-#         return super().form_valid(form)
-
-
 class CustomLoginView(LoginView):
     def get_success_url(self):
         user = self.request.user
@@ -323,18 +301,20 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            if user.is_authenticated:
-                if user.user_type == "student":
-                    student_dashboard_url = reverse(
-                        "user-details", kwargs={"id": user.id}
-                    )
-                    return redirect(student_dashboard_url)
-                elif user.user_type == "lecturer":
-                    return redirect("/lecturer-dashboard")
-                elif user.user_type == "admin":
-                    return redirect("/admin-dashboard")
-                elif user.user_type == "alumni":
-                    return redirect("/alumni-dashboard")
+            try:
+                info = UserAttributes.objects.get(root=request.user.id)
+                # Continue with your login logic if UserAttributes exists for the user
+            except UserAttributes.DoesNotExist:
+                return redirect("/accounts/registration-step-2")
+            if user.user_type == "student":
+                student_dashboard_url = reverse("user-details", kwargs={"id": user.id})
+                return redirect(student_dashboard_url)
+            elif user.user_type == "lecturer":
+                return redirect("/lecturer-dashboard")
+            elif user.user_type == "admin":
+                return redirect("/admin-dashboard")
+            elif user.user_type == "alumni":
+                return redirect("/alumni-dashboard")
     else:
         form = LoginForm(request)
     return render(request, "accounts/login.html", {"form": form})
@@ -349,6 +329,7 @@ def registration(request):
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+
             return redirect("registration-step-2")
     else:
         form = RegistrationForm()

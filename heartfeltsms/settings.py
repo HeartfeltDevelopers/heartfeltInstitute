@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+
+
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -56,6 +58,7 @@ INSTALLED_APPS = [
     "lib",
     "accounts",
     "finances",
+    "email_confirmation",
     # "library",
     "attendance",
     "classes",
@@ -67,6 +70,7 @@ INSTALLED_APPS = [
     "django_countries",
     "exams",
     "django_extensions",
+    "captcha",
 ]
 
 MIDDLEWARE = [
@@ -189,16 +193,11 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 GOOGLE_MEET_CREDENTIALS_PATH = os.path.join(
     BASE_DIR, "credentials", "heartfelt-sms-419d0da5f9a0.json"
 )
-# AUTHENTICATION_BACKENDS = [
-#     'django.contrib.auth.backends.ModelBackend',
-#     'allauth.account.auth_backends.AuthenticationBackend',
-# ]
 
-# LOGIN_REDIRECT_URL = 'home'
-# LOGOUT_REDIRECT_URL = 'home'
 
-# Sets the ID of your site's URL.
-# SITE_ID = 1
+RECAPTCHA_PUBLIC_KEY = "6LddA3kgAAAAAPf1mAJmEc7Ku0cssbD5QMha09NT"
+RECAPTCHA_PRIVATE_KEY = "6LddA3kgAAAAAJY-2-Q0J3QX83DFJwFR1hXqmN8q"
+SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
 
 # Email settings
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -207,8 +206,6 @@ EMAIL_HOST = (
     "smtp.gmail.com"  # For example, 'smtp.gmail.com' if you're using Gmail's SMTP
 )
 EMAIL_PORT = 587  # Common ports include 25, 465, and 587
-EMAIL_USE_TLS = True  # Use this if your SMTP server uses TLS
-# EMAIL_USE_SSL = True               # Use this if your SMTP server uses SSL
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
