@@ -83,7 +83,7 @@
                 </div>
             </div>
             <!-- Sidebar Area End Here -->
-            <div class="dashboard-content-one">
+            <div class="dashboard-content-one" style="height: 100vh;">
                 <!-- Breadcubs Area Start Here -->
                 <div style="height: 40px;">
                     &nbsp
@@ -97,15 +97,15 @@
                                 <div class="heading-layout1">
                                     <div class="item-title">
                                         <h3 class="item-title">{{user.first_name}} {{user.last_name}}</h3>
-                                        <p>Student Temp Number: 1000{{user.id}}</p>
+                                        <p>Student ID Number: <b>{{student_id}}</b></p>
                                     </div>
                                     <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                             aria-expanded="false">...</a>
 
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <!-- <a class="dropdown-item" href="#lesson_allocation" data-toggle="modal"><i
-                                                class="fas fa-plus text-dark-pastel-green"></i>Add Class</a> -->
+                                            <a class="dropdown-item" href="#lesson_allocation" data-toggle="modal"><i
+                                                class="fas fa-plus text-dark-pastel-green"></i>Add Course</a>
                                             <a class="dropdown-item" href="#member" data-toggle="modal"><i
                                                     class="fas fa-cogs text-orange-red"></i>Edit Profile</a>
                                             <a class="dropdown-item" href="#"><i
@@ -141,11 +141,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Country:</td>
-                                                        <td class="font-medium text-dark-medium">{{user.country}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Admission Date:</td>
-                                                        <td class="font-medium text-dark-medium">{{user.date_joined}}</td>
+                                                        <td class="font-medium text-dark-medium">{{country}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -162,6 +158,7 @@
                         </div>
                     </div>
                     <!-- Student Info Area End Here -->
+                    {% if lesson_allocation %}
                     <!-- Notification Area Start Here -->
                     <div class="col-md-6 col-12">
                         <div class="card dashboard-card-six">
@@ -186,7 +183,18 @@
                         </div>
                     </div>
                     <!-- Notification Area End Here -->
+                    {% else %}
+                    <div class="col-md-6 col-12">
+                        <div class="card ">
+                            <div class="card-body">
+                                <button type="submit"
+                                class="btn btn-gradient-yellow btn-lg" style="text-transform: uppercase;">Enroll to class</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
+                {% if lesson_allocation %}
                 <div class="row">
                     <div class="col-12-xxxl col-12">
                         <div class="row">
@@ -289,7 +297,7 @@
                                             </div>
                                         </div>
                                         {% else %}
-                                        <div> You dont have upcoming lessons </div>
+                                        <div style="min-height: 400px"> <a href="#lesson_allocation" data-toggle="modal"> You dont have upcoming lessons </a></div>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -298,6 +306,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
 
         <!-- Modal -->
         <div class="modal right fade"  id="member"  tabindex="-1" role="dialog">

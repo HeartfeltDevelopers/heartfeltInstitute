@@ -47,8 +47,8 @@ class UserAttributes(models.Model):
     church_name = models.CharField(max_length=500)
     nationality = models.CharField(max_length=50)
     city = models.CharField(max_length=100)
-    className = models.CharField(max_length=50, default="HIM-LEC-01")
-    # country = CountryField()
+    className = models.CharField(max_length=50, default="")
+    country = CountryField()
 
     def __unicode__(self):
         return "UserAttributes {}".format(self.id)

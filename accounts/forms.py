@@ -207,5 +207,6 @@ class UserAttributesForm(forms.ModelForm):
             "nationality",
             "address",
             "city",
+            "country",
             "photo",
         ]
