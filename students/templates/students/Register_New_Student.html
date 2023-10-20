@@ -14,16 +14,22 @@
   .custom-padding {
     padding-bottom: 10px
 }
+#id_student_id {
+  visibility: hidden;
+}
 </style>
 
 <div class="container">
     <form method="post" id="registration-form">
       {% csrf_token %}
+      <div>
+        Hi {{user.first_name}} {{user.last_name}}
+      </div>
+      <button type="submit" class="btn btn-success btn-lg">Next</button>
       <input type="hidden" name="root" value="{{user.id}}">
       <input type="hidden" name="user" value="{{user.id}}">
       <input type="hidden" name="status" value="Pending">
       {{form.student_id}}
-      <button type="submit" class="btn btn-success btn-lg">Next</button>
     </form>
 </div>
 

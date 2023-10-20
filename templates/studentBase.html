@@ -11,17 +11,15 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
     <!-- Normalize CSS -->
-    <style>
-        .table-box-wrap{
-            font-size: small;
-        }
-    </style>
+
     <!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
 
+    <link href="{% static 'uicons/css/uicons-regular-rounded.css' %}" rel="stylesheet">
+
 	<link rel="stylesheet" href="{% static 'css/animate-login.css' %}">
 	<!-- Custom Stylesheet -->
-	<!-- <link rel="stylesheet" href="{% static 'css/style-login.css' %}"> -->
+	<link rel="stylesheet" href="{% static 'css/style-login.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
 
@@ -61,37 +59,28 @@
             <!-- Sidebar Area Start Here -->
             <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
                 <div class="mobile-sidebar-header d-md-none">
-                     <div class="header-logo">
-                         <a href="index.html"><img src="img/logo1.png" alt="logo"></a>
+                     <div class="">
+                        
                      </div>
                 </div>
                  <div class="sidebar-menu-content">
                      <ul class="nav nav-sidebar-menu sidebar-toggle-view">
-                         <li class="nav-item sidebar-nav-item">
-                             <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Profile</span></a>
-                             <ul class="nav sub-group-menu">
-                                 <li class="nav-item">
-                                     <a href="{% url 'user-details' user.id %}" class="nav-link"><i
-                                             class="fas fa-angle-right"></i>Student Details</a>
-                                 </li>
-                             </ul>
-                         </li>
                         
                          <li class="nav-item sidebar-nav-item">
-                             <a href="#" class="nav-link"><i class="flaticon-technological"></i><span>Accounts</span></a>
+                             <a href="#" class="nav-link"><i class="fi fi-rr-user"></i><span>Accounts</span></a>
                              <ul class="nav sub-group-menu">
                                  
                                  <li class="nav-item">
-                                     <a href="add-expense.html" class="nav-link"><i class="fas fa-angle-right"></i>Pay</a>
+                                     <a href="" class="nav-link"><i class="fas fa-angle-right"></i>Pay</a>
                                  </li>
                              </ul>
                          </li>
                          <li class="nav-item sidebar-nav-item">
                              <a href="#" class="nav-link"><i
-                                     class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler"></i><span>Class</span></a>
+                                     class="fi fi-rr-presentation"></i><span>Class</span></a>
                              <ul class="nav sub-group-menu">
                                  <li class="nav-item">
-                                     <a href="all-class.html" class="nav-link"><i class="fas fa-angle-right"></i>All
+                                     <a href="" class="nav-link"><i class="fas fa-angle-right"></i>All
                                          Classes</a>
                                  </li>
                                  
@@ -115,7 +104,7 @@
              </div>
              <!-- Sidebar Area End Here -->
 
-             <div class="dashboard-content-one">
+             <div class="dashboard-content-one" style="min-height: 100vh;">
                  <!-- Breadcubs Area Start Here -->
                  <div class="breadcrumbs-area">
                      <h3>Students Dashboard</h3>
@@ -127,12 +116,10 @@
                      </ul>
                  </div>
                  <!-- Breadcubs Area End Here -->
-                 <div class="row">
                      <!-- Main area Start Here -->
+
                      {% block content %}{% endblock %}
                      <!-- Main area End Here -->
-                 </div>
-                 
  
                  <!-- Modal -->
                      <div class="modal right fade"  id="notifications"  tabindex="-1" role="dialog">

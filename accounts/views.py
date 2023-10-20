@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from django.db import connection
 from django.urls import reverse
 from django.contrib import messages
@@ -40,6 +41,7 @@ def dictfetchall(cursor):
     return [dict(zip(columns, row)) for row in cursor.fetchall()]
 
 
+@login_required(login_url="/coresms/login/")
 def admin_dashboard(request):
     labels = []
     data = []
@@ -70,6 +72,7 @@ def admin_dashboard(request):
     return render(request, "accounts/admin/dashboard.html", context)
 
 
+@login_required(login_url="/coresms/login/")
 def user_details(request, id):
     user_loggedin = get_object_or_404(UserAttributes, rootID=request.user.id)
     student = get_object_or_404(Student, root=request.user.id)
@@ -129,6 +132,7 @@ def user_details(request, id):
     return render(request, template, context)
 
 
+@login_required(login_url="/coresms/login/")
 def student_dashboard(request):
     user = get_object_or_404(CustomUser, id=request.user.id)
     # student = get_object_or_404(Student, user_id=request.user.id)
@@ -142,6 +146,7 @@ def student_dashboard(request):
     return render(request, template, context)
 
 
+@login_required(login_url="/coresms/login/")
 def lecturer_dashboard(request):
     notifications = AssignmentNotification.objects.all().order_by("-id")[:5]
     students = fetch_students()
@@ -281,16 +286,14 @@ class CustomLoginView(LoginView):
 
         if user.is_authenticated:
             if user.user_type == "admin":
-                return "/admin/dashboard/"  # Customize the URL for the admin dashboard
+                return "/coresms/admin/dashboard/"  # Customize the URL for the admin dashboard
             elif user.user_type == "lecturer":
-                return "/lecturer/dashboard/"  # Customize the URL for the lecturer dashboard
+                return "/coresms/lecturer/dashboard/"  # Customize the URL for the lecturer dashboard
             elif user.user_type == "student":
                 student_dashboard_url = reverse("user-details", kwargs={"id": user.id})
                 return student_dashboard_url
             elif user.user_type == "alumni":
-                return (
-                    "/alumni/dashboard/"  # Customize the URL for the alumni dashboard
-                )
+                return "/coresms/alumni/dashboard/"  # Customize the URL for the alumni dashboard
 
         return "/"
 
@@ -310,11 +313,11 @@ def user_login(request):
                 student_dashboard_url = reverse("user-details", kwargs={"id": user.id})
                 return redirect(student_dashboard_url)
             elif user.user_type == "lecturer":
-                return redirect("/lecturer-dashboard")
+                return redirect("/coresms/lecturer-dashboard")
             elif user.user_type == "admin":
-                return redirect("/admin-dashboard")
+                return redirect("/coresms/admin-dashboard")
             elif user.user_type == "alumni":
-                return redirect("/alumni-dashboard")
+                return redirect("/coresms/alumni-dashboard")
     else:
         form = LoginForm(request)
     return render(request, "accounts/login.html", {"form": form})

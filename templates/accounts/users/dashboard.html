@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'studentBase.html' %}
 {% load static %}
 {% block content %}
 
@@ -24,71 +24,7 @@
         </style>
    
         <!-- Page Area Start Here -->
-        <div class="dashboard-page-one">
-            <!-- Sidebar Area Start Here -->
-            <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
-               <div class="mobile-sidebar-header d-md-none">
-                    <div class="header-logo">
-                        <a href=""><img src="img/logo1.png" alt="logo"></a>
-                    </div>
-               </div>
-                <div class="sidebar-menu-content">
-                    <ul class="nav nav-sidebar-menu sidebar-toggle-view">
-                        {% if user.user_type == 'admin' %}
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="fi fi-rr-home"></i><span>Dashboard</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                   <a href="{% url 'admin_dashboard' %}" class="nav-link"><i class="fas fa-angle-right"></i>Admin Dashboard</a>
-                               </li>
-                                <li class="nav-item">
-                                    <a href="{% url 'lecturer_dashboard' %}" class="nav-link"><i class="fas fa-angle-right"></i>Lecturers Dashboard</a>
-                                </li>
-                            </ul>
-                        </li>
-                        {% endif %}
-                        <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="fi fi-rr-user"></i><span>Accounts</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="" class="nav-link"><i class="fas fa-angle-right"></i>Pay</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i
-                                    class="fi fi-rr-presentation"></i><span>Class</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="" class="nav-link"><i class="fas fa-angle-right"></i>All
-                                        Classes</a>
-                                </li>
-                                
-                            </ul>
-                        </li> -->
-                        <!-- <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="fi fi-rr-test"></i><span>Exam</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
-                                    <a href="" class="nav-link"><i class="fas fa-angle-right"></i>Exam
-                                        Schedule</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link"><i class="fas fa-angle-right"></i>Exam
-                                        Grades</a>
-                                </li>
-                            </ul>
-                        </li> -->
-                    </ul>
-                </div>
-            </div>
-            <!-- Sidebar Area End Here -->
-            <div class="dashboard-content-one" style="height: 100vh;">
-                <!-- Breadcubs Area Start Here -->
-                <div style="height: 40px;">
-                    &nbsp
-                </div>
-                <!-- Breadcubs Area End Here -->
+            <div class="dashboard-content-one">
                 <div class="row">
                     <!-- Student Info Area Start Here -->
                     <div class="col-md-6 col-12">
@@ -305,7 +241,7 @@
                     </div>
                 </div>
                 {% endif %}
-
+            </div>
         <!-- Modal -->
         <div class="modal right fade"  id="member"  tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
