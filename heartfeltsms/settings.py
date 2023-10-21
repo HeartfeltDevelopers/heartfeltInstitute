@@ -206,7 +206,7 @@ EMAIL_HOST = (
     "smtp.gmail.com"  # For example, 'smtp.gmail.com' if you're using Gmail's SMTP
 )
 EMAIL_PORT = 587  # Common ports include 25, 465, and 587
-EMAIL_HOST_USER = config("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = "mcmanyika@gmail.com"
+EMAIL_HOST_PASSWORD = "mtaqrhhrlswhzuav"
 
 PASSWORD_RESET_TIMEOUT = 14400
