@@ -44,10 +44,10 @@ class UserAttributes(models.Model):
     gender = models.CharField(max_length=50, choices=USER_GENDER, blank=True)
     phone = models.CharField(max_length=15)
     address = models.CharField(max_length=500)
-    church_name = models.CharField(max_length=500)
+    church_name = models.CharField(max_length=50)
     nationality = models.CharField(max_length=50)
     city = models.CharField(max_length=100)
-    className = models.CharField(max_length=50, default="")
+    className = models.CharField(max_length=50, default="HIM-LEC-01")
     country = CountryField()
 
     def __unicode__(self):
