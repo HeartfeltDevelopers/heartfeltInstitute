@@ -43,7 +43,11 @@ DEBUG = True
 if DEBUG:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1", "198.199.87.51"]
 else:
-    ALLOWED_HOSTS = ["198.199.87.51", "localhost", "127.0.0.1"]
+    ALLOWED_HOSTS = [
+        "198.199.87.51",
+        "heartfeltinstitute.ac.zw",
+        "www.heartfeltinstitute.ac.zw",
+    ]
 
 # Application definition
 
