@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     "email_confirmation",
     # "library",
     "attendance",
+    "program",
     "classes",
     "students",
     "courses",
