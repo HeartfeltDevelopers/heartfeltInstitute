@@ -41,7 +41,13 @@ SECRET_KEY = "django-insecure-59z(rfb2!4z&gk9oj61*(m#g3-0kxskf#$k(6jemp1lv6mhm)%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 if DEBUG:
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "198.199.87.51"]
+    ALLOWED_HOSTS = [
+        "localhost",
+        "127.0.0.1",
+        "198.199.87.51",
+        "heartfeltinstitute.ac.zw",
+        "www.heartfeltinstitute.ac.zw",
+    ]
 else:
     ALLOWED_HOSTS = [
         "198.199.87.51",
