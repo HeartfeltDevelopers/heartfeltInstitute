@@ -1,0 +1,27 @@
+{% block content %}
+    {% if exam %}
+        <!-- Static Exam Details -->
+        <h2>Exam Details:</h2>
+        <p><strong>Start Time:</strong> {{ static_exam_details.start_time }}</p>
+        <p><strong>Start Time:</strong> {{ static_exam_details.end_time }}</p>
+        <p><strong>Course Name:</strong> {{ static_exam_details.course_name }}</p>
+        <p><strong>Total Possible Marks:</strong> {{ static_exam_details.total_marks }}</p>
+        <p><strong>Number of Questions:</strong> {{ static_exam_details.questions_count }}</p>
+
+       <ul>
+            <li>All questions are MCQ (multiple choice question)</li>
+            <li>Only one choice is correct among the given.</li>
+            <li>Every question carry different marks.</li>
+            <li>Try to answer ASAP.</li>
+            <li>Questions are presented randomly.</li>
+        </ul>
+       
+
+
+    {% else %}
+        <!-- Display a message when there is no exam available -->
+        <h2>No Exam Available</h2>
+        <p>Sorry, there is no exam available at the moment.</p>
+    {% endif %}
+{% endblock %}
+

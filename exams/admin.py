@@ -1,11 +1,13 @@
 from django.contrib import admin
-from .models import Exam, ExamQuestion, ExamChoice
+from .models import Exam, Question, Submission, Response
 # Register your models here.
 
 
 admin.site.register(Exam)
-admin.site.register(ExamQuestion)
-admin.site.register(ExamChoice)
+admin.site.register(Question)
+admin.site.register(Submission)
+admin.site.register(Response)
+
 
 
 

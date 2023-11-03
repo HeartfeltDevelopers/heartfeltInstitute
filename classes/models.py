@@ -9,6 +9,7 @@ class StudentClasse(models.Model):
         ('physical', 'Physical'),
     ]
     class_name = models.CharField(max_length=50)
+    courses = models.ManyToManyField(Course)
     class_code = models.CharField(max_length=10, unique=True)
     class_type = models.CharField(max_length=10, choices=CLASS_TYPE_CHOICES)
     created_date = models.DateField(auto_now_add=True)
@@ -29,6 +30,8 @@ class OnlineLesson(models.Model):
     online_platform_link = models.URLField(max_length=200, null=True, blank=True)
     course_name = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
     lecturer = models.ForeignKey(Lecturer, on_delete=models.SET_NULL, null=True, blank=True)
+    students = models.ManyToManyField(Student)
+    student_class = models.ForeignKey("StudentClass", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.online_title
@@ -44,6 +47,8 @@ class OfflineLesson(models.Model):
     material_downloads = models.FileField(upload_to='class_materials/', null=True, blank=True)
     course_name = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
     lecturer = models.ForeignKey(Lecturer, on_delete=models.SET_NULL, null=True, blank=True)
+    students = models.ManyToManyField(Student)
+    student_class = models.ForeignKey("StudentClass", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.lesson_title

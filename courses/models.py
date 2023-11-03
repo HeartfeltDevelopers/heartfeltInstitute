@@ -66,7 +66,7 @@ class Course(models.Model):
     lecturer = models.ForeignKey(Lecturer, on_delete=models.CASCADE, db_column='user.last_name')
     start_date = models.DateField()
     end_date = models.DateField()
-    max_students = models.PositiveIntegerField()
+    #max_students = models.PositiveIntegerField()
     credits = models.PositiveIntegerField()
     course_unit = models.CharField(max_length=200)
     current_class = models.CharField(choices=CURRENT_CLASS, max_length=30, blank=True)
@@ -75,6 +75,7 @@ class Course(models.Model):
     location = models.CharField(max_length=25, choices=LOCATION)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
+    
 
     def __str__(self):
         return self.course_code
@@ -84,7 +85,7 @@ class Course(models.Model):
 
 
 class TakenCourse(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    students = models.ManyToManyField(Student, related_name='courses', blank=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='taken_courses')
     ca = models.PositiveIntegerField(blank=True, null=True, default=0)
     exam = models.PositiveIntegerField(blank=True, null=True, default=0)

@@ -13,54 +13,39 @@ class Exam(models.Model):
 
     def __str__(self):
         return self.title
-    
-    
-class ExamQuestion(models.Model):
-    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
-    question_text = models.CharField(max_length=500)
-    marks = models.PositiveIntegerField()
-
-    def __str__(self):
-        return self.question_text
 
 
-class ExamChoice(models.Model):
-    question = models.ForeignKey(ExamQuestion, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=100)
-    is_correct = models.BooleanField(default=False)
+class Question(models.Model):
+        exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+        marks = models.PositiveIntegerField()
+        question_text = models.CharField(max_length=600)
+        option1 = models.CharField(max_length=200)
+        option2 = models.CharField(max_length=200)
+        option3 = models.CharField(max_length=200)
+        option4 = models.CharField(max_length=200)
+        cat = (('Option1', 'Option1'), ('Option2', 'Option2'), ('Option3', 'Option3'), ('Option4', 'Option4'))
+        answer = models.CharField(max_length=200, choices=cat)
 
-    def __str__(self):
-        return self.choice_text
-
-
-
-class StudentExamSubmission(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
-    submission_time = models.DateTimeField(auto_now_add=True)
-    total_score = models.PositiveIntegerField(default=0)
-
-    def __str__(self):
-        return f'{self.student} - {self.exam} - {self.total_score}'
-    
-
-class StudentExamResponse(models.Model):
-    submission = models.ForeignKey(StudentExamSubmission, on_delete=models.CASCADE)
-    question = models.ForeignKey(ExamQuestion, on_delete=models.CASCADE)
-    selected_choice = models.ForeignKey(ExamChoice, on_delete=models.CASCADE)
-    is_correct = models.BooleanField(default=False)
-    marks_obtained = models.PositiveIntegerField(default=0)
-
-    def __str__(self):
-        return f'{self.submission} - {self.question} - {self.selected_choice}'
+        def __str__(self):
+            return self.question_text
 
 
+class Submission(models.Model):
+        student = models.ForeignKey(Student, on_delete=models.CASCADE)
+        exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+        submission_time = models.DateTimeField(auto_now_add=True)
+        total_score = models.PositiveIntegerField(default=0)
 
-class StudentExamSchedule(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
-    scheduled_datetime = models.DateTimeField()
+        def __str__(self):
+            return f'{self.student} - {self.exam} - {self.total_score}'
 
-    def __str__(self):
-        return f'{self.student} - {self.exam} - {self.scheduled_datetime}'
 
+class Response(models.Model):
+        submission = models.ForeignKey(Submission, on_delete=models.CASCADE)
+        question = models.ForeignKey(Question, on_delete=models.CASCADE)
+        selected_choice = models.ForeignKey(Question, related_name='selected_choice', on_delete=models.CASCADE)
+        is_correct = models.BooleanField(default=False)
+        marks_obtained = models.PositiveIntegerField(default=0)
+
+        def __str__(self):
+            return f'{self.submission} - {self.question} - {self.selected_choice}'

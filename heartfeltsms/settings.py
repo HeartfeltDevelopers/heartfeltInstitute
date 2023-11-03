@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'django_countries',
     'exams',
     'django_extensions',
+    'assignments',
+    'administration',
 ]
 
 MIDDLEWARE = [
@@ -163,3 +165,5 @@ GOOGLE_MEET_CREDENTIALS_PATH = os.path.join(BASE_DIR, 'credentials', 'heartfelt-
 
 # Sets the ID of your site's URL.
 # SITE_ID = 1
+
+MEDIA_DIR = BASE_DIR / 'media'
