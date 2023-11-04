@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Expense, Fee, Partnership
+from .models import Expense, Partnership
 
 
 class ExpenseAdmin(admin.ModelAdmin):
@@ -19,7 +19,7 @@ class FeeAdmin(admin.ModelAdmin):
     list_filter = ['fee_type', 'semester', 'is_fully_paid', 'payment_method']
 
 
-admin.site.register(Fee, FeeAdmin)
+
 
 
 class PartnershipAdmin(admin.ModelAdmin):

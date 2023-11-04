@@ -12,11 +12,11 @@ from accounts.models import Lecturer, Student
 class Assignment(models.Model):
     title = models.CharField(max_length=300)
     description = models.TextField(max_length=1000)
-    assigned_class = models.ForeignKey(StudentClasse, on_delete=models.SET_NULL, blank=True, null=True)
+    assigned_class = models.ForeignKey(StudentClasse, on_delete=models.SET_NULL, blank=True, null=True, related_name='assignments_assigned_classes')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='assignments')
     lecturer = models.ForeignKey(Lecturer, on_delete=models.CASCADE)
-    student_class = models.ForeignKey(StudentClasse, on_delete=models.CASCADE)
-    students = models.ManyToManyField(Student)
+    student_class = models.ForeignKey(StudentClasse, on_delete=models.CASCADE, null=True, default=None)
+    students = models.ManyToManyField(Student, related_name='assignments')
     due_date = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     
@@ -26,7 +26,7 @@ class Assignment(models.Model):
 
 class Submission(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, related_name='submissions')
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='submissions')
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='submissions', null=True)
     submission_date = models.DateTimeField(auto_now_add=True)
     file_upload = models.FileField(upload_to='submissions/')
 

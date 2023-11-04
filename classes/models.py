@@ -31,7 +31,7 @@ class OnlineLesson(models.Model):
     course_name = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
     lecturer = models.ForeignKey(Lecturer, on_delete=models.SET_NULL, null=True, blank=True)
     students = models.ManyToManyField(Student)
-    student_class = models.ForeignKey("StudentClass", on_delete=models.CASCADE)
+    student_class = models.ForeignKey("StudentClasse", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.online_title
@@ -48,7 +48,7 @@ class OfflineLesson(models.Model):
     course_name = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
     lecturer = models.ForeignKey(Lecturer, on_delete=models.SET_NULL, null=True, blank=True)
     students = models.ManyToManyField(Student)
-    student_class = models.ForeignKey("StudentClass", on_delete=models.CASCADE)
+    student_class = models.ForeignKey("StudentClasse", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.lesson_title
