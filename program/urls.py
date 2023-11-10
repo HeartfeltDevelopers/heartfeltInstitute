@@ -1,7 +1,6 @@
 from django.urls import path
-
-# from program.views import program
+from . import views
 
 urlpatterns = [
-    # path("", home, name="home"),
+    path("add-program/", views.add_program, name="add_program"),
 ]

@@ -31,6 +31,7 @@ urlpatterns = [
     path("students/", include("students.urls")),
     path("classes/", include("classes.urls")),
     path("register", include("email_confirmation.urls")),
+    path("program", include("program.urls")),
 ]
 
 if settings.DEBUG:

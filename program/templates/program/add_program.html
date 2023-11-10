@@ -1,0 +1,38 @@
+{% extends 'blank_2.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+{% if form_submitted %}
+<script>
+    // Reload the parent page
+    window.top.location.reload();
+</script>
+
+{% endif %}
+
+<!-- Rest of your template content -->
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ CoursesForm.course_name }}
+    </div>
+    <div class="form-group">
+      <label for="program">Program Name</label>
+      {{CoursesForm.program }}
+    </div>
+
+    <div class="form-group">
+      {{ CoursesForm.level }}
+    </div>
+  
+  
+    <div class="form-group">
+      <button type="submit" class="btn btn-gradient-yellow">Submit</button>
+      <input type="hidden" name="student_id" value="{{request.user.id}}">
+    </div>
+  </form>
+  
+
+{% endblock %}
