@@ -30,7 +30,7 @@ DB_PASS = os.getenv("DB_PASS")
 SECRET_KEY = "django-insecure-59z(rfb2!4z&gk9oj61*(m#g3-0kxskf#$k(6jemp1lv6mhm)%"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 if DEBUG:
     ALLOWED_HOSTS = [
         "localhost",
