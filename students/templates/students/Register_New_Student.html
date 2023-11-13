@@ -22,8 +22,8 @@
 <div class="container">
     <form method="post" id="registration-form">
       {% csrf_token %}
-      <div>
-        Hi {{user.first_name}} {{user.last_name}}
+      <div style="color: #000;">
+        Hi {{user.first_name}} {{user.last_name}}, thank you for registering with Heartfelt Institute  we look forward to meeting you
       </div>
       <button type="submit" class="btn btn-success btn-lg">Next</button>
       <input type="hidden" name="root" value="{{user.id}}">
