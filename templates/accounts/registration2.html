@@ -14,6 +14,13 @@
   .custom-padding {
     padding-bottom: 10px
 }
+.form-control.large-date {
+    font-size: 16px; /* Increases the font size */
+    padding: 10px; /* Adds padding inside the input field */
+    height: 30px; /* Sets a specific height for the input */
+    width: 200px; /* Sets a specific width for the input */
+}
+
 </style>
 
 <div class="container" >
@@ -26,7 +33,9 @@
         {{form.church_name}}
       </div>
       <div class="custom-padding">
-        {{form.date_of_birth}}
+        <label for="date_of_birth">Date of Birth
+        <input type="date" name="date_of_birth" class="form-control large-date">
+      </label>
       </div>
       <div class="custom-padding">
         {{form.gender}}

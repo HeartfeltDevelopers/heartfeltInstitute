@@ -96,6 +96,7 @@ class LoginForm(AuthenticationForm):
 
 class UserAttributesForm(forms.ModelForm):
     GENDER_CHOICES = (
+        ("", "Select Gender"),
         ("Female", "Female"),
         ("Male", "Male"),
     )
@@ -110,17 +111,7 @@ class UserAttributesForm(forms.ModelForm):
         ),
         label="",
     )
-    date_of_birth = forms.DateField(
-        required=False,
-        widget=forms.DateInput(
-            attrs={
-                "class": "form-control form-control-lg",
-                "placeholder": "DOB",
-                "style": "margin-bottom: 10px;",
-            }
-        ),
-        label="",
-    )
+
     phone = forms.CharField(
         max_length=30,
         required=False,

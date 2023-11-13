@@ -14,17 +14,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-import environ
-from decouple import config
 
 from django.contrib import staticfiles
-
-root = environ.Path(__file__) - 3  # Three folders back, adjust if needed.
-env = environ.Env(
-    DEBUG=(bool, False),
-    # Default values for other environment variables can be set as well.
-)
-environ.Env.read_env(root(".env"))  # Reads the .env file.
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
