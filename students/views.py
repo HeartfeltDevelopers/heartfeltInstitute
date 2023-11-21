@@ -12,10 +12,10 @@ def new_student_account(request):
             form.save()
             if request.user.is_authenticated:
                 if request.user.user_type == "student":
-                    student_dashboard_url = reverse(
-                        "user-details", kwargs={"id": request.user.id}
-                    )
-                    return redirect(student_dashboard_url)
+                    # student_dashboard_url = reverse(
+                    #     "user-details", kwargs={"id": request.user.id}
+                    # )
+                    return redirect("/")
     else:
         form = StudentForm()
 
