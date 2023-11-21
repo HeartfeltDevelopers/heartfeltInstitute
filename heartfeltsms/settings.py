@@ -120,6 +120,10 @@ if DEBUG:
 else:
     DATABASES = {
         "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        },
+        "backup": {
             "ENGINE": "django.db.backends.postgresql_psycopg2",
             "NAME": "bigboy2",
             "USER": "admin",
