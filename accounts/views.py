@@ -345,7 +345,7 @@ def registration2(request):
         if form.is_valid():
             form.save()
             if request.user.user_type == "student":
-                return redirect("/students/new-student")
+                return redirect("/")
             elif request.user_type == "lecturer":
                 return redirect("/lecturer-dashboard")
             elif request.user_type == "admin":
