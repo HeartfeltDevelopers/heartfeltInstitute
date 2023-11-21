@@ -53,7 +53,7 @@ def activateEmail(request, user, to_email):
     if email.send():
         messages.success(
             request,
-            f"Dear <b>{user}</b>, please go to you email <b>{to_email}</b> inbox and click on \
+            f"Hi, please go to you email <b>{to_email}</b> inbox and click on \
                 received activation link to confirm and complete the registration. <b>Note:</b> Check your spam folder.",
         )
     else:
