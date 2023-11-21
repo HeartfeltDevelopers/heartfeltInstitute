@@ -257,8 +257,6 @@ def create_lesson(request):
             print("this is end time: ", end_datetime)
             event = service.events().insert(calendarId="primary", body=event).execute()
 
-            print(event)
-
             if event is not None:
                 meet_link = event.get("htmlLink")
                 print("Event created: %s" % (event.get("htmlLink")))
@@ -290,8 +288,9 @@ class CustomLoginView(LoginView):
             elif user.user_type == "lecturer":
                 return "/coresms/lecturer/dashboard/"  # Customize the URL for the lecturer dashboard
             elif user.user_type == "student":
-                student_dashboard_url = reverse("user-details", kwargs={"id": user.id})
-                return student_dashboard_url
+                return redirect("/")
+                # student_dashboard_url = reverse("user-details", kwargs={"id": user.id})
+                # return student_dashboard_url
             elif user.user_type == "alumni":
                 return "/coresms/alumni/dashboard/"  # Customize the URL for the alumni dashboard
 
@@ -310,8 +309,9 @@ def user_login(request):
             except UserAttributes.DoesNotExist:
                 return redirect("/accounts/registration-step-2")
             if user.user_type == "student":
-                student_dashboard_url = reverse("user-details", kwargs={"id": user.id})
-                return redirect(student_dashboard_url)
+                return redirect("/")
+                # student_dashboard_url = reverse("user-details", kwargs={"id": user.id})
+                # return redirect(student_dashboard_url)
             elif user.user_type == "lecturer":
                 return redirect("/coresms/lecturer-dashboard")
             elif user.user_type == "admin":
