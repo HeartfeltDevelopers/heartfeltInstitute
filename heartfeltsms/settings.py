@@ -192,14 +192,17 @@ RECAPTCHA_PUBLIC_KEY = "6LddA3kgAAAAAPf1mAJmEc7Ku0cssbD5QMha09NT"
 RECAPTCHA_PRIVATE_KEY = "6LddA3kgAAAAAJY-2-Q0J3QX83DFJwFR1hXqmN8q"
 SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
 
-# Email settings
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_USE_TLS = True
-EMAIL_HOST = (
-    "smtp.gmail.com"  # For example, 'smtp.gmail.com' if you're using Gmail's SMTP
-)
-EMAIL_PORT = 587  # Common ports include 25, 465, and 587
-EMAIL_HOST_USER = "mcmanyika@gmail.com"
-EMAIL_HOST_PASSWORD = "mtaqrhhrlswhzuav"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.getenv(
+    "EMAIL_HOST", "default_host"
+)  # Replace "default_host" with a default value or leave as an empty string
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 465))  # Provide a default value if necessary
+EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", "True") == "True"
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "default_email")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "default_password")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "default_from_email")
+
 
 PASSWORD_RESET_TIMEOUT = 14400
