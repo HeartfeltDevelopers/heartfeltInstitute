@@ -106,14 +106,14 @@ if DEBUG:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db5.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
 else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+            "NAME": BASE_DIR / "db5.sqlite3",
         },
         "backup": {
             "ENGINE": "django.db.backends.postgresql_psycopg2",
@@ -194,11 +194,8 @@ SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
 
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.getenv(
-    "EMAIL_HOST", "default_host"
-)  # Replace "default_host" with a default value or leave as an empty string
-EMAIL_PORT = int(os.getenv("EMAIL_PORT", 465))  # Provide a default value if necessary
+EMAIL_HOST = os.getenv("EMAIL_HOST", "default_host")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 465))
 EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", "True") == "True"
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "default_email")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "default_password")
