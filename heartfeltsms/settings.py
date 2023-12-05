@@ -36,6 +36,7 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = [
         "www.heartfeltinstitute.ac.zw",
+        "heartfeltinstitute.ac.zw",
     ]
 
 # Application definition
@@ -114,15 +115,7 @@ else:
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": BASE_DIR / "db5.sqlite3",
-        },
-        "backup": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": "bigboy2",
-            "USER": "admin",
-            "PASSWORD": "focus@1",
-            "HOST": "localhost",
-            "PORT": "",
-        },
+        }
     }
 
 
